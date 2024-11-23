@@ -1,0 +1,25 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+
+# Logs
+logs/
+*.log
+.log/
+.eslintcache
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Backend
+backend/__pycache__/
+backend/env/
+backend/.env
+
+# Build directories
+frontend/dist/
+frontend/build/
