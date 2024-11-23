@@ -12,11 +12,48 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PlusCircleOutlined,
+  InfoCircleOutlined,
+  UpSquareOutlined,
 } from "@ant-design/icons";
 import GlobalHeader from "./GlobalHeader"; // Importación del encabezado global
 import "../styles/Home.css";
 
 const { SubMenu } = Menu;
+
+const HorizontalStatsBlock = () => {
+  return (
+    <div className="horizontal-stats-block">
+      <div className="stat-item">
+        <div className="stat-header">
+          <span>Usuarios del mes</span>
+          <InfoCircleOutlined className="info-icon" />
+        </div>
+        <div className="stat-body">
+          <h3 className="stat-value">100</h3>
+          <UpSquareOutlined className="stat-trend" />
+          <span className="stat-trend-value">17.1</span>
+        </div>
+        <div className="stat-chart">
+          {/* Aquí se pueden incluir gráficos como <LineChart> */}
+        </div>
+      </div>
+      <div className="stat-item">
+        <div className="stat-header">
+          <span>Tasa de asistencia</span>
+          <InfoCircleOutlined className="info-icon" />
+        </div>
+        <div className="stat-body">
+          <h3 className="stat-value">90%</h3>
+          <UpSquareOutlined className="stat-trend" />
+          <span className="stat-trend-value">26.2</span>
+        </div>
+        <div className="stat-chart">
+          {/* Aquí se pueden incluir gráficos como <LineChart> */}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -86,14 +123,10 @@ const Home = () => {
           {/* Tabla de control de asistencia */}
           <div className="card-legacy">
             <div className="card-header">
-              <div className="title-wrapper">
-                <h5 className="card-title">Control de asistencia del día</h5>
-              </div>
-              <div className="card-options">
-                <Button icon={<PlusCircleOutlined />} className="add-button">
-                  Agregar
-                </Button>
-              </div>
+              <h5 className="card-title">Control de asistencia del día</h5>
+              <Button icon={<PlusCircleOutlined />} className="add-button">
+                Agregar
+              </Button>
             </div>
             <div className="card-body">
               <div className="table">
@@ -133,6 +166,32 @@ const Home = () => {
                     <span className="divider">|</span>
                     <span className="action-link">Marcar asistencia</span>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Nuevo card - Flujo de usuarios */}
+          <div className="card-legacy">
+            <div className="card-header">
+              <h5 className="card-title">Flujo de usuarios</h5>
+            </div>
+            <div className="card-body">
+              <HorizontalStatsBlock />
+              <div className="table">
+                <div className="table-row header">
+                  <div className="table-cell">Usuarios</div>
+                  <div className="table-cell">Contratos</div>
+                  <div className="table-cell">Visitas del mes</div>
+                </div>
+                <div className="table-row">
+                  <div className="table-cell">Nombre usuario</div>
+                  <div className="table-cell">Ver</div>
+                  <div className="table-cell">5</div>
+                </div>
+                <div className="table-row">
+                  <div className="table-cell">Nombre usuario</div>
+                  <div className="table-cell">Ver</div>
+                  <div className="table-cell">10</div>
                 </div>
               </div>
             </div>
