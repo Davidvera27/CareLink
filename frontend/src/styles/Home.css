@@ -1,3 +1,4 @@
+/* Home Container */
 .home-container {
     display: flex;
     flex-direction: row;
@@ -5,6 +6,7 @@
     background-color: #f8f9fa;
   }
   
+  /* Sidebar Menu */
   .menu-container {
     width: 208px;
     transition: all 0.3s ease-in-out;
@@ -24,11 +26,10 @@
   }
   
   .collapse-btn {
-    background-color: #7f34b4;
-    color: #ffffff;
-    border: none;
     margin: 16px;
-    padding: 8px;
+    background-color: #7f34b4;
+    color: white;
+    border: none;
     border-radius: 4px;
     transition: background-color 0.3s ease;
   }
@@ -37,17 +38,21 @@
     background-color: #65558f;
   }
   
+  /* Main Content */
   .content {
     flex: 1;
     padding: 20px;
+    overflow: auto; /* Ajuste para manejar contenido extenso */
     background-color: #f8f9fa;
   }
   
+  /* Card Styling */
   .card-legacy {
     background: #ffffff;
     border-radius: 2px;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-    width: 1200px;
+    width: 100%;
+    max-width: 1184px;
     margin: 20px auto;
     padding: 16px;
   }
@@ -57,41 +62,195 @@
     justify-content: space-between;
     align-items: center;
     padding-bottom: 16px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   
-  .title-wrapper .card-title {
+  .card-title {
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-size: 16px;
     color: rgba(0, 0, 0, 0.85);
   }
   
-  .card-options .add-button {
-    background-color: #ffffff;
-    color: rgba(0, 0, 0, 0.85);
+  .add-button {
+    background: #ffffff;
+    color: #7f34b4;
     border: 1px solid #d9d9d9;
-    border-radius: 2px;
-    padding: 4px 15px;
-  }
-  
-  .card-body {
+    padding: 4px 12px;
+    border-radius: 4px;
     display: flex;
-    gap: 60px;
-    padding-top: 16px;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.3s ease;
   }
   
-  .table-column {
+  .add-button:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Table Styling */
+  .table {
     display: flex;
     flex-direction: column;
+    width: 100%;
+  }
+  
+  .table-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
   }
   
   .table-cell {
-    background: #fafafa;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    flex: 1;
     padding: 16px;
     font-family: "Roboto", sans-serif;
     font-size: 14px;
     color: rgba(0, 0, 0, 0.85);
+    background-color: #fafafa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+  }
+  
+  .table-cell.header {
+    font-weight: 500;
+    background-color: #f5f5f5;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .actions-header {
+    text-align: center;
+  }
+  
+  /* Badge Styles */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    padding: 4px 8px;
+    font-size: 12px;
+    color: white;
+  }
+  
+  .badge.green {
+    background-color: #52c41a;
+  }
+  
+  .badge.red {
+    background-color: #ff4d4f;
+  }
+  
+  .badge.gray {
+    background-color: #d9d9d9;
+  }
+  
+  /* Action Links */
+  .action-link {
+    color: #7f34b4;
+    cursor: pointer;
+    margin: 0 8px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .action-link:hover {
+    text-decoration: underline;
+  }
+  
+  .divider {
+    height: 12px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 0 8px;
+  }
+  
+  /* Checkbox Cell */
+  .checkbox-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    background-color: #fafafa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    width: 32px;
+  }
+  
+  .checkbox-input {
+    width: 16px;
+    height: 16px;
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Link Column */
+  .link-column {
+    flex: 1;
+    min-width: 431px;
+  }
+  
+  .link-text {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #595959;
+  }
+  
+  /* Status Column */
+  .status-column {
+    flex: 0 0 109px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .status-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  
+  .dot.green {
+    background-color: #52c41a;
+  }
+  
+  .dot.red {
+    background-color: #ff4d4f;
+  }
+  
+  .dot.gray {
+    background-color: #d9d9d9;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .card-legacy {
+      padding: 12px;
+      width: 100%;
+      margin: 10px auto;
+    }
+  
+    .table-cell {
+      font-size: 12px;
+      padding: 12px;
+    }
+  
+    .add-button {
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+  
+    .card-title {
+      font-size: 14px;
+    }
   }
   
