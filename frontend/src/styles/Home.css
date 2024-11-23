@@ -1,0 +1,97 @@
+.home-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    background-color: #f8f9fa;
+  }
+  
+  .menu-container {
+    width: 208px;
+    transition: all 0.3s ease-in-out;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .menu-container.collapsed {
+    width: 80px;
+  }
+  
+  .menu {
+    flex: 1;
+    background-color: #ffffff;
+  }
+  
+  .collapse-btn {
+    background-color: #7f34b4;
+    color: #ffffff;
+    border: none;
+    margin: 16px;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .collapse-btn:hover {
+    background-color: #65558f;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  
+  .card-legacy {
+    background: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    width: 1200px;
+    margin: 20px auto;
+    padding: 16px;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .title-wrapper .card-title {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.85);
+  }
+  
+  .card-options .add-button {
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0.85);
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    padding: 4px 15px;
+  }
+  
+  .card-body {
+    display: flex;
+    gap: 60px;
+    padding-top: 16px;
+  }
+  
+  .table-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .table-cell {
+    background: #fafafa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 16px;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+  }
+  
