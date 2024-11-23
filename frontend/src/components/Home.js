@@ -29,6 +29,7 @@ const Home = () => {
     <div className="home-page">
       <GlobalHeader />
       <div className="home-container">
+        {/* Menú colapsable */}
         <div className={`menu-container ${collapsed ? "collapsed" : ""}`}>
           <Button
             type="primary"
@@ -82,30 +83,57 @@ const Home = () => {
           </Menu>
         </div>
         <div className="content">
+          {/* Tabla de control de asistencia */}
           <div className="card-legacy">
             <div className="card-header">
               <div className="title-wrapper">
                 <h5 className="card-title">Control de asistencia del día</h5>
               </div>
               <div className="card-options">
-                <Button
-                  icon={<PlusCircleOutlined />}
-                  className="add-button"
-                >
+                <Button icon={<PlusCircleOutlined />} className="add-button">
                   Agregar
                 </Button>
               </div>
             </div>
             <div className="card-body">
-              <div className="table-column">
-                <div className="table-cell">Usuario</div>
-                <div className="table-cell">Sara Manuela Gómez</div>
-                <div className="table-cell">Juan Pablo Ruiz</div>
-              </div>
-              <div className="table-column">
-                <div className="table-cell">Tipo de Servicio</div>
-                <div className="table-cell">Centro día</div>
-                <div className="table-cell">Centro día</div>
+              <div className="table">
+                <div className="table-row header">
+                  <div className="table-cell checkbox-header"></div>
+                  <div className="table-cell">Usuario</div>
+                  <div className="table-cell">Tipo servicio</div>
+                  <div className="table-cell">Estado</div>
+                  <div className="table-cell actions-header">Acciones</div>
+                </div>
+                <div className="table-row">
+                  <div className="table-cell">
+                    <input type="checkbox" className="checkbox-input" />
+                  </div>
+                  <div className="table-cell">Sara Manuela Gómez</div>
+                  <div className="table-cell">Centro día</div>
+                  <div className="table-cell">
+                    <span className="badge green">Asistió</span>
+                  </div>
+                  <div className="table-cell actions">
+                    <span className="action-link">Ver</span>
+                    <span className="divider">|</span>
+                    <span className="action-link">Marcar asistencia</span>
+                  </div>
+                </div>
+                <div className="table-row">
+                  <div className="table-cell">
+                    <input type="checkbox" className="checkbox-input" />
+                  </div>
+                  <div className="table-cell">Juan Pablo Ruiz</div>
+                  <div className="table-cell">Centro día</div>
+                  <div className="table-cell">
+                    <span className="badge gray">Pendiente</span>
+                  </div>
+                  <div className="table-cell actions">
+                    <span className="action-link">Ver</span>
+                    <span className="divider">|</span>
+                    <span className="action-link">Marcar asistencia</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
