@@ -15,7 +15,7 @@ import {
   InfoCircleOutlined,
   UpSquareOutlined,
 } from "@ant-design/icons";
-import GlobalHeader from "./GlobalHeader"; // Importación del encabezado global
+import GlobalHeader from "./GlobalHeader"; // Encabezado global
 import "../styles/Home.css";
 
 const { SubMenu } = Menu;
@@ -34,7 +34,7 @@ const HorizontalStatsBlock = () => {
           <span className="stat-trend-value">17.1</span>
         </div>
         <div className="stat-chart">
-          {/* Aquí se pueden incluir gráficos como <LineChart> */}
+          {/* Placeholder para gráficos */}
         </div>
       </div>
       <div className="stat-item">
@@ -48,7 +48,7 @@ const HorizontalStatsBlock = () => {
           <span className="stat-trend-value">26.2</span>
         </div>
         <div className="stat-chart">
-          {/* Aquí se pueden incluir gráficos como <LineChart> */}
+          {/* Placeholder para gráficos */}
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@ const Home = () => {
     <div className="home-page">
       <GlobalHeader />
       <div className="home-container">
-        {/* Menú colapsable */}
+        {/* Menú lateral */}
         <div className={`menu-container ${collapsed ? "collapsed" : ""}`}>
           <Button
             type="primary"
@@ -170,7 +170,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          {/* Nuevo card - Flujo de usuarios */}
+          {/* Cards adicionales */}
           <div className="card-legacy">
             <div className="card-header">
               <h5 className="card-title">Flujo de usuarios</h5>
