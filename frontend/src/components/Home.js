@@ -55,6 +55,38 @@ const HorizontalStatsBlock = () => {
   );
 };
 
+const ScheduledActivities = () => {
+  return (
+    <div className="card-legacy scheduled-activities">
+      <div className="card-header">
+        <h5 className="card-title">Actividades programadas</h5>
+      </div>
+      <div className="card-body">
+        <div className="table">
+          <div className="table-row header">
+            <div className="table-cell">Actividad</div>
+            <div className="table-cell">Fecha</div>
+            <div className="table-cell actions-header">Acciones</div>
+          </div>
+          {["Juego de Ping Pong", "Clase de Yoga", "Taller de Arte"].map(
+            (activity, index) => (
+              <div className="table-row" key={index}>
+                <div className="table-cell">{activity}</div>
+                <div className="table-cell">Dentro de 7 días</div>
+                <div className="table-cell actions">
+                  <span className="action-link">Editar</span>
+                  <span className="divider">|</span>
+                  <span className="action-link">Ver</span>
+                </div>
+              </div>
+            )
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -66,7 +98,6 @@ const Home = () => {
     <div className="home-page">
       <GlobalHeader />
       <div className="home-container">
-        {/* Menú lateral */}
         <div className={`menu-container ${collapsed ? "collapsed" : ""}`}>
           <Button
             type="primary"
@@ -120,7 +151,6 @@ const Home = () => {
           </Menu>
         </div>
         <div className="content">
-          {/* Tabla de control de asistencia */}
           <div className="card-legacy">
             <div className="card-header">
               <h5 className="card-title">Control de asistencia del día</h5>
@@ -170,31 +200,33 @@ const Home = () => {
               </div>
             </div>
           </div>
-          {/* Cards adicionales */}
-          <div className="card-legacy">
-            <div className="card-header">
-              <h5 className="card-title">Flujo de usuarios</h5>
-            </div>
-            <div className="card-body">
-              <HorizontalStatsBlock />
-              <div className="table">
-                <div className="table-row header">
-                  <div className="table-cell">Usuarios</div>
-                  <div className="table-cell">Contratos</div>
-                  <div className="table-cell">Visitas del mes</div>
-                </div>
-                <div className="table-row">
-                  <div className="table-cell">Nombre usuario</div>
-                  <div className="table-cell">Ver</div>
-                  <div className="table-cell">5</div>
-                </div>
-                <div className="table-row">
-                  <div className="table-cell">Nombre usuario</div>
-                  <div className="table-cell">Ver</div>
-                  <div className="table-cell">10</div>
+          <div className="card-row">
+            <div className="card-legacy">
+              <div className="card-header">
+                <h5 className="card-title">Flujo de usuarios</h5>
+              </div>
+              <div className="card-body">
+                <HorizontalStatsBlock />
+                <div className="table">
+                  <div className="table-row header">
+                    <div className="table-cell">Usuarios</div>
+                    <div className="table-cell">Contratos</div>
+                    <div className="table-cell">Visitas del mes</div>
+                  </div>
+                  <div className="table-row">
+                    <div className="table-cell">Nombre usuario</div>
+                    <div className="table-cell">Ver</div>
+                    <div className="table-cell">5</div>
+                  </div>
+                  <div className="table-row">
+                    <div className="table-cell">Nombre usuario</div>
+                    <div className="table-cell">Ver</div>
+                    <div className="table-cell">10</div>
+                  </div>
                 </div>
               </div>
             </div>
+            <ScheduledActivities />
           </div>
         </div>
       </div>
