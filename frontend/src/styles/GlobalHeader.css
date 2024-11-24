@@ -1,19 +1,72 @@
 .global-header-container {
+    display: flex;
+    flex-direction: row;
+    height: auto; /* Cambiar de 100vh a auto para no afectar el fondo completo */
+    background-color: transparent; /* Cambiar de morado a transparente */
     position: sticky;
     top: 0;
     z-index: 10;
-    background-color: #22075e;
 }
 
+
+/* Menú lateral */
+.menu-container {
+    width: 240px; /* Tamaño fijo para evitar desbordes */
+    background-color: #ffffff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: width 0.3s;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.menu-container.collapsed {
+    width: 80px; /* Tamaño reducido al colapsar */
+}
+
+.menu {
+    margin-top: 48px; /* Alineación con el encabezado */
+    height: calc(100vh - 48px); /* Ajusta la altura del menú */
+    overflow-y: auto; /* Permite el scroll si hay demasiados elementos */
+}
+
+.collapse-btn {
+    background-color: #7f34b4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin: 16px;
+    padding: 8px;
+    transition: background-color 0.3s;
+}
+
+.collapse-btn:hover {
+    background-color: #5d2393;
+}
+
+/* Encabezado Global */
 .global-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 16px;
     height: 48px;
+    width: calc(100% - 240px); /* Ajusta con respecto al tamaño del menú */
+    margin-left: 240px;
+    padding: 0 16px;
+    background-color: #22075e;
     box-shadow: inset 0px -1px 0px #f0f0f0;
+    transition: margin-left 0.3s, width 0.3s;
 }
 
+.menu-container.collapsed ~ .global-header {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+}
+
+/* Logo */
 .logo h1 {
     font-family: "Roboto", sans-serif;
     font-weight: 700;
@@ -21,42 +74,21 @@
     color: #ffffff;
 }
 
+/* Barra de herramientas */
 .toolbar {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.icon-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 38px;
-    height: 48px;
-    cursor: pointer;
-    color: #ffffff;
-}
-
-.badge-icon {
-    position: relative;
+.badge-icon,
+.user-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 48px;
     cursor: pointer;
-}
-
-.badge-wrapper {
-    position: absolute;
-    top: 6px;
-    right: 8px;
 }
 
 .badge {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: #ff4d4f;
     color: #ffffff;
     font-family: "Roboto Mono", monospace;
@@ -64,12 +96,9 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-}
-
-.user-wrapper {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 8px;
 }
 
 .user-wrapper img {
