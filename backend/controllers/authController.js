@@ -35,10 +35,19 @@ exports.loginUser = async (req, res) => {
       }
   
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-      res.status(200).json({ message: "Inicio de sesión exitoso", token });
+  
+      res.status(200).json({
+        message: "Inicio de sesión exitoso",
+        token,
+        user: {
+          id: user._id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        },
+      });
     } catch (error) {
-      console.error("Error en loginUser:", error);
       res.status(500).json({ message: "Error en el servidor", error });
     }
   };
+  
   
