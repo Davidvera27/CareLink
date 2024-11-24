@@ -5,13 +5,12 @@ import "../styles/Login.css";
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState("login"); // Tab activo (login o register)
-  const [email, setEmail] = useState(""); // Cambiado de "username" a "email"
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState(""); // Nuevo campo: Nombre 1
-  const [middleName, setMiddleName] = useState(""); // Nuevo campo: Nombre 2
-  const [lastName, setLastName] = useState(""); // Nuevo campo: Apellidos
+  const [firstName, setFirstName] = useState(""); // Nombre 1
+  const [middleName, setMiddleName] = useState(""); // Nombre 2
+  const [lastName, setLastName] = useState(""); // Apellidos
 
-  // Cambiar entre las pestañas de login y registro
   const handleTabSwitch = (tab) => {
     setActiveTab(tab);
   };
@@ -24,18 +23,19 @@ const Login = () => {
         ? "http://localhost:5000/api/auth/login"
         : "http://localhost:5000/api/auth/register";
 
-    const payload =
-      activeTab === "login"
-        ? { email, password }
-        : { email, password, firstName, middleName, lastName }; // Nuevos datos para registro
+  const payload =
+        activeTab === "login"
+          ? { email, password }
+          : { firstName, middleName, lastName, email, password };
 
     try {
+      // Enviar solicitud al backend
       const response = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(payload), // Se envían todos los datos
       });
 
       const data = await response.json();
