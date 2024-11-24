@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Home from "./components/Home";
-import PrivateRoute from "./components/PrivateRoute"; // Importar PrivateRoute
+import NuevoUsuario from "./components/NuevoUsuario"; // Importar el nuevo componente
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   return (
@@ -14,6 +15,14 @@ const App = () => {
           element={
             <PrivateRoute>
               <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/nuevo-usuario" // Cambiado de "nuevoUsuario" a "nuevo-usuario"
+          element={
+            <PrivateRoute>
+              <NuevoUsuario />
             </PrivateRoute>
           }
         />
