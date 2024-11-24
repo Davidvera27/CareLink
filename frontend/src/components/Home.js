@@ -1,24 +1,7 @@
-import React, { useState } from "react";
-import { Menu, Button } from "antd";
-import {
-  HomeOutlined,
-  UserOutlined,
-  FileAddOutlined,
-  ProfileOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
-  SolutionOutlined,
-  TeamOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  PlusCircleOutlined,
-  InfoCircleOutlined,
-  UpSquareOutlined,
-} from "@ant-design/icons";
-import GlobalHeader from "./GlobalHeader"; // Encabezado global
+import React from "react";
+import GlobalHeader from "./GlobalHeader";
+import NavMenu from "./navMenu"; // Import the modularized navigation menu
 import "../styles/Home.css";
-
-const { SubMenu } = Menu;
 
 const HorizontalStatsBlock = () => {
   return (
@@ -26,30 +9,22 @@ const HorizontalStatsBlock = () => {
       <div className="stat-item">
         <div className="stat-header">
           <span>Usuarios del mes</span>
-          <InfoCircleOutlined className="info-icon" />
         </div>
         <div className="stat-body">
           <h3 className="stat-value">100</h3>
-          <UpSquareOutlined className="stat-trend" />
-          <span className="stat-trend-value">17.1</span>
+          <span className="stat-trend">17.1</span>
         </div>
-        <div className="stat-chart">
-          {/* Placeholder para gráficos */}
-        </div>
+        <div className="stat-chart">{/* Placeholder for charts */}</div>
       </div>
       <div className="stat-item">
         <div className="stat-header">
           <span>Tasa de asistencia</span>
-          <InfoCircleOutlined className="info-icon" />
         </div>
         <div className="stat-body">
           <h3 className="stat-value">90%</h3>
-          <UpSquareOutlined className="stat-trend" />
-          <span className="stat-trend-value">26.2</span>
+          <span className="stat-trend">26.2</span>
         </div>
-        <div className="stat-chart">
-          {/* Placeholder para gráficos */}
-        </div>
+        <div className="stat-chart">{/* Placeholder for charts */}</div>
       </div>
     </div>
   );
@@ -88,80 +63,23 @@ const ScheduledActivities = () => {
 };
 
 const Home = () => {
-  const [collapsed, setCollapsed] = useState(false);
-
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
-
   return (
     <div className="home-page">
       <GlobalHeader />
       <div className="home-container">
-        <div className={`menu-container ${collapsed ? "collapsed" : ""}`}>
-          <Button
-            type="primary"
-            onClick={toggleCollapsed}
-            className="collapse-btn"
-          >
-            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          </Button>
-          <Menu mode="inline" inlineCollapsed={collapsed} className="menu">
-            <Menu.Item key="1" icon={<HomeOutlined />}>
-              Tablero de Inicio
-            </Menu.Item>
-            <SubMenu key="sub1" icon={<UserOutlined />} title="Usuarios">
-              <Menu.Item key="2" icon={<FileAddOutlined />}>
-                Nuevo Usuario
-              </Menu.Item>
-              <Menu.Item key="3" icon={<ProfileOutlined />}>
-                Nuevo Reporte Clínico
-              </Menu.Item>
-              <Menu.Item key="4" icon={<TeamOutlined />}>
-                Lista de Usuarios
-              </Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub2"
-              icon={<AppstoreOutlined />}
-              title="Gestión de Actividades"
-            >
-              <Menu.Item key="5">Opción 1</Menu.Item>
-              <Menu.Item key="6">Opción 2</Menu.Item>
-              <Menu.Item key="7">Opción 3</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub3"
-              icon={<SolutionOutlined />}
-              title="Visitas Domiciliarias"
-            >
-              <Menu.Item key="8">Opción 1</Menu.Item>
-              <Menu.Item key="9">Opción 2</Menu.Item>
-              <Menu.Item key="10">Opción 3</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub4"
-              icon={<SettingOutlined />}
-              title="Administración"
-            >
-              <Menu.Item key="11">Opción 1</Menu.Item>
-              <Menu.Item key="12">Opción 2</Menu.Item>
-              <Menu.Item key="13">Opción 3</Menu.Item>
-            </SubMenu>
-          </Menu>
-        </div>
+        <NavMenu />
         <div className="content">
           <div className="card-legacy">
             <div className="card-header">
               <h5 className="card-title">Control de asistencia del día</h5>
-              <Button icon={<PlusCircleOutlined />} className="add-button">
-                Agregar
-              </Button>
+              <button className="add-button">Agregar</button>
             </div>
             <div className="card-body">
               <div className="table">
                 <div className="table-row header">
-                  <div className="table-cell checkbox-header"></div>
+                  <div className="table-cell checkbox-header">
+                    <input type="checkbox" />
+                  </div>
                   <div className="table-cell">Usuario</div>
                   <div className="table-cell">Tipo servicio</div>
                   <div className="table-cell">Estado</div>
@@ -169,7 +87,7 @@ const Home = () => {
                 </div>
                 <div className="table-row">
                   <div className="table-cell">
-                    <input type="checkbox" className="checkbox-input" />
+                    <input type="checkbox" />
                   </div>
                   <div className="table-cell">Sara Manuela Gómez</div>
                   <div className="table-cell">Centro día</div>
@@ -184,7 +102,7 @@ const Home = () => {
                 </div>
                 <div className="table-row">
                   <div className="table-cell">
-                    <input type="checkbox" className="checkbox-input" />
+                    <input type="checkbox" />
                   </div>
                   <div className="table-cell">Juan Pablo Ruiz</div>
                   <div className="table-cell">Centro día</div>
