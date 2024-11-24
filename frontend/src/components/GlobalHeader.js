@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/GlobalHeader.css";
 import avatar from "../assets/avatar.jpg";
 import { NotificationOutlined, LogoutOutlined } from "@ant-design/icons";
 
 const GlobalHeader = () => {
+  const [userName, setUserName] = useState("Andrea Salazar");
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      setUserName(`${user.firstName} ${user.lastName}`);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/"; // Redirige al inicio de sesión
+  };
+
   return (
     <div className="global-header-container">
       <header className="global-header">
@@ -21,8 +37,8 @@ const GlobalHeader = () => {
           </div>
           <div className="user-wrapper">
             <img src={avatar} alt="User Avatar" />
-            <span className="user-name">Andrea Salazar</span>
-            <div className="icon-wrapper">
+            <span className="user-name">{userName}</span>
+            <div className="icon-wrapper" onClick={handleLogout}>
               <LogoutOutlined />
             </div>
           </div>
