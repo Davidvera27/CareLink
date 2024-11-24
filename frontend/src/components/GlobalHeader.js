@@ -13,6 +13,7 @@ import {
   MenuUnfoldOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import "../styles/GlobalHeader.css";
 import avatar from "../assets/avatar.jpg";
 
@@ -21,6 +22,7 @@ const { SubMenu } = Menu;
 const GlobalHeader = () => {
   const [userName, setUserName] = useState("Andrea Salazar");
   const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -40,6 +42,10 @@ const GlobalHeader = () => {
     window.location.href = "/";
   };
 
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className="global-header-container">
       <div className={`menu-container ${collapsed ? "collapsed" : ""}`}>
@@ -51,17 +57,33 @@ const GlobalHeader = () => {
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </Button>
         <Menu mode="inline" inlineCollapsed={collapsed} className="menu">
-          <Menu.Item key="1" icon={<HomeOutlined />}>
+          <Menu.Item
+            key="1"
+            icon={<HomeOutlined />}
+            onClick={() => handleNavigation("/home")}
+          >
             Tablero de Inicio
           </Menu.Item>
           <SubMenu key="sub1" icon={<UserOutlined />} title="Usuarios">
-            <Menu.Item key="2" icon={<FileAddOutlined />}>
+            <Menu.Item
+              key="2"
+              icon={<FileAddOutlined />}
+              onClick={() => handleNavigation("/Nuevo-Usuario")}
+            >
               Nuevo Usuario
             </Menu.Item>
-            <Menu.Item key="3" icon={<ProfileOutlined />}>
+            <Menu.Item
+              key="3"
+              icon={<ProfileOutlined />}
+              onClick={() => handleNavigation("/NuevoReporteClinico")}
+            >
               Nuevo Reporte Clínico
             </Menu.Item>
-            <Menu.Item key="4" icon={<TeamOutlined />}>
+            <Menu.Item
+              key="4"
+              icon={<TeamOutlined />}
+              onClick={() => handleNavigation("/ListaUsuarios")}
+            >
               Lista de Usuarios
             </Menu.Item>
           </SubMenu>
