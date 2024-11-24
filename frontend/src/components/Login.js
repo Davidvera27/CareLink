@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom"; // Para redirección
 import Swal from "sweetalert2";
 import "../styles/Login.css";
 
 const Login = () => {
-  const [activeTab, setActiveTab] = useState("login"); // Tab activo (login o register)
+  const [activeTab, setActiveTab] = useState("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState(""); // Nombre 1
   const [middleName, setMiddleName] = useState(""); // Nombre 2
   const [lastName, setLastName] = useState(""); // Apellidos
+  const navigate = useNavigate(); // Hook para redirección
 
   const handleTabSwitch = (tab) => {
     setActiveTab(tab);
@@ -17,19 +19,17 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const endpoint =
       activeTab === "login"
         ? "http://localhost:5000/api/auth/login"
         : "http://localhost:5000/api/auth/register";
-  
+
     const payload =
       activeTab === "login"
         ? { email, password }
         : { firstName, middleName, lastName, email, password };
-  
-    console.log("Enviando datos al backend:", payload); // Verifica los datos enviados
-  
+
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -38,18 +38,18 @@ const Login = () => {
         },
         body: JSON.stringify(payload),
       });
-  
+
       const data = await response.json();
-      console.log("Respuesta del backend:", data); // Verifica la respuesta
-  
+
       if (response.ok) {
         if (activeTab === "login") {
-          localStorage.setItem("token", data.token);
+          localStorage.setItem("token", data.token); // Guarda el token JWT
           Swal.fire({
             icon: "success",
             title: "Inicio de sesión exitoso",
             text: "Bienvenido de nuevo.",
           });
+          navigate("/home"); // Redirige a la página principal
         } else {
           Swal.fire({
             icon: "success",
@@ -74,7 +74,6 @@ const Login = () => {
       });
     }
   };
-  
 
   return (
     <div className="login-container">
@@ -109,7 +108,6 @@ const Login = () => {
                   required
                 />
               </div>
-
               <div className="input-group">
                 <UserOutlined className="input-icon" />
                 <input
@@ -119,7 +117,6 @@ const Login = () => {
                   onChange={(e) => setMiddleName(e.target.value)}
                 />
               </div>
-
               <div className="input-group">
                 <UserOutlined className="input-icon" />
                 <input
@@ -132,7 +129,6 @@ const Login = () => {
               </div>
             </>
           )}
-
           <div className="input-group">
             <UserOutlined className="input-icon" />
             <input
@@ -143,7 +139,6 @@ const Login = () => {
               required
             />
           </div>
-
           <div className="input-group">
             <LockOutlined className="input-icon" />
             <input
