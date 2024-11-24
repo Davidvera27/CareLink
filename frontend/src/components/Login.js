@@ -17,32 +17,34 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const endpoint =
       activeTab === "login"
         ? "http://localhost:5000/api/auth/login"
         : "http://localhost:5000/api/auth/register";
-
-  const payload =
-        activeTab === "login"
-          ? { email, password }
-          : { firstName, middleName, lastName, email, password };
-
+  
+    const payload =
+      activeTab === "login"
+        ? { email, password }
+        : { firstName, middleName, lastName, email, password };
+  
+    console.log("Enviando datos al backend:", payload); // Verifica los datos enviados
+  
     try {
-      // Enviar solicitud al backend
       const response = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload), // Se envían todos los datos
+        body: JSON.stringify(payload),
       });
-
+  
       const data = await response.json();
-
+      console.log("Respuesta del backend:", data); // Verifica la respuesta
+  
       if (response.ok) {
         if (activeTab === "login") {
-          localStorage.setItem("token", data.token); // Guarda el token JWT en el localStorage
+          localStorage.setItem("token", data.token);
           Swal.fire({
             icon: "success",
             title: "Inicio de sesión exitoso",
@@ -54,7 +56,7 @@ const Login = () => {
             title: "Registro exitoso",
             text: "Ahora puedes iniciar sesión con tus credenciales.",
           });
-          setActiveTab("login"); // Cambia al tab de login tras el registro
+          setActiveTab("login");
         }
       } else {
         Swal.fire({
@@ -72,6 +74,7 @@ const Login = () => {
       });
     }
   };
+  
 
   return (
     <div className="login-container">
