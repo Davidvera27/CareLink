@@ -43,11 +43,12 @@ const Login = () => {
 
       if (response.ok) {
         if (activeTab === "login") {
-          localStorage.setItem("token", data.token); // Guarda el token JWT
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user)); // Almacena los datos del usuario
           Swal.fire({
             icon: "success",
             title: "Inicio de sesión exitoso",
-            text: "Bienvenido de nuevo.",
+            text: `Bienvenido de nuevo, ${data.user.firstName}!`,
           });
           navigate("/home"); // Redirige a la página principal
         } else {
