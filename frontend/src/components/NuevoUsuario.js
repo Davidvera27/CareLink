@@ -5,6 +5,7 @@ import GlobalHeader from "./GlobalHeader"; // Barra de navegación
 import "../styles/NuevoUsuario.css";
 import axios from "axios";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 
@@ -22,6 +23,8 @@ axios.interceptors.response.use(
 );
 
 const NuevoUsuario = () => {
+  const navigate = useNavigate(); // Hook para navegación
+
   const onFinish = async (values) => {
     try {
       const response = await axios.post("http://localhost:5000/api/patients", {
@@ -40,6 +43,7 @@ const NuevoUsuario = () => {
 
       if (response.status === 201) {
         message.success("Usuario registrado exitosamente");
+        navigate(`/nuevo-usuario/agregar-acudiente/${response.data.patient.id}`);
       }
     } catch (error) {
       console.error("Error al registrar el usuario:", error);
