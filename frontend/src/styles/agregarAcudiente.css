@@ -1,0 +1,33 @@
+.agregar-acudiente-page {
+  padding: 20px;
+}
+
+.card-legacy {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.head h3 {
+  margin: 0;
+}
+
+.body {
+  margin-top: 20px;
+}
+
+.form-section {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
