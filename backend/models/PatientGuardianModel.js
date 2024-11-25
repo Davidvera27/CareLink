@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
-const PatientGuardian = sequelize.define("PatientGuardian", {
+const PatientGuardian = sequelize.define("PatientsGuardian", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -11,7 +11,7 @@ const PatientGuardian = sequelize.define("PatientGuardian", {
     type: DataTypes.STRING,
     allowNull: false,
     references: {
-      model: "Patients", // Debe coincidir con el nombre de la tabla `Patients`
+      model: "Patients",
       key: "id_usuario",
     },
     onDelete: "CASCADE",
