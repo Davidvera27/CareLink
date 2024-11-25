@@ -16,10 +16,12 @@ exports.createPatientGuardian = async (req, res) => {
       marcadores,
     } = req.body;
 
-    if (!id_usuario || !parentesco || !n_documento || !nombres || !apellidos || !direccion) {
+    // Validar campos obligatorios
+    if (!id_usuario || !parentesco || typeof vive === "undefined" || !n_documento || !nombres || !apellidos || !direccion) {
       return res.status(400).json({ message: "Faltan campos obligatorios." });
     }
 
+    // Crear el acudiente en la base de datos
     const patientGuardian = await PatientGuardian.create({
       id_usuario,
       parentesco,
@@ -35,7 +37,7 @@ exports.createPatientGuardian = async (req, res) => {
 
     res.status(201).json({ message: "Acudiente registrado exitosamente.", patientGuardian });
   } catch (error) {
-    console.error("Error al registrar acudiente:", error);
+    console.error("Error al registrar el acudiente:", error);
     res.status(500).json({ message: "Error interno del servidor.", error: error.message });
   }
 };
@@ -73,6 +75,7 @@ exports.updatePatientGuardian = async (req, res) => {
       return res.status(404).json({ message: "Acudiente no encontrado." });
     }
 
+    // Actualizar los datos del acudiente
     await patientGuardian.update(req.body);
     res.status(200).json({ message: "Acudiente actualizado correctamente.", patientGuardian });
   } catch (error) {
