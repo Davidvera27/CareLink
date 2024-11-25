@@ -4,6 +4,7 @@ const cors = require("cors");
 const { connectMongoDB, connectPostgreSQL, syncPostgreSQL } = require("./db");
 const patientRoutes = require("./routes/patientRoutes");
 const authRoutes = require("./routes/authRoutes");
+const patientGuardianRoutes = require('../routes/patientGuardianRoutes');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cors());
 // Rutas
 app.use("/api/auth", authRoutes); // Rutas para autenticación
 app.use("/api/patients", patientRoutes); // Rutas para pacientes
+app.use('/api/guardians', patientGuardianRoutes);
 
 // Iniciar servidor
 const PORT = process.env.PORT || 5000;
