@@ -1,5 +1,4 @@
 const express = require("express");
-const router = express.Router();
 const {
   createPatientGuardian,
   getAllPatientGuardians,
@@ -8,11 +7,13 @@ const {
   deletePatientGuardian,
 } = require("../controllers/PatientGuardianController");
 
-// Rutas para los acudientes
-router.post("/", createPatientGuardian);
-router.get("/", getAllPatientGuardians);
-router.get("/:id", getPatientGuardianById);
-router.put("/:id", updatePatientGuardian);
-router.delete("/:id", deletePatientGuardian);
+const router = express.Router();
+
+// Rutas para los acudientes (PatientsGuardian)
+router.post("/", createPatientGuardian); // Crear nuevo acudiente
+router.get("/", getAllPatientGuardians); // Obtener todos los acudientes
+router.get("/:id", getPatientGuardianById); // Obtener acudiente por ID
+router.put("/:id", updatePatientGuardian); // Actualizar acudiente
+router.delete("/:id", deletePatientGuardian); // Eliminar acudiente
 
 module.exports = router;
