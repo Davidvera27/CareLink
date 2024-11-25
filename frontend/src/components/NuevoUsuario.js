@@ -1,23 +1,66 @@
 import React from "react";
-import { Form, Input, Select, DatePicker, Button, Upload } from "antd";
+import { Form, Input, Select, DatePicker, Button, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import GlobalHeader from "./GlobalHeader"; // Importar GlobalHeader
+import GlobalHeader from "./GlobalHeader"; // Barra de navegación
 import "../styles/NuevoUsuario.css";
+import axios from "axios";
+import moment from "moment";
 
 const { Option } = Select;
 
+// Configuración global para manejar errores en Axios
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (!error.response) {
+      message.error("Error de red. Verifica tu conexión.");
+    } else {
+      message.error(error.response.data?.message || "Error en el servidor.");
+    }
+    return Promise.reject(error);
+  }
+);
+
 const NuevoUsuario = () => {
-  const onFinish = (values) => {
-    console.log("Formulario enviado con éxito:", values);
+  const onFinish = async (values) => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/patients", {
+        tipo_usuario: values.tipoUsuario,
+        n_documento: values.nDocumento,
+        apellidos: values.apellidos,
+        nombres: values.nombres,
+        genero: values.genero,
+        fecha_nacimiento: values.fechaNacimiento.format("YYYY-MM-DD"),
+        estado_civil: values.estadoCivil,
+        ocupacion: values.ocupacion,
+        direccion: values.direccion,
+        telefono: values.telefono,
+        correo_electronico: values.correoElectronico,
+      });
+
+      if (response.status === 201) {
+        message.success("Usuario registrado exitosamente");
+      }
+    } catch (error) {
+      console.error("Error al registrar el usuario:", error);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
     console.error("Error en el formulario:", errorInfo);
+    message.error("Por favor, complete todos los campos obligatorios.");
+  };
+
+  const validateDate = (_, value) => {
+    if (!value || value.isBefore(moment())) {
+      return Promise.resolve();
+    }
+    return Promise.reject(new Error("La fecha debe ser anterior a hoy."));
   };
 
   return (
     <div>
-      <GlobalHeader /> {/* Incluir la barra de navegación */}
+      <GlobalHeader />
       <div className="nuevo-usuario-page">
         <div className="card-legacy">
           <div className="head">
@@ -42,13 +85,6 @@ const NuevoUsuario = () => {
                 <h4>Datos básicos</h4>
                 <div className="form-row">
                   <Form.Item
-                    name="idUsuario"
-                    label="Id. Usuario"
-                    className="form-item"
-                  >
-                    <Input placeholder="0001" disabled />
-                  </Form.Item>
-                  <Form.Item
                     name="tipoUsuario"
                     label="Tipo de usuario"
                     className="form-item"
@@ -62,6 +98,7 @@ const NuevoUsuario = () => {
                     name="nDocumento"
                     label="N° Documento"
                     className="form-item"
+                    rules={[{ required: true, message: "Este campo es obligatorio" }]}
                   >
                     <Input placeholder="44567890" />
                   </Form.Item>
@@ -71,6 +108,7 @@ const NuevoUsuario = () => {
                     name="apellidos"
                     label="Apellidos"
                     className="form-item"
+                    rules={[{ required: true, message: "Este campo es obligatorio" }]}
                   >
                     <Input placeholder="LOPEZ ORREGO" />
                   </Form.Item>
@@ -78,10 +116,16 @@ const NuevoUsuario = () => {
                     name="nombres"
                     label="Nombres"
                     className="form-item"
+                    rules={[{ required: true, message: "Este campo es obligatorio" }]}
                   >
                     <Input placeholder="JUAN ANTONIO" />
                   </Form.Item>
-                  <Form.Item name="genero" label="Género" className="form-item">
+                  <Form.Item
+                    name="genero"
+                    label="Género"
+                    className="form-item"
+                    rules={[{ required: true, message: "Este campo es obligatorio" }]}
+                  >
                     <Select>
                       <Option value="Masculino">Masculino</Option>
                       <Option value="Femenino">Femenino</Option>
@@ -93,6 +137,10 @@ const NuevoUsuario = () => {
                     name="fechaNacimiento"
                     label="Fecha de nacimiento"
                     className="form-item"
+                    rules={[
+                      { required: true, message: "Este campo es obligatorio" },
+                      { validator: validateDate },
+                    ]}
                   >
                     <DatePicker format="YYYY-MM-DD" />
                   </Form.Item>
@@ -130,7 +178,7 @@ const NuevoUsuario = () => {
                     listType="picture"
                     beforeUpload={() => false}
                   >
-                    <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                    <Button icon={<UploadOutlined />}>Subir Fotografía</Button>
                   </Upload>
                 </Form.Item>
               </div>
@@ -141,6 +189,7 @@ const NuevoUsuario = () => {
                     name="direccion"
                     label="Dirección"
                     className="form-item"
+                    rules={[{ required: true, message: "Este campo es obligatorio" }]}
                   >
                     <Input placeholder="CLL 45 - 60-20 INT 101" />
                   </Form.Item>
