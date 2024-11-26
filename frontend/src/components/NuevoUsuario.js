@@ -42,8 +42,9 @@ const NuevoUsuario = () => {
       });
 
       if (response.status === 201) {
-        message.success("Usuario registrado exitosamente");
-        navigate(`/nuevo-usuario/agregar-acudiente/${response.data.patient.id}`);
+        const idUsuario = response.data.patient.id_usuario; // Extraer id_usuario
+        message.success("Usuario registrado exitosamente.");
+        navigate(`/nuevo-usuario/agregar-acudiente/${idUsuario}`); // Redirigir con id_usuario
       }
     } catch (error) {
       console.error("Error al registrar el usuario:", error);
