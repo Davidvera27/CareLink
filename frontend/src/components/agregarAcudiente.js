@@ -8,15 +8,14 @@ import "../styles/agregarAcudiente.css";
 const { Option } = Select;
 
 const AgregarAcudiente = () => {
-  const { id_usuario } = useParams(); // Obtener el ID del usuario/paciente
+  const { id_usuario } = useParams(); // Obtener el ID del usuario/paciente desde la URL
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
     try {
-      // Enviar solicitud al backend para registrar un acudiente
-      console.log("Formulario enviado con valores:", values); // Log para depuración
+      // Enviar datos al backend con el ID del usuario
       const response = await axios.post(`http://localhost:5000/api/guardians`, {
-        id_usuario, // Clave foránea para vinculación
+        id_usuario, // Enviar el ID del usuario correctamente
         parentesco: values.parentesco,
         vive: values.vive === "Sí",
         n_documento: values.nDocumento,
@@ -33,19 +32,19 @@ const AgregarAcudiente = () => {
 
       if (response.status === 201) {
         message.success("Acudiente registrado exitosamente.");
-        navigate("/home"); // Redirigir a la página principal
+        navigate(`/detalle-usuario/${id_usuario}`); // Redirigir al detalle del usuario
       }
     } catch (error) {
       console.error("Error al registrar el acudiente:", error);
       message.error(
-        error.response?.data?.message || "Hubo un problema al registrar el acudiente."
+        error.response?.data?.message ||
+          "Hubo un problema al registrar el acudiente."
       );
     }
   };
 
   const onFinishFailed = (errorInfo) => {
     console.error("Error en el formulario:", errorInfo);
-    // Mostrar un log de los campos que fallaron la validación
     errorInfo.errorFields.forEach((field) => {
       console.error(`Campo fallido: ${field.name}, Mensaje: ${field.errors}`);
     });
@@ -66,6 +65,9 @@ const AgregarAcudiente = () => {
               name="agregar-acudiente"
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
+              initialValues={{
+                vive: "Sí", // Valor predeterminado para el campo 'vive'
+              }}
             >
               <div className="form-section">
                 <h4>Datos básicos del acudiente</h4>
@@ -73,7 +75,9 @@ const AgregarAcudiente = () => {
                   <Form.Item
                     name="parentesco"
                     label="Parentesco"
-                    rules={[{ required: true, message: "Este campo es obligatorio." }]}
+                    rules={[
+                      { required: true, message: "Este campo es obligatorio." },
+                    ]}
                   >
                     <Select placeholder="Seleccione un parentesco">
                       <Option value="Padre/Madre">Padre/Madre</Option>
@@ -84,7 +88,9 @@ const AgregarAcudiente = () => {
                   <Form.Item
                     name="vive"
                     label="¿Vive?"
-                    rules={[{ required: true, message: "Este campo es obligatorio." }]}
+                    rules={[
+                      { required: true, message: "Este campo es obligatorio." },
+                    ]}
                   >
                     <Select placeholder="Seleccione una opción">
                       <Option value="Sí">Sí</Option>
@@ -94,7 +100,9 @@ const AgregarAcudiente = () => {
                   <Form.Item
                     name="nDocumento"
                     label="N° Documento"
-                    rules={[{ required: true, message: "Este campo es obligatorio." }]}
+                    rules={[
+                      { required: true, message: "Este campo es obligatorio." },
+                    ]}
                   >
                     <Input placeholder="Número de documento" />
                   </Form.Item>
@@ -103,14 +111,18 @@ const AgregarAcudiente = () => {
                   <Form.Item
                     name="nombres"
                     label="Nombres"
-                    rules={[{ required: true, message: "Este campo es obligatorio." }]}
+                    rules={[
+                      { required: true, message: "Este campo es obligatorio." },
+                    ]}
                   >
                     <Input placeholder="Nombres" />
                   </Form.Item>
                   <Form.Item
                     name="apellidos"
                     label="Apellidos"
-                    rules={[{ required: true, message: "Este campo es obligatorio." }]}
+                    rules={[
+                      { required: true, message: "Este campo es obligatorio." },
+                    ]}
                   >
                     <Input placeholder="Apellidos" />
                   </Form.Item>
@@ -122,7 +134,9 @@ const AgregarAcudiente = () => {
                   <Form.Item
                     name="direccion"
                     label="Dirección"
-                    rules={[{ required: true, message: "Este campo es obligatorio." }]}
+                    rules={[
+                      { required: true, message: "Este campo es obligatorio." },
+                    ]}
                   >
                     <Input placeholder="Dirección" />
                   </Form.Item>
