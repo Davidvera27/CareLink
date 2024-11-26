@@ -1,6 +1,6 @@
+const Patient = require("../models/patientModel");
 const PatientGuardian = require("../models/PatientGuardianModel");
 
-// Crear un nuevo acudiente
 exports.createPatientGuardian = async (req, res) => {
   try {
     const {
@@ -16,12 +16,18 @@ exports.createPatientGuardian = async (req, res) => {
       marcadores,
     } = req.body;
 
+    // Validar que id_usuario exista en la tabla Patients
+    const patientExists = await Patient.findOne({ where: { id_usuario } });
+    if (!patientExists) {
+      return res.status(404).json({ message: "El usuario no existe en la base de datos." });
+    }
+
     // Validar campos obligatorios
     if (!id_usuario || !parentesco || typeof vive === "undefined" || !n_documento || !nombres || !apellidos || !direccion) {
       return res.status(400).json({ message: "Faltan campos obligatorios." });
     }
 
-    // Crear el acudiente en la base de datos
+    // Crear el acudiente
     const patientGuardian = await PatientGuardian.create({
       id_usuario,
       parentesco,
