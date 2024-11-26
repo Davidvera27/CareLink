@@ -35,14 +35,13 @@ const App = () => {
 
         {/* Ruta para agregar un Acudiente o Familiar */}
         <Route
-          path="/nuevo-usuario/agregar-acudiente/:id_patient"
+          path="/nuevo-usuario/agregar-acudiente/:id_usuario"
           element={
             <PrivateRoute>
               <AgregarAcudiente />
             </PrivateRoute>
           }
         />
-
       </Routes>
     </Router>
   );
