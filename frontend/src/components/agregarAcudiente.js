@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Select, Button, message, Checkbox } from "antd";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import GlobalHeader from "./GlobalHeader";
 import axios from "axios";
 import "../styles/agregarAcudiente.css";
@@ -9,7 +9,7 @@ const { Option } = Select;
 
 const AgregarAcudiente = () => {
   const { id_usuario } = useParams(); // Obtener el ID del usuario/paciente desde la URL
-  const navigate = useNavigate();
+  const [form] = Form.useForm(); // Referencia al formulario
 
   const onFinish = async (values) => {
     try {
@@ -32,7 +32,7 @@ const AgregarAcudiente = () => {
 
       if (response.status === 201) {
         message.success("Acudiente registrado exitosamente.");
-        navigate(`/detalle-usuario/${id_usuario}`); // Redirigir al detalle del usuario
+        form.resetFields(); // Limpiar el formulario
       }
     } catch (error) {
       console.error("Error al registrar el acudiente:", error);
@@ -62,6 +62,7 @@ const AgregarAcudiente = () => {
           <div className="body">
             <Form
               layout="vertical"
+              form={form} // Conectar el formulario con Ant Design
               name="agregar-acudiente"
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
@@ -160,7 +161,7 @@ const AgregarAcudiente = () => {
                 </Checkbox.Group>
               </div>
               <div className="form-footer">
-                <Button type="default" htmlType="reset">
+                <Button type="default" htmlType="reset" onClick={() => form.resetFields()}>
                   Restablecer
                 </Button>
                 <Button type="primary" htmlType="submit">
