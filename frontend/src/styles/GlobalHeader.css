@@ -11,27 +11,41 @@
 
 /* Menú lateral */
 .menu-container {
-    width: 240px; /* Tamaño fijo para evitar desbordes */
+    margin-top: 64px; /* Igual a la altura de la cabecera global */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: calc(100vh - 64px); /* Resta la altura de la cabecera */
     background-color: #ffffff;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
-    height: 100%;
     transition: width 0.3s;
-    position: fixed;
-    left: 0;
-    top: 0;
 }
 
 .menu-container.collapsed {
-    width: 80px; /* Tamaño reducido al colapsar */
+    width: 80px;
 }
 
 .menu {
-    margin-top: 48px; /* Alineación con el encabezado */
-    height: calc(100vh - 48px); /* Ajusta la altura del menú */
-    overflow-y: auto; /* Permite el scroll si hay demasiados elementos */
+    margin-top: 0; /* No necesita margen adicional ya que `menu-container` lo tiene */
+    height: 100%; /* Ocupa todo el espacio disponible del contenedor */
+    overflow-y: auto;
 }
+
+.main-content {
+    margin-left: 240px; /* Ancho del menú lateral */
+    margin-top: 64px; /* Altura de la cabecera */
+    padding: 16px; /* Opcional, para añadir espacio */
+    transition: margin-left 0.3s;
+}
+
+.menu-container.collapsed ~ .main-content {
+    margin-left: 80px; /* Ajustar cuando el menú está colapsado */
+}
+
+
 
 .collapse-btn {
     background-color: #7f34b4;
@@ -49,17 +63,21 @@
 
 /* Encabezado Global */
 .global-header {
+    position: fixed; /* Para que sea estática */
+    top: 0; /* Siempre en la parte superior */
+    left: 0; /* Alineada al borde izquierdo */
+    right: 0; /* Extiende hasta el borde derecho */
+    z-index: 1000; /* Para garantizar que siempre esté encima */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 48px;
-    width: calc(100% - 240px); /* Ajusta con respecto al tamaño del menú */
-    margin-left: 240px;
+    height: 64px; /* Ajusta según el diseño */
     padding: 0 16px;
-    background-color: #22075e;
+    background-color: #22075e; /* Mantén el color definido */
     box-shadow: inset 0px -1px 0px #f0f0f0;
     transition: margin-left 0.3s, width 0.3s;
 }
+
 
 .menu-container.collapsed ~ .global-header {
     margin-left: 80px;
