@@ -1,0 +1,266 @@
+/* Estilos de la página */
+.detalles-usuario-page {
+    background-color: #f5f5f5;
+    padding: 24px;
+}
+
+.detalles-usuario-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Estilos de la tarjeta: Datos básicos y de localización */
+.card-legacy {
+    display: flex;
+    flex-direction: column;
+    width: 1214px;
+    background: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    height: 56px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.title-wrapper {
+    display: flex;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.opciones {
+    display: flex;
+    gap: 10px;
+}
+
+.opciones-button {
+    display: flex;
+    align-items: center;
+    padding: 4px 15px;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    background: transparent;
+    border: none;
+    color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+}
+
+.opciones-button.icon-only {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.body {
+    display: flex;
+    align-items: center;
+    padding: 24px;
+    gap: 20px;
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.datos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-basica,
+.info-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.merge {
+    display: flex;
+    gap: 5px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.highlight {
+    font-weight: bold;
+    background: #f1e6f5;
+    border-radius: 100px;
+    padding: 0 5px;
+    color: #000000;
+}
+
+.link {
+    color: #9957c2;
+    text-decoration: underline;
+}
+
+/* Estilos de la tarjeta: Historia Clínica */
+.historia-clinica-card {
+    display: flex;
+    flex-direction: column;
+    width: 1214px;
+    background: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .historia-clinica-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    height: 56px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .historia-clinica-title-wrapper {
+    display: flex;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.85);
+  }
+  
+  .historia-clinica-body {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    gap: 25px;
+  }
+  
+  .historia-clinica-datos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .historia-clinica-titulo {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #000000;
+  }
+  
+  .historia-clinica-merge {
+    display: flex;
+    gap: 5px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+  }
+  
+  .historia-clinica-highlight {
+    font-weight: bold;
+    background: #f1e6f5;
+    border-radius: 100px;
+    padding: 0 5px;
+    color: #000000;
+  }
+  
+  .historia-clinica-link {
+    color: #9957c2;
+    text-decoration: underline;
+  }
+  
+  .historia-clinica-opciones {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .historia-clinica-edit-button,
+  .historia-clinica-delete-button {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+  }
+  
+
+/* Estilos de la tarjeta: Reportes Clínicos */
+.reportes-clinicos-card {
+    display: flex;
+    flex-direction: column;
+    width: 1214px;
+    background: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    height: 56px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.card-head .title {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.agregar-btn {
+    display: flex;
+    align-items: center;
+    background-color: #7f34b4;
+    color: #ffffff;
+    border-radius: 2px;
+    padding: 4px 15px;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+}
+
+.card-body .reportes-clinicos-table {
+    padding: 16px;
+}
+
+.reportes-clinicos-table .ant-table {
+    border-radius: 2px;
+}
+
+.reportes-clinicos-table .ant-table-thead > tr > th {
+    background-color: #fafafa;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.reportes-clinicos-table .ant-table-tbody > tr > td {
+    font-family: "Roboto", sans-serif;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.acciones {
+    display: flex;
+    gap: 10px;
+}
+
+.acciones .ant-btn-link {
+    color: #7f34b4;
+    font-size: 14px;
+}
