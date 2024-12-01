@@ -62,6 +62,8 @@ const DetallesUsuario = () => {
     },
   ];
 
+  
+
   const data = [
     {
       key: "1",
@@ -76,6 +78,8 @@ const DetallesUsuario = () => {
       fecha: "10/24/2024",
     },
   ];
+
+  
 
   const modalData = {
     cirugias: {
