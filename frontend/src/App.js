@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import NuevoUsuario from "./components/NuevoUsuario";
-import AgregarAcudiente from "./components/agregarAcudiente"; // Importar el nuevo componente
+import AgregarAcudiente from "./components/agregarAcudiente";
+import DetallesUsuario from "./components/DetallesUsuario"; // Importar el nuevo componente
 import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
@@ -39,6 +40,16 @@ const App = () => {
           element={
             <PrivateRoute>
               <AgregarAcudiente />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Nueva Ruta para Detalles del Usuario */}
+        <Route
+          path="/detalles-usuario"
+          element={
+            <PrivateRoute>
+              <DetallesUsuario />
             </PrivateRoute>
           }
         />
