@@ -21,19 +21,29 @@ const DetallesUsuario = () => {
 
   const columns = [
     {
+      title: <input type="checkbox" />,
+      dataIndex: "checkbox",
+      key: "checkbox",
+      render: () => <input type="checkbox" />,
+      width: "5%",
+    },
+    {
       title: "Profesional",
       dataIndex: "profesional",
       key: "profesional",
+      width: "30%",
     },
     {
       title: "Tipo Reporte",
       dataIndex: "tipoReporte",
       key: "tipoReporte",
+      width: "30%",
     },
     {
       title: "Fecha",
       dataIndex: "fecha",
       key: "fecha",
+      width: "20%",
     },
     {
       title: "Acciones",
@@ -48,6 +58,7 @@ const DetallesUsuario = () => {
           </Button>
         </div>
       ),
+      width: "15%",
     },
   ];
 
@@ -71,9 +82,7 @@ const DetallesUsuario = () => {
       title: "Historial de cirugías del usuario",
       content: (
         <Table
-          dataSource={[
-            { key: "1", fecha: "10/11/1998", observacion: "Apendicectomía" },
-          ]}
+          dataSource={[{ key: "1", fecha: "10/11/1998", observacion: "Apendicectomía" }]}
           columns={[
             { title: "Fecha de ocurrencia", dataIndex: "fecha", key: "fecha" },
             { title: "Observación", dataIndex: "observacion", key: "observacion" },
@@ -109,18 +118,10 @@ const DetallesUsuario = () => {
               <span className="title">Datos básicos y de localización</span>
             </div>
             <div className="opciones">
-              <Button
-                className="opciones-button"
-                icon={<EditOutlined />}
-                type="text"
-              >
+              <Button className="opciones-button" icon={<EditOutlined />} type="text">
                 Editar
               </Button>
-              <Button
-                className="opciones-button icon-only"
-                icon={<DeleteOutlined />}
-                type="text"
-              />
+              <Button className="opciones-button icon-only" icon={<DeleteOutlined />} type="text" />
             </div>
           </div>
           <div className="body">
@@ -162,139 +163,121 @@ const DetallesUsuario = () => {
 
         {/* Segunda tarjeta */}
         <Card className="historia-clinica-card" bordered={false}>
-        <div className="historia-clinica-head">
+          <div className="historia-clinica-head">
             <div className="historia-clinica-title-wrapper">
-            <span className="historia-clinica-title">Historia Clínica</span>
+              <span className="historia-clinica-title">Historia Clínica</span>
             </div>
             <div className="historia-clinica-opciones">
-            <Button
-                className="historia-clinica-edit-button"
-                icon={<EditOutlined />}
-                type="text"
-            >
+              <Button className="historia-clinica-edit-button" icon={<EditOutlined />} type="text">
                 Editar
-            </Button>
-            <Button
+              </Button>
+              <Button
                 className="historia-clinica-delete-button icon-only"
                 icon={<DeleteOutlined />}
                 type="text"
-            />
+              />
             </div>
-        </div>
-        <div className="historia-clinica-body">
+          </div>
+          <div className="historia-clinica-body">
             <div className="historia-clinica-datos">
-            <div className="esenciales">
+              <div className="esenciales">
                 <span className="historia-clinica-titulo">Datos Esenciales</span>
                 <div className="historia-clinica-merge">
-                <span>Empresa de Salud domiciliaria:</span>
-                <span>Sí</span>
-                <span className="historia-clinica-highlight">604 607 8990</span>
+                  <span>Empresa de Salud domiciliaria:</span>
+                  <span>Sí</span>
+                  <span className="historia-clinica-highlight">604 607 8990</span>
                 </div>
                 <div className="historia-clinica-merge">
-                <span>Tipo de Sangre:</span>
-                <span>O+</span>
-                <span>Estatura:</span>
-                <span>165</span>
+                  <span>Tipo de Sangre:</span>
+                  <span>O+</span>
+                  <span>Estatura:</span>
+                  <span>165</span>
                 </div>
                 <div className="historia-clinica-merge">
-                <span>Motivo de Ingreso:</span>
-                <span>Usuario de centro de día</span>
+                  <span>Motivo de Ingreso:</span>
+                  <span>Usuario de centro de día</span>
                 </div>
-            </div>
-            <div className="discapacidad">
+              </div>
+              <div className="discapacidad">
                 <span className="historia-clinica-titulo">
-                Discapacidades, Apoyos y Limitaciones
+                  Discapacidades, Apoyos y Limitaciones
                 </span>
                 <div className="historia-clinica-merge">
-                <span>Discapacidad:</span>
-                <span>Sí</span>
-                <span className="historia-clinica-highlight">Visual</span>
-                <span className="historia-clinica-highlight">Auditiva</span>
+                  <span>Discapacidad:</span>
+                  <span>Sí</span>
+                  <span className="historia-clinica-highlight">Visual</span>
+                  <span className="historia-clinica-highlight">Auditiva</span>
                 </div>
                 <div className="historia-clinica-merge">
-                <span>Limitaciones:</span>
-                <span>Sí</span>
-                <span className="historia-clinica-highlight">Ayuda para ir al baño</span>
+                  <span>Limitaciones:</span>
+                  <span>Sí</span>
+                  <span className="historia-clinica-highlight">Ayuda para ir al baño</span>
                 </div>
                 <div className="historia-clinica-merge">
-                <span>Apoyos y Tratamientos:</span>
-                <span
+                  <span>Apoyos y Tratamientos:</span>
+                  <span
                     className="historia-clinica-link"
                     onClick={() =>
-                    showModal("Apoyos y Tratamientos", "Información de apoyos y tratamientos...")
+                      showModal("Apoyos y Tratamientos", "Información de apoyos y tratamientos...")
                     }
-                >
+                  >
                     Ver
-                </span>
+                  </span>
                 </div>
-            </div>
-            <div className="preexistencias">
+              </div>
+              <div className="preexistencias">
                 <span className="historia-clinica-titulo">Preexistencias y Alergias</span>
                 <div className="historia-clinica-merge">
-                <span>Cirugías:</span>
-                <span>Sí</span>
-                <span
+                  <span>Cirugías:</span>
+                  <span>Sí</span>
+                  <span
                     className="historia-clinica-link"
-                    onClick={() =>
-                    showModal(
-                        modalData.cirugias.title,
-                        modalData.cirugias.content
-                    )
-                    }
-                >
+                    onClick={() => showModal(modalData.cirugias.title, modalData.cirugias.content)}
+                  >
                     Ver
-                </span>
+                  </span>
                 </div>
                 <div className="historia-clinica-merge">
-                <span>Alergias a medicamentos:</span>
-                <span>Sí</span>
-                <span
+                  <span>Alergias a medicamentos:</span>
+                  <span>Sí</span>
+                  <span
                     className="historia-clinica-link"
-                    onClick={() =>
-                    showModal(
-                        modalData.alergias.title,
-                        modalData.alergias.content
-                    )
-                    }
-                >
+                    onClick={() => showModal(modalData.alergias.title, modalData.alergias.content)}
+                  >
                     Ver
-                </span>
+                  </span>
                 </div>
                 <div className="historia-clinica-merge">
-                <span>Otras Alergias:</span>
-                <span>Sí</span>
-                <span
+                  <span>Otras Alergias:</span>
+                  <span>Sí</span>
+                  <span
                     className="historia-clinica-link"
                     onClick={() =>
-                    showModal(
-                        modalData.otrasAlergias.title,
-                        modalData.otrasAlergias.content
-                    )
+                      showModal(modalData.otrasAlergias.title, modalData.otrasAlergias.content)
                     }
-                >
+                  >
                     Ver
-                </span>
+                  </span>
                 </div>
-            </div>
-            <div className="habitos">
+              </div>
+              <div className="habitos">
                 <span className="historia-clinica-titulo">Hábitos y otros datos</span>
                 <div className="historia-clinica-merge">
-                <span>Cafeína:</span>
-                <span>Sí</span>
+                  <span>Cafeína:</span>
+                  <span>Sí</span>
                 </div>
                 <div className="historia-clinica-merge">
-                <span>Alcoholismo:</span>
-                <span>No</span>
+                  <span>Alcoholismo:</span>
+                  <span>No</span>
                 </div>
                 <div className="historia-clinica-merge">
-                <span>Maltrato:</span>
-                <span>No</span>
+                  <span>Maltrato:</span>
+                  <span>No</span>
                 </div>
+              </div>
             </div>
-            </div>
-        </div>
+          </div>
         </Card>
-
 
         {/* Tercera tarjeta */}
         <Card className="reportes-clinicos-card" bordered={false}>
@@ -307,12 +290,7 @@ const DetallesUsuario = () => {
             </Button>
           </div>
           <div className="card-body">
-            <Table
-              columns={columns}
-              dataSource={data}
-              pagination={false}
-              className="reportes-clinicos-table"
-            />
+            <Table columns={columns} dataSource={data} pagination={false} className="table" />
           </div>
         </Card>
       </div>
@@ -322,11 +300,7 @@ const DetallesUsuario = () => {
         title={modalTitle}
         visible={isModalVisible}
         onCancel={handleModalClose}
-        footer={[
-          <Button key="ok" type="primary" onClick={handleModalClose}>
-            OK
-          </Button>,
-        ]}
+        footer={[<Button key="ok" type="primary" onClick={handleModalClose}>OK</Button>]}
       >
         {modalContent}
       </Modal>
