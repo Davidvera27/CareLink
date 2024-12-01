@@ -11,7 +11,7 @@ const HorizontalStatsBlock = () => {
         </div>
         <div className="stat-body">
           <h3 className="stat-value">100</h3>
-          <span className="stat-trend-value">17.1</span>
+          <span className="stat-trend-value">17.1%</span>
         </div>
       </div>
       <div className="stat-item">
@@ -20,7 +20,7 @@ const HorizontalStatsBlock = () => {
         </div>
         <div className="stat-body">
           <h3 className="stat-value">90%</h3>
-          <span className="stat-trend-value">26.2</span>
+          <span className="stat-trend-value">26.2%</span>
         </div>
       </div>
     </div>
@@ -43,8 +43,12 @@ const ScheduledActivities = () => {
           {["Ping Pong", "Yoga", "Arte"].map((activity, index) => (
             <div className="table-row" key={index}>
               <div className="table-cell">{activity}</div>
-              <div className="table-cell">7 días</div>
-              <div className="table-cell">Editar | Ver</div>
+              <div className="table-cell">Dentro de 7 días</div>
+              <div className="table-cell actions">
+                <span className="action-link">Editar</span>
+                <span className="divider">|</span>
+                <span className="action-link">Ver</span>
+              </div>
             </div>
           ))}
         </div>
@@ -60,7 +64,7 @@ const Home = () => {
       <div className="home-container">
         <div className="content">
           {/* Control de asistencia */}
-          <div className="card-legacy">
+          <div className="card-legacy attendance-control">
             <div className="card-header">
               <h5 className="card-title">Control de asistencia del día</h5>
               <button className="add-button">Agregar</button>
@@ -70,7 +74,7 @@ const Home = () => {
                 <div className="table-row header">
                   <div className="table-cell checkbox-header"></div>
                   <div className="table-cell">Usuario</div>
-                  <div className="table-cell">Tipo servicio</div>
+                  <div className="table-cell">Tipo de servicio</div>
                   <div className="table-cell">Estado</div>
                   <div className="table-cell actions-header">Acciones</div>
                 </div>
@@ -108,9 +112,9 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Card Row: Flujo de usuarios */}
+          {/* Card Row: Flujo de usuarios y Actividades programadas */}
           <div className="card-row">
-            <div className="card-legacy">
+            <div className="card-legacy flujo-usuarios">
               <div className="card-header">
                 <h5 className="card-title">Flujo de usuarios</h5>
               </div>
@@ -118,7 +122,7 @@ const Home = () => {
                 <HorizontalStatsBlock />
                 <div className="table">
                   <div className="table-row header">
-                    <div className="table-cell">Usuarios</div>
+                    <div className="table-cell">Usuario</div>
                     <div className="table-cell">Contratos</div>
                     <div className="table-cell">Visitas del mes</div>
                   </div>
