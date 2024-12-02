@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Menu, Button } from "antd";
+import { Menu, Button, Breadcrumb } from "antd";
 import {
   HomeOutlined,
   UserOutlined,
@@ -13,16 +13,25 @@ import {
   MenuUnfoldOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/GlobalHeader.css";
 import avatar from "../assets/avatar.jpg";
 
 const { SubMenu } = Menu;
 
+const breadcrumbNameMap = {
+  "/home": "Tablero de Inicio",
+  "/nuevo-usuario": "Nuevo Usuario",
+  "/nuevo-usuario/agregar-acudiente": "Agregar Acudiente",
+  "/detalles-usuario": "Detalles del Usuario",
+  "/detalles-usuario/historia-clinica": "Historia Clínica",
+};
+
 const GlobalHeader = () => {
   const [userName, setUserName] = useState("Andrea Salazar");
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -42,13 +51,27 @@ const GlobalHeader = () => {
     window.location.href = "/";
   };
 
-  const handleNavigation = (path) => {
-    navigate(path);
-  };
+  const pathSnippets = location.pathname.split("/").filter((i) => i);
+  const breadcrumbItems = pathSnippets.map((_, index) => {
+    const url = `/${pathSnippets.slice(0, index + 1).join("/")}`;
+    return {
+      title: (
+        <a
+          href={url}
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(url);
+          }}
+        >
+          {breadcrumbNameMap[url] || url}
+        </a>
+      ),
+    };
+  });
 
   return (
     <div className="global-header-container">
-      {/* Header */}
+      {/* Encabezado Global */}
       <header className="global-header">
         <div className="logo">
           <h1>Sistema de Gestión</h1>
@@ -62,14 +85,14 @@ const GlobalHeader = () => {
           <div className="user-wrapper">
             <img src={avatar} alt="User Avatar" />
             <span className="user-name">{userName}</span>
-            <div className="icon-wrapper" onClick={handleLogout}>
+            <div className="logout-icon" onClick={handleLogout}>
               <LogoutOutlined />
             </div>
           </div>
         </div>
       </header>
 
-      {/* Sidebar and Main Content */}
+      {/* Menú lateral */}
       <div className={`menu-container ${collapsed ? "collapsed" : ""}`}>
         <Button
           type="primary"
@@ -82,7 +105,7 @@ const GlobalHeader = () => {
           <Menu.Item
             key="1"
             icon={<HomeOutlined />}
-            onClick={() => handleNavigation("/home")}
+            onClick={() => navigate("/home")}
           >
             Tablero de Inicio
           </Menu.Item>
@@ -90,23 +113,23 @@ const GlobalHeader = () => {
             <Menu.Item
               key="2"
               icon={<FileAddOutlined />}
-              onClick={() => handleNavigation("/Nuevo-Usuario")}
+              onClick={() => navigate("/nuevo-usuario")}
             >
               Nuevo Usuario
             </Menu.Item>
             <Menu.Item
               key="3"
               icon={<ProfileOutlined />}
-              onClick={() => handleNavigation("/NuevoReporteClinico")}
+              onClick={() => navigate("/nuevo-usuario/agregar-acudiente")}
             >
-              Nuevo Reporte Clínico
+              Agregar Acudiente
             </Menu.Item>
             <Menu.Item
               key="4"
               icon={<TeamOutlined />}
-              onClick={() => handleNavigation("/ListaUsuarios")}
+              onClick={() => navigate("/detalles-usuario")}
             >
-              Lista de Usuarios
+              Detalles del Usuario
             </Menu.Item>
           </SubMenu>
           <SubMenu
@@ -139,9 +162,13 @@ const GlobalHeader = () => {
         </Menu>
       </div>
 
-      {/* Main Content */}
+      {/* Contenido Principal */}
       <div className="main-content">
-        {/* Add children components or main view here */}
+        {/* Breadcrumb */}
+        <Breadcrumb
+          items={[{ title: <a href="/home">Inicio</a> }, ...breadcrumbItems]}
+        />
+        {/* Espacio para el contenido dinámico */}
       </div>
     </div>
   );
