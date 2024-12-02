@@ -305,7 +305,16 @@ const DetallesUsuario = () => {
               <span className="historia-clinica-title">Historia Clínica</span>
             </div>
             <div className="historia-clinica-opciones">
-              <Button className="historia-clinica-edit-button" icon={<EditOutlined />} type="text">
+              {/* Botón Editar con funcionalidad de redirección */}
+              <Button
+                className="historia-clinica-edit-button"
+                icon={<EditOutlined />}
+                type="text"
+                onClick={() => {
+                  const id_usuario = "USR-12345"; // Aquí deberás obtener dinámicamente el ID del usuario.
+                  window.location.href = `/detalles-usuario/historia-clinica/${id_usuario}`;
+                }}
+              >
                 Editar
               </Button>
               <Button
@@ -415,6 +424,7 @@ const DetallesUsuario = () => {
             </div>
           </div>
         </Card>
+
 
         {/* Tercera tarjeta */}
         <Card className="reportes-clinicos-card" bordered={false}>
