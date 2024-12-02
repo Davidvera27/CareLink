@@ -4,7 +4,8 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import NuevoUsuario from "./components/NuevoUsuario";
 import AgregarAcudiente from "./components/agregarAcudiente";
-import DetallesUsuario from "./components/DetallesUsuario"; // Importar el nuevo componente
+import DetallesUsuario from "./components/DetallesUsuario"; // Componente DetallesUsuario
+import HistoriaClinica from "./components/HistoriaClinica"; // Nuevo componente HistoriaClinica
 import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
@@ -44,12 +45,22 @@ const App = () => {
           }
         />
 
-        {/* Nueva Ruta para Detalles del Usuario */}
+        {/* Ruta para Detalles del Usuario */}
         <Route
           path="/detalles-usuario"
           element={
             <PrivateRoute>
               <DetallesUsuario />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Nueva Ruta para Historia Clínica */}
+        <Route
+          path="/detalles-usuario/historia-clinica/:id_usuario"
+          element={
+            <PrivateRoute>
+              <HistoriaClinica />
             </PrivateRoute>
           }
         />
