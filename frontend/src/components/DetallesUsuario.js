@@ -62,6 +62,18 @@ const DetallesUsuario = () => {
     },
   ];
 
+  const dataAcudientes = [
+    {
+      key: "1",
+      nombres: "María Patricia",
+      apellidos: "Lopez Gomez",
+      parentesco: "Hija",
+      telefono: "304567890",
+      direccion: "CLL 45 - 60-20 INT 101",
+      email: "maria@gmail.com",
+    },
+  ];
+  
   
 
   const data = [
@@ -79,6 +91,63 @@ const DetallesUsuario = () => {
     },
   ];
 
+  const columnsAcudientes = [
+    {
+      title: <input type="checkbox" />,
+      dataIndex: "checkbox",
+      key: "checkbox",
+      render: () => <input type="checkbox" />,
+      width: "5%",
+    },
+    {
+      title: "Nombres",
+      dataIndex: "nombres",
+      key: "nombres",
+      width: "20%",
+    },
+    {
+      title: "Apellidos",
+      dataIndex: "apellidos",
+      key: "apellidos",
+      width: "20%",
+    },
+    {
+      title: "Parentesco",
+      dataIndex: "parentesco",
+      key: "parentesco",
+      width: "15%",
+    },
+    {
+      title: "Teléfono",
+      dataIndex: "telefono",
+      key: "telefono",
+      width: "15%",
+    },
+    {
+      title: "Dirección",
+      dataIndex: "direccion",
+      key: "direccion",
+      width: "20%",
+    },
+    {
+      title: "E-Mail",
+      dataIndex: "email",
+      key: "email",
+      width: "20%",
+    },
+    {
+      title: "Acciones",
+      key: "acciones",
+      render: () => (
+        <div className="acciones">
+          <Button type="link">Editar</Button>
+          <Button type="link">Eliminar</Button>
+        </div>
+      ),
+      width: "10%",
+    },
+  ];
+  
   
 
   const modalData = {
@@ -297,6 +366,26 @@ const DetallesUsuario = () => {
             <Table columns={columns} dataSource={data} pagination={false} className="table" />
           </div>
         </Card>
+
+        <Card className="acudientes-card" bordered={false}>
+          <div className="card-head">
+            <div className="title-wrapper">
+              <span className="title">Acudientes</span>
+            </div>
+            <Button type="primary" icon={<PlusOutlined />} className="agregar-btn">
+              Agregar
+            </Button>
+          </div>
+          <div className="card-body">
+            <Table
+              columns={columnsAcudientes}
+              dataSource={dataAcudientes}
+              pagination={false}
+              className="table"
+            />
+          </div>
+        </Card>
+
       </div>
 
       {/* Modal */}
