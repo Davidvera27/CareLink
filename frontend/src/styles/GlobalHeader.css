@@ -63,20 +63,19 @@
 
 /* Encabezado Global */
 .global-header {
-    position: fixed; /* Para que sea estática */
-    top: 0; /* Siempre en la parte superior */
-    left: 0; /* Alineada al borde izquierdo */
-    right: 0; /* Extiende hasta el borde derecho */
-    z-index: 1000; /* Para garantizar que siempre esté encima */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 64px; /* Ajusta según el diseño */
     padding: 0 16px;
-    background-color: #22075e; /* Mantén el color definido */
+    height: 48px;
+    background-color: #22075e; /* Fondo morado */
     box-shadow: inset 0px -1px 0px #f0f0f0;
-    transition: margin-left 0.3s, width 0.3s;
-}
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
 
 
 .menu-container.collapsed ~ .global-header {
@@ -86,18 +85,35 @@
 
 /* Logo */
 .logo h1 {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 16px;
     color: #ffffff;
-}
+    margin: 0;
+  }
 
 /* Barra de herramientas */
 .toolbar {
     display: flex;
     align-items: center;
-    gap: 12px;
-}
+    gap: 16px;
+  }
+/* Íconos en la barra de herramientas */
+  .icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+  }
+  .icon {
+    font-size: 16px;
+    color: #ffffff;
+  }
+  
+  .badge-icon {
+    position: relative;
+  }
 
 .badge-icon,
 .user-wrapper {
@@ -107,9 +123,12 @@
 }
 
 .badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
     background: #ff4d4f;
     color: #ffffff;
-    font-family: "Roboto Mono", monospace;
+    font-family: 'Roboto Mono', monospace;
     font-size: 12px;
     width: 20px;
     height: 20px;
@@ -117,8 +136,33 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+  }
+/* Avatar y nombre del usuario */
+.user-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+  }
+  
+  .user-name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+  }
+
+  /* Logout */
+.icon-wrapper:last-child {
+    margin-left: 16px;
+  }
+
+  
 .user-wrapper img {
     width: 32px;
     height: 32px;
