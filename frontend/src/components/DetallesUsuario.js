@@ -73,6 +73,18 @@ const DetallesUsuario = () => {
       email: "maria@gmail.com",
     },
   ];
+
+  const dataContratos = [
+    {
+      key: "1",
+      fechaInicio: "12/12/2024",
+      estado: "Activo",
+      servicios: "Centro día, transporte",
+      firmado: "Sí",
+      estadoFacturacion: "Al día",
+    },
+  ];
+  
   
   
 
@@ -147,6 +159,58 @@ const DetallesUsuario = () => {
       width: "10%",
     },
   ];
+
+  const columnsContratos = [
+    {
+      title: <input type="checkbox" />,
+      dataIndex: "checkbox",
+      key: "checkbox",
+      render: () => <input type="checkbox" />,
+      width: "5%",
+    },
+    {
+      title: "Fecha de inicio",
+      dataIndex: "fechaInicio",
+      key: "fechaInicio",
+      width: "20%",
+    },
+    {
+      title: "Estado",
+      dataIndex: "estado",
+      key: "estado",
+      width: "15%",
+    },
+    {
+      title: "Servicios",
+      dataIndex: "servicios",
+      key: "servicios",
+      width: "30%",
+    },
+    {
+      title: "Firmado",
+      dataIndex: "firmado",
+      key: "firmado",
+      width: "10%",
+    },
+    {
+      title: "Estado Facturación",
+      dataIndex: "estadoFacturacion",
+      key: "estadoFacturacion",
+      width: "20%",
+    },
+    {
+      title: "Acciones",
+      key: "acciones",
+      render: () => (
+        <div className="acciones">
+          <Button type="link">Ver</Button>
+          <Button type="link">Editar</Button>
+        </div>
+      ),
+      width: "10%",
+    },
+  ];
+  
   
   
 
@@ -385,6 +449,26 @@ const DetallesUsuario = () => {
             />
           </div>
         </Card>
+
+        <Card className="contratos-card" bordered={false}>
+          <div className="card-head">
+            <div className="title-wrapper">
+              <span className="title">Contratos</span>
+            </div>
+            <Button type="primary" icon={<PlusOutlined />} className="agregar-btn">
+              Agregar
+            </Button>
+          </div>
+          <div className="card-body">
+            <Table
+              columns={columnsContratos}
+              dataSource={dataContratos}
+              pagination={false}
+              className="table"
+            />
+          </div>
+        </Card>
+
 
       </div>
 
