@@ -264,3 +264,13 @@
     color: #7f34b4;
     font-size: 14px;
 }
+
+
+.acudientes-card {
+    display: flex;
+    flex-direction: column;
+    width: 1214px;
+    background: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
