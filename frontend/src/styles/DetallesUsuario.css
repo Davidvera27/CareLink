@@ -265,8 +265,20 @@
     font-size: 14px;
 }
 
+/* Estilos de la tarjeta: acudientes */
 
 .acudientes-card {
+    display: flex;
+    flex-direction: column;
+    width: 1214px;
+    background: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de la tarjeta: Contratos */
+
+.contratos-card {
     display: flex;
     flex-direction: column;
     width: 1214px;
