@@ -1,0 +1,88 @@
+.historia-clinica-page {
+    background-color: #f5f5f5; /* Fondo acorde a otras páginas */
+    padding: 24px;
+    min-height: 100vh;
+}
+
+.historia-clinica-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center; /* Alinea las tarjetas al centro */
+}
+
+.card {
+    background: #ffffff; /* Fondo blanco */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+    max-width: 1214px; /* Alineado al diseño */
+    padding: 24px;
+    border: 1px solid #d9d9d9; /* Bordes ligeros */
+}
+
+.card-header h3,
+.card-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.85); /* Color de texto estándar */
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-body label {
+    display: flex;
+    flex-direction: column;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+    margin-bottom: 10px;
+}
+
+.card-body input,
+.card-body select {
+    padding: 8px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.card-footer button {
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    background-color: #7f34b4; /* Morado acorde al diseño */
+    color: white;
+}
+
+.card-footer button:hover {
+    background-color: #5d2393; /* Hover más oscuro */
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: 16px;
+        max-width: 100%;
+    }
+
+    .card-body input,
+    .card-body select {
+        font-size: 12px;
+    }
+}
