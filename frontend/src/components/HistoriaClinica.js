@@ -11,82 +11,86 @@ const HistoriaClinica = () => {
       <div className="historia-clinica-container">
 
         {/* Tarjeta Principal */}
-        <Card className="card-legacy" bordered={false}>
-          <div className="head">
-            <div className="title-wrapper">
-            </div>
-
-          </div>
-          <div className="body">
-            <Avatar
-              className="avatar"
-              size={140}
-              src="https://via.placeholder.com/140"
-              alt="Avatar"
-            />
-            <div className="datos">
-              <div className="info-basica">
-                <span className="nombre">JUAN ANTONIO LOPEZ ORREGO</span>
-                <div className="merge">
-                  <span>44567890</span>
-                  <span>-</span>
-                  <span>Masculino</span>
-                  <span>-</span>
-                  <span>1956/11/08</span>
-                  <span>-</span>
-                  <span>68 años</span>
-                </div>
-                <div className="merge">
-                  <span>Casado</span>
-                  <span>-</span>
-                  <span>Pensionado</span>
-                </div>
-              </div>
-              <div className="info-contacto">
-                <span>CLL 45 - 60-20 INT 101</span>
-                <div className="merge">
-                  <span>315 6789 6789</span>
-                  <span>-</span>
-                  <span>juanantonio@gmail.com</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Card>
+<Card className="principal-card" bordered={false}>
+  <div className="head">
+    <Avatar
+      className="avatar"
+      size={72}
+      src="https://via.placeholder.com/72"
+      alt="Avatar"
+    />
+    <div className="datos">
+      <div className="info-basica">
+        <span className="nombre">JUAN ANTONIO LOPEZ ORREGO</span>
+        <div className="merge">
+          <span>44567890</span>
+          <span>-</span>
+          <span>Masculino</span>
+          <span>-</span>
+          <span>1956/11/08</span>
+          <span>-</span>
+          <span>68 años</span>
+        </div>
+        <div className="merge">
+          <span>Casado</span>
+          <span>-</span>
+          <span>Pensionado</span>
+        </div>
+      </div>
+      <div className="info-contacto">
+        <span>CLL 45 - 60-20 INT 101</span>
+        <div className="merge">
+          <span>315 6789 6789</span>
+          <span>-</span>
+          <span>juanantonio@gmail.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</Card>
 
 {/* Servicio para Emergencias Médicas */}
 <Card className="servicio-emergencias-card" bordered={false}>
   <div className="card-header">
-    <h3>Servicio para emergencias médicas</h3>
+    <h3>Servicio externo para emergencias médicas</h3>
   </div>
   <div className="card-body">
-    <label>
-      ¿Cuenta con servicio externo para emergencias?
-      <select>
-        <option>Sí</option>
-        <option>No</option>
-      </select>
-    </label>
-    <label>
-      ¿Cuál?
-      <select>
-        <option value="" disabled selected>
-          Seleccione un servicio
-        </option>
-        <option value="emi">EMI</option>
-        <option value="colsanitas">Colsanitas</option>
-        <option value="medilink">Medilink</option>
-        <option value="cruz-roja">Cruz Roja</option>
-        <option value="sura">SURA</option>
-        <option value="otra">Otro</option>
-      </select>
-    </label>
-    <label>
-      Teléfono del servicio
-      <input type="text" placeholder="Número de contacto" />
-    </label>
+    <div className="horizontal-form">
+      <div className="form-group">
+        <label className="form-label">
+          ¿Cuenta con servicio externo para emergencias?
+          <select className="form-select">
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+        </label>
+      </div>
+      <div className="form-group">
+        <label className="form-label">
+          ¿Cuál?
+          <select className="form-select">
+            <option value="" disabled selected>
+              Seleccione un servicio
+            </option>
+            <option value="emi">EMI</option>
+            <option value="colsanitas">Colsanitas</option>
+            <option value="medilink">Medilink</option>
+            <option value="cruz-roja">Cruz Roja</option>
+            <option value="sura">SURA</option>
+            <option value="otra">Otro</option>
+          </select>
+        </label>
+      </div>
+      <div className="form-group">
+        <label className="form-label">
+          Teléfono para servicio emergencia médica
+          <input type="text" className="form-input" placeholder="Número de contacto" />
+        </label>
+      </div>
+    </div>
   </div>
 </Card>
+
 
 
         {/* Datos Básicos de Ingreso */}
