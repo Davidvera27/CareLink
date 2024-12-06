@@ -1,48 +1,58 @@
 import React from "react";
-import GlobalHeader from "./GlobalHeader";
-import "../styles/HistoriaClinica.css";
-import { Card, Button, Avatar, Row, Col, Input, Select, Typography } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import GlobalHeader from "./GlobalHeader"; // Importa el componente de encabezado global.
+import "../styles/HistoriaClinica.css"; // Importa los estilos específicos para esta página.
+import { Card, Button, Avatar, Row, Col, Input, Select, Typography, Table, Checkbox, Space, Divider } from "antd"; // Importa componentes de Ant Design.
+import { PlusOutlined } from "@ant-design/icons"; // Importa el ícono "PlusOutlined" de Ant Design.
 
-const { Title, Text } = Typography;
+const { Title, Text } = Typography; // Desestructuración para usar componentes tipográficos de Ant Design.
 
 const HistoriaClinica = () => {
   return (
     <div className="historia-clinica-page">
+      {/* Encabezado global */}
       <GlobalHeader />
+      
+      {/* Contenedor principal de la página */}
       <div className="historia-clinica-container">
-        {/* Main Patient Card */}
+
+        {/* Tarjeta principal de información del paciente */}
         <Card className="principal-card" bordered>
           <Row align="middle" gutter={16}>
+            {/* Columna para el avatar del paciente */}
             <Col span={4}>
               <Avatar
                 className="avatar"
                 size={72}
-                src="https://via.placeholder.com/72"
+                src="https://via.placeholder.com/72" // URL de ejemplo para el avatar - puede cambiarse por una ruta del disco local.
                 alt="Avatar"
               />
             </Col>
+
+            {/* Columna con la información personal del paciente */}
             <Col span={10}>
-              <Title level={5}>JUAN ANTONIO LOPEZ ORREGO</Title>
-              <Text>44567890 - Masculino - 1956/11/08 - 68 años</Text>
+              <Title level={5}>JUAN ANTONIO LOPEZ ORREGO</Title> {/* Nombre del paciente */}
+              <Text>44567890 - Masculino - 1956/11/08 - 68 años</Text> {/* Identificación y detalles */}
               <br />
-              <Text>Casado - Pensionado</Text>
+              <Text>Casado - Pensionado</Text> {/* Estado civil */}
             </Col>
+
+            {/* Columna con la información de contacto del paciente */}
             <Col span={10}>
-              <Text>CLL 45 - 60-20 INT 101</Text>
+              <Text>CLL 45 - 60-20 INT 101</Text> {/* Dirección */}
               <br />
-              <Text>315 6789 6789 - juanantonio@gmail.com</Text>
+              <Text>315 6789 6789 - juanantonio@gmail.com</Text> {/* Teléfono y correo */}
             </Col>
           </Row>
         </Card>
 
-        {/* Emergency Service Card */}
+        {/* Tarjeta para servicios de emergencias médicas */}
         <Card
           className="servicio-emergencias-card"
           title="Servicio externo para emergencias médicas"
           bordered
         >
           <Row gutter={16}>
+            {/* Campo: ¿Cuenta con servicio externo? */}
             <Col span={8}>
               <label>
                 ¿Cuenta con servicio externo para emergencias?
@@ -52,6 +62,8 @@ const HistoriaClinica = () => {
                 </Select>
               </label>
             </Col>
+
+            {/* Campo: ¿Cuál? */}
             <Col span={8}>
               <label>
                 ¿Cuál?
@@ -65,6 +77,8 @@ const HistoriaClinica = () => {
                 </Select>
               </label>
             </Col>
+
+            {/* Campo: Teléfono para emergencias */}
             <Col span={8}>
               <label>
                 Teléfono para servicio emergencia médica
@@ -74,7 +88,7 @@ const HistoriaClinica = () => {
           </Row>
         </Card>
 
-        {/* Other Sections */}
+        {/* Tarjeta de datos básicos de ingreso */}
         <Card title="Datos básicos de ingreso" bordered>
           <Row gutter={16}>
             <Col span={12}>
@@ -92,6 +106,7 @@ const HistoriaClinica = () => {
           </Row>
         </Card>
 
+        {/* Tarjeta de datos básicos de salud */}
         <Card title="Datos básicos de salud" bordered>
           <Row gutter={16}>
             <Col span={12}>
@@ -118,6 +133,7 @@ const HistoriaClinica = () => {
           </Row>
         </Card>
 
+        {/* Exploración física inicial */}
         <Card title="Exploración física inicial" bordered>
           <Row gutter={16}>
             <Col span={8}>
@@ -153,14 +169,119 @@ const HistoriaClinica = () => {
           </Row>
         </Card>
 
-        <Card
-          title="Tratamientos o medicamentos temporales o permanentes"
-          bordered
-        >
-          <Button type="primary" icon={<PlusOutlined />}>
-            Agregar Tratamiento
-          </Button>
-        </Card>
+{/* Tratamientos o medicamentos temporales o permanentes */}
+<Card
+  className="tratamientos-card"
+  title="Tratamientos o medicamentos temporales o permanentes que requieren apoyo"
+  bordered
+>
+  <div style={{ marginBottom: "16px" }}>
+    <Checkbox.Group style={{ display: "flex", gap: "16px" }}>
+      <Checkbox value="farmaco" defaultChecked>
+        Régimen farmacoterapéutico
+      </Checkbox>
+      <Checkbox value="enfermeria" defaultChecked>
+        Plan de cuidados de enfermería
+      </Checkbox>
+      <Checkbox value="fisioterapia">
+        Intervención fisioterapéutica
+      </Checkbox>
+    </Checkbox.Group>
+  </div>
+
+  <div>
+    <Typography.Title level={5}>Régimen farmacoterapéutico</Typography.Title>
+    <Table
+      columns={[
+        { title: "Fecha de inicio", dataIndex: "startDate", key: "startDate" },
+        { title: "Medicamento", dataIndex: "medicine", key: "medicine" },
+        { title: "Dosis", dataIndex: "dose", key: "dose" },
+        {
+          title: "Vía de administración",
+          dataIndex: "administration",
+          key: "administration",
+        },
+        { title: "Frecuencia", dataIndex: "frequency", key: "frequency" },
+        { title: "Duración", dataIndex: "duration", key: "duration" },
+        { title: "Indicaciones", dataIndex: "instructions", key: "instructions" },
+        {
+          title: "Acciones",
+          key: "actions",
+          render: (_, record) => (
+            <Space>
+              <Button type="link">Desactivar</Button>
+              <Button type="link" danger>
+                Eliminar
+              </Button>
+            </Space>
+          ),
+        },
+      ]}
+      dataSource={[
+        {
+          key: "1",
+          startDate: "10/09/2024",
+          medicine: "Enalapril",
+          dose: "5 mg",
+          administration: "Oral",
+          frequency: "Cada 12 horas",
+          duration: "Indefinida",
+          instructions:
+            "Administrar con alimentos. Controlar presión arterial antes de cada dosis.",
+        },
+      ]}
+      pagination={false}
+    />
+    <Button
+      type="dashed"
+      icon={<PlusOutlined />}
+      style={{ marginTop: "16px" }}
+    >
+      Agregar Tratamiento
+    </Button>
+  </div>
+
+  <Divider />
+
+  <div>
+    <Typography.Title level={5}>Plan de cuidados de enfermería</Typography.Title>
+    <Table
+      columns={[
+        { title: "Diagnóstico", dataIndex: "diagnosis", key: "diagnosis" },
+        { title: "Intervención", dataIndex: "intervention", key: "intervention" },
+        { title: "Frecuencia", dataIndex: "frequency", key: "frequency" },
+        {
+          title: "Acciones",
+          key: "actions",
+          render: (_, record) => (
+            <Space>
+              <Button type="link">Finalizar</Button>
+              <Button type="link" danger>
+                Eliminar
+              </Button>
+            </Space>
+          ),
+        },
+      ]}
+      dataSource={[
+        {
+          key: "1",
+          diagnosis: "Piel alterada relacionada con herida en la pierna.",
+          intervention: "Limpiar herida, secar con gasas sin frotar.",
+          frequency: "Diaria",
+        },
+      ]}
+      pagination={false}
+    />
+    <Button
+      type="dashed"
+      icon={<PlusOutlined />}
+      style={{ marginTop: "16px" }}
+    >
+      Agregar Cuidado de Enfermería
+    </Button>
+  </div>
+</Card>
 
         <Card title="Condiciones especiales permanentes preexistentes de cuidado" bordered>
           <label>
