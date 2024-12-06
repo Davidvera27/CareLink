@@ -1,281 +1,216 @@
 import React from "react";
 import GlobalHeader from "./GlobalHeader";
 import "../styles/HistoriaClinica.css";
-import { Card, Button, Avatar } from "antd";
+import { Card, Button, Avatar, Row, Col, Input, Select, Typography } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+
+const { Title, Text } = Typography;
 
 const HistoriaClinica = () => {
   return (
     <div className="historia-clinica-page">
       <GlobalHeader />
       <div className="historia-clinica-container">
-
-        {/* Tarjeta Principal */}
-<Card className="principal-card" bordered={false}>
-  <div className="head">
-    <Avatar
-      className="avatar"
-      size={72}
-      src="https://via.placeholder.com/72"
-      alt="Avatar"
-    />
-    <div className="datos">
-      <div className="info-basica">
-        <span className="nombre">JUAN ANTONIO LOPEZ ORREGO</span>
-        <div className="merge">
-          <span>44567890</span>
-          <span>-</span>
-          <span>Masculino</span>
-          <span>-</span>
-          <span>1956/11/08</span>
-          <span>-</span>
-          <span>68 años</span>
-        </div>
-        <div className="merge">
-          <span>Casado</span>
-          <span>-</span>
-          <span>Pensionado</span>
-        </div>
-      </div>
-      <div className="info-contacto">
-        <span>CLL 45 - 60-20 INT 101</span>
-        <div className="merge">
-          <span>315 6789 6789</span>
-          <span>-</span>
-          <span>juanantonio@gmail.com</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</Card>
-
-{/* Servicio para Emergencias Médicas */}
-<Card className="servicio-emergencias-card" bordered={false}>
-  <div className="card-header">
-    <h3>Servicio externo para emergencias médicas</h3>
-  </div>
-  <div className="card-body">
-    <div className="horizontal-form">
-      <div className="form-group">
-        <label className="form-label">
-          ¿Cuenta con servicio externo para emergencias?
-          <select className="form-select">
-            <option>Sí</option>
-            <option>No</option>
-          </select>
-        </label>
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          ¿Cuál?
-          <select className="form-select">
-            <option value="" disabled selected>
-              Seleccione un servicio
-            </option>
-            <option value="emi">EMI</option>
-            <option value="colsanitas">Colsanitas</option>
-            <option value="medilink">Medilink</option>
-            <option value="cruz-roja">Cruz Roja</option>
-            <option value="sura">SURA</option>
-            <option value="otra">Otro</option>
-          </select>
-        </label>
-      </div>
-      <div className="form-group">
-        <label className="form-label">
-          Teléfono para servicio emergencia médica
-          <input type="text" className="form-input" placeholder="Número de contacto" />
-        </label>
-      </div>
-    </div>
-  </div>
-</Card>
-
-
-
-        {/* Datos Básicos de Ingreso */}
-        <Card className="card" bordered={false}>
-          <div className="card-header">
-            <h3>Datos básicos de ingreso</h3>
-          </div>
-          <div className="card-body">
-            <label>
-              Fecha de registro
-              <input type="date" />
-            </label>
-            <label>
-              Motivo de ingreso
-              <input type="text" placeholder="Motivo" />
-            </label>
-          </div>
+        {/* Main Patient Card */}
+        <Card className="principal-card" bordered>
+          <Row align="middle" gutter={16}>
+            <Col span={4}>
+              <Avatar
+                className="avatar"
+                size={72}
+                src="https://via.placeholder.com/72"
+                alt="Avatar"
+              />
+            </Col>
+            <Col span={10}>
+              <Title level={5}>JUAN ANTONIO LOPEZ ORREGO</Title>
+              <Text>44567890 - Masculino - 1956/11/08 - 68 años</Text>
+              <br />
+              <Text>Casado - Pensionado</Text>
+            </Col>
+            <Col span={10}>
+              <Text>CLL 45 - 60-20 INT 101</Text>
+              <br />
+              <Text>315 6789 6789 - juanantonio@gmail.com</Text>
+            </Col>
+          </Row>
         </Card>
 
-        {/* Datos Básicos de Salud */}
-        <Card className="card" bordered={false}>
-          <div className="card-header">
-            <h3>Datos básicos de salud</h3>
-          </div>
-          <div className="card-body">
-            <label>
-              EPS
-              <input type="text" placeholder="EPS" />
-            </label>
-            <label>
-              Tipo de Sangre
-              <select>
-                <option>O+</option>
-                <option>O-</option>
-                <option>A+</option>
-                <option>A-</option>
-                <option>B+</option>
-                <option>B-</option>
-                <option>AB+</option>
-                <option>AB-</option>
-              </select>
-            </label>
-          </div>
+        {/* Emergency Service Card */}
+        <Card
+          className="servicio-emergencias-card"
+          title="Servicio externo para emergencias médicas"
+          bordered
+        >
+          <Row gutter={16}>
+            <Col span={8}>
+              <label>
+                ¿Cuenta con servicio externo para emergencias?
+                <Select placeholder="Seleccione" style={{ width: "100%" }}>
+                  <Select.Option value="si">Sí</Select.Option>
+                  <Select.Option value="no">No</Select.Option>
+                </Select>
+              </label>
+            </Col>
+            <Col span={8}>
+              <label>
+                ¿Cuál?
+                <Select placeholder="Seleccione un servicio" style={{ width: "100%" }}>
+                  <Select.Option value="emi">EMI</Select.Option>
+                  <Select.Option value="colsanitas">Colsanitas</Select.Option>
+                  <Select.Option value="medilink">Medilink</Select.Option>
+                  <Select.Option value="cruz-roja">Cruz Roja</Select.Option>
+                  <Select.Option value="sura">SURA</Select.Option>
+                  <Select.Option value="otra">Otro</Select.Option>
+                </Select>
+              </label>
+            </Col>
+            <Col span={8}>
+              <label>
+                Teléfono para servicio emergencia médica
+                <Input placeholder="Número de contacto" />
+              </label>
+            </Col>
+          </Row>
         </Card>
 
-        {/* Exploración Física Inicial */}
-        <Card className="card" bordered={false}>
-          <div className="card-header">
-            <h3>Exploración física inicial</h3>
-          </div>
-          <div className="card-body">
-            <label>
-              Estatura
-              <input type="number" placeholder="cm" />
-            </label>
-            <label>
-              Peso
-              <input type="number" placeholder="kg" />
-            </label>
-            <label>
-              Presión Arterial
-              <input type="text" placeholder="mmHg" />
-            </label>
-            <label>
-              Frecuencia Cardíaca
-              <input type="text" placeholder="bpm" />
-            </label>
-            <label>
-              Temperatura Corporal
-              <input type="number" placeholder="°C" />
-            </label>
-          </div>
+        {/* Other Sections */}
+        <Card title="Datos básicos de ingreso" bordered>
+          <Row gutter={16}>
+            <Col span={12}>
+              <label>
+                Fecha de registro
+                <Input type="date" />
+              </label>
+            </Col>
+            <Col span={12}>
+              <label>
+                Motivo de ingreso
+                <Input placeholder="Motivo" />
+              </label>
+            </Col>
+          </Row>
         </Card>
 
-        {/* Tratamientos o Medicamentos */}
-        <Card className="card" bordered={false}>
-          <div className="card-header">
-            <h3>Tratamientos o medicamentos temporales o permanentes</h3>
-          </div>
-          <div className="card-body">
-            <Button type="primary" icon={<PlusOutlined />}>
-              Agregar Tratamiento
-            </Button>
-            {/* Tabla de Tratamientos */}
-          </div>
+        <Card title="Datos básicos de salud" bordered>
+          <Row gutter={16}>
+            <Col span={12}>
+              <label>
+                EPS
+                <Input placeholder="EPS" />
+              </label>
+            </Col>
+            <Col span={12}>
+              <label>
+                Tipo de Sangre
+                <Select placeholder="Seleccione" style={{ width: "100%" }}>
+                  <Select.Option value="O+">O+</Select.Option>
+                  <Select.Option value="O-">O-</Select.Option>
+                  <Select.Option value="A+">A+</Select.Option>
+                  <Select.Option value="A-">A-</Select.Option>
+                  <Select.Option value="B+">B+</Select.Option>
+                  <Select.Option value="B-">B-</Select.Option>
+                  <Select.Option value="AB+">AB+</Select.Option>
+                  <Select.Option value="AB-">AB-</Select.Option>
+                </Select>
+              </label>
+            </Col>
+          </Row>
         </Card>
 
-        {/* Condiciones Especiales Permanentes */}
-        <Card className="card" bordered={false}>
-          <div className="card-header">
-            <h3>Condiciones especiales permanentes preexistentes de cuidado</h3>
-          </div>
-          <div className="card-body">
-            <label>
-              Detalle de la condición:
-              <textarea placeholder="Escribe las condiciones especiales..." />
-            </label>
-          </div>
+        <Card title="Exploración física inicial" bordered>
+          <Row gutter={16}>
+            <Col span={8}>
+              <label>
+                Estatura
+                <Input placeholder="cm" />
+              </label>
+            </Col>
+            <Col span={8}>
+              <label>
+                Peso
+                <Input placeholder="kg" />
+              </label>
+            </Col>
+            <Col span={8}>
+              <label>
+                Presión Arterial
+                <Input placeholder="mmHg" />
+              </label>
+            </Col>
+            <Col span={8}>
+              <label>
+                Frecuencia Cardíaca
+                <Input placeholder="bpm" />
+              </label>
+            </Col>
+            <Col span={8}>
+              <label>
+                Temperatura Corporal
+                <Input placeholder="°C" />
+              </label>
+            </Col>
+          </Row>
         </Card>
 
-        {/* Esquema de Vacunación */}
-        <Card className="card" bordered={false}>
-          <div className="card-header">
-            <h3>Esquema de vacunación</h3>
-          </div>
-          <div className="card-body">
-            <Button type="primary" icon={<PlusOutlined />}>
-              Agregar Vacuna
-            </Button>
-            {/* Tabla de Vacunación */}
-          </div>
+        <Card
+          title="Tratamientos o medicamentos temporales o permanentes"
+          bordered
+        >
+          <Button type="primary" icon={<PlusOutlined />}>
+            Agregar Tratamiento
+          </Button>
         </Card>
 
-        {/* Habilidades Biofísicas */}
-        <Card className="card" bordered={false}>
-          <div className="card-header">
-            <h3>Habilidades biofísicas</h3>
-          </div>
-          <div className="card-body">
-            <label>
-              Tipo de Movilidad:
-              <select>
-                <option>Independiente</option>
-                <option>Con ayuda</option>
-              </select>
-            </label>
-          </div>
+        <Card title="Condiciones especiales permanentes preexistentes de cuidado" bordered>
+          <label>
+            Detalle de la condición:
+            <Input.TextArea placeholder="Escribe las condiciones especiales..." />
+          </label>
         </Card>
 
-        {/* Hábitos o Antecedentes Toxicológicos */}
-        <Card className="card" bordered={false}>
-          <div className="card-header">
-            <h3>Hábitos o antecedentes toxicológicos</h3>
-          </div>
-          <div className="card-body">
-            <label>
-              Detalle de los hábitos:
-              <textarea placeholder="Ejemplo: Consumo de alcohol o tabaco..." />
-            </label>
-          </div>
+        <Card title="Esquema de vacunación" bordered>
+          <Button type="primary" icon={<PlusOutlined />}>
+            Agregar Vacuna
+          </Button>
         </Card>
 
-        {/* Habilidades de Percepción Social */}
-        <Card className="card" bordered={false}>
-          <div className="card-header">
-            <h3>Habilidades de percepción social</h3>
-          </div>
-          <div className="card-body">
-            <label>
-              Estado de ánimo:
-              <input type="text" placeholder="Alegre, Triste, etc." />
-            </label>
-          </div>
+        <Card title="Habilidades biofísicas" bordered>
+          <label>
+            Tipo de Movilidad:
+            <Select placeholder="Seleccione" style={{ width: "100%" }}>
+              <Select.Option value="independiente">Independiente</Select.Option>
+              <Select.Option value="con-ayuda">Con ayuda</Select.Option>
+            </Select>
+          </label>
         </Card>
 
-        {/* Diagnóstico Inicial */}
-        <Card className="card" bordered={false}>
-          <div className="card-header">
-            <h3>Diagnóstico inicial</h3>
-          </div>
-          <div className="card-body">
-            <textarea placeholder="Describa el diagnóstico inicial..." />
-          </div>
+        <Card title="Hábitos o antecedentes toxicológicos" bordered>
+          <label>
+            Detalle de los hábitos:
+            <Input.TextArea placeholder="Ejemplo: Consumo de alcohol o tabaco..." />
+          </label>
         </Card>
 
-        {/* Prueba y Test */}
-        <Card className="card" bordered={false}>
-          <div className="card-header">
-            <h3>Prueba y Test</h3>
-          </div>
-          <div className="card-body">
-            <Button type="primary" icon={<PlusOutlined />}>
-              Agregar Prueba
-            </Button>
-          </div>
+        <Card title="Habilidades de percepción social" bordered>
+          <label>
+            Estado de ánimo:
+            <Input placeholder="Alegre, Triste, etc." />
+          </label>
         </Card>
 
-        {/* Adjuntar Documento */}
-        <Card className="card" bordered={false}>
-          <div className="card-header">
-            <h3>Adjuntar Documento</h3>
-          </div>
-          <div className="card-body">
-            <input type="file" />
-          </div>
+        <Card title="Diagnóstico inicial" bordered>
+          <Input.TextArea placeholder="Describa el diagnóstico inicial..." />
+        </Card>
+
+        <Card title="Prueba y Test" bordered>
+          <Button type="primary" icon={<PlusOutlined />}>
+            Agregar Prueba
+          </Button>
+        </Card>
+
+        <Card title="Adjuntar Documento" bordered>
+          <Input type="file" />
         </Card>
       </div>
     </div>
