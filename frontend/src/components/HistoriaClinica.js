@@ -612,10 +612,6 @@ const HistoriaClinica = () => {
   </div>
 </Card>
 
-
-
-
-
         <Card title="Esquema de vacunación" bordered>
           <Button type="primary" icon={<PlusOutlined />}>
             Agregar Vacuna
