@@ -1,6 +1,5 @@
 /* 
-Global Styles 
-Estilos generales para la página de Historia Clínica
+Estilos Generales para la Página de Historia Clínica 
 */
 .historia-clinica-page {
   background-color: #f0f2f5; /* Fondo acorde al diseño predeterminado de Ant Design */
@@ -9,12 +8,11 @@ Estilos generales para la página de Historia Clínica
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Roboto", sans-serif; /* Fuente utilizada en toda la página */
+  font-family: "Roboto", sans-serif; /* Fuente principal */
 }
 
 /* 
-Container for Cards 
-Contenedor principal de todas las tarjetas
+Contenedor Principal para las Tarjetas 
 */
 .historia-clinica-container {
   display: flex;
@@ -25,8 +23,7 @@ Contenedor principal de todas las tarjetas
 }
 
 /* 
-General Card Styles 
-Estilos generales para todas las tarjetas
+Estilos Generales para las Tarjetas 
 */
 .card {
   background: #ffffff; /* Fondo blanco */
@@ -42,39 +39,37 @@ Estilos generales para todas las tarjetas
 
 .card label {
   display: flex;
-  flex-direction: column; /* Cada elemento dentro del label se apila */
-  gap: 8px; /* Espaciado entre elementos */
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.85); /* Color del texto */
+  flex-direction: column; /* Los elementos dentro de cada label se apilan verticalmente */
+  gap: 8px; /* Espaciado entre los elementos */
+  font-size: 14px; /* Tamaño estándar del texto */
+  color: rgba(0, 0, 0, 0.85); /* Color de texto oscuro */
 }
 
 /* 
-Tratamientos Card 
-Estilos específicos para la tarjeta de tratamientos
+Estilos para la Tarjeta de Tratamientos 
 */
 .tratamientos-card {
   margin-bottom: 24px; /* Margen inferior para separar del siguiente bloque */
 }
 
 /* 
-Title Styling 
-Estilos específicos para los títulos dentro de las tarjetas
+Estilo para los Títulos dentro de las Tarjetas 
 */
 .checkbox-title {
-  margin-bottom: 8px;
-  color: #333333; /* Color gris oscuro para mayor contraste */
-  font-weight: bold;
+  margin-bottom: 8px; /* Espaciado inferior */
+  color: #333333; /* Color gris oscuro */
+  font-weight: bold; /* Negrita para destacar los títulos */
 }
 
 /* 
-Add Button 
-Estilo del botón "Agregar" en la parte superior derecha de las tablas
+Estilo para el Botón "Agregar" 
+Posicionado en la parte superior derecha de las tablas
 */
 .add-button {
   background-color: #7f34b4; /* Color principal del botón */
   border-color: #7f34b4; /* Borde del mismo color */
   color: white; /* Texto blanco para contraste */
-  font-weight: bold;
+  font-weight: bold; /* Negrita para mayor visibilidad */
 }
 
 .add-button:hover {
@@ -83,47 +78,44 @@ Estilo del botón "Agregar" en la parte superior derecha de las tablas
 }
 
 /* 
-Table Header Styling 
-Estilo del encabezado de las tablas
+Encabezados de las Tablas 
 */
 .table-header {
   display: flex;
-  justify-content: space-between; /* Espacio entre título y botón */
-  align-items: center;
+  justify-content: space-between; /* Distribuye el título y el botón a los extremos */
+  align-items: center; /* Alinea verticalmente los elementos */
   margin-bottom: 16px; /* Espaciado inferior */
 }
 
-/* Encabezados de las tablas */
 .ant-table-thead > tr > th {
   background-color: #f5f5f5; /* Fondo gris claro */
   font-weight: bold; /* Texto en negrita */
-  color: #333; /* Color oscuro para mejor legibilidad */
+  color: #333; /* Color oscuro para mejorar la legibilidad */
 }
 
 /* 
-Inputs and Selects 
-Estilos para entradas de texto y selectores
+Estilos para Inputs y Selectores 
 */
 .ant-input,
 .ant-select-selector {
-  padding: 4px 12px;
-  font-size: 14px;
-  line-height: 22px;
-  border-radius: 4px;
+  padding: 4px 12px; /* Espaciado interno para los inputs */
+  font-size: 14px; /* Tamaño estándar del texto */
+  line-height: 22px; /* Altura de línea para una mejor legibilidad */
+  border-radius: 4px; /* Bordes redondeados */
   border: 1px solid #d9d9d9; /* Bordes claros */
 }
 
 .ant-input:focus,
 .ant-select-focused .ant-select-selector {
-  border-color: #7f34b4; /* Color del borde al enfocar */
+  border-color: #7f34b4; /* Borde destacado al enfocar */
   box-shadow: 0 0 0 2px rgba(127, 52, 180, 0.2); /* Sombra suave */
 }
 
 .ant-input-textarea {
-  padding: 8px 12px;
+  padding: 8px 12px; /* Espaciado interno para áreas de texto */
   font-size: 14px;
   border-radius: 4px;
-  border: 1px solid #d9d9d9;
+  border: 1px solid #d9d9d9; /* Bordes claros */
 }
 
 .ant-input[type="file"] {
@@ -132,8 +124,7 @@ Estilos para entradas de texto y selectores
 }
 
 /* 
-Buttons 
-Estilo para los botones primarios (general)
+Botones Primarios (General) 
 */
 .ant-btn-primary {
   background-color: #7f34b4; /* Color principal */
@@ -146,8 +137,8 @@ Estilo para los botones primarios (general)
 }
 
 /* 
-Responsive Design 
-Diseño responsivo para pantallas más pequeñas
+Diseño Responsivo 
+Ajustes para pantallas pequeñas
 */
 @media (max-width: 768px) {
   .historia-clinica-container {
@@ -160,7 +151,12 @@ Diseño responsivo para pantallas más pequeñas
 
   .ant-row {
     flex-direction: column; /* Cambia las filas a columnas en pantallas pequeñas */
-    gap: 16px; /* Espaciado entre elementos */
+    gap: 16px; /* Espaciado entre los elementos */
+  }
+
+  .table-header {
+    flex-direction: column; /* Cambia el diseño del encabezado */
+    align-items: flex-start; /* Alinea los elementos a la izquierda */
+    gap: 8px; /* Espaciado adicional */
   }
 }
-  
