@@ -169,126 +169,247 @@ const HistoriaClinica = () => {
           </Row>
         </Card>
 
-{/* Tratamientos o medicamentos temporales o permanentes */}
+        {/* Tratamientos o medicamentos temporales o permanentes */}
+        <Card
+          className="tratamientos-card"
+          title={<Title level={4}>Tratamientos o medicamentos temporales o permanentes que requieren apoyo</Title>}
+          bordered
+        >
+          {/* Checkboxes */}
+          <div>
+            <Title level={5} className="checkbox-title">Tratamientos o medicamentos</Title>
+            <Checkbox.Group style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+              <Checkbox value="farmaco" defaultChecked>
+                Régimen farmacoterapéutico
+              </Checkbox>
+              <Checkbox value="enfermeria" defaultChecked>
+                Plan de cuidados de enfermería
+              </Checkbox>
+              <Checkbox value="fisioterapia" defaultChecked>
+                Intervención fisioterapéutica
+              </Checkbox>
+            </Checkbox.Group>
+          </div>
+
+          {/* Régimen Farmacoterapéutico */}
+          <div>
+            <div className="table-header">
+              <Title level={5}>Régimen farmacoterapéutico</Title>
+              <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                className="add-button"
+              >
+                Agregar
+              </Button>
+            </div>
+            <Table
+              columns={[
+                { title: "Fecha de inicio", dataIndex: "startDate", key: "startDate" },
+                { title: "Medicamento", dataIndex: "medicine", key: "medicine" },
+                { title: "Dosis", dataIndex: "dose", key: "dose" },
+                {
+                  title: "Vía de administración",
+                  dataIndex: "administration",
+                  key: "administration",
+                },
+                { title: "Frecuencia", dataIndex: "frequency", key: "frequency" },
+                { title: "Duración", dataIndex: "duration", key: "duration" },
+                { title: "Indicaciones", dataIndex: "instructions", key: "instructions" },
+                {
+                  title: "Acciones",
+                  key: "actions",
+                  render: (_, record) => (
+                    <Space>
+                      <Button type="link" style={{ color: "#1890ff" }}>
+                        Desactivar
+                      </Button>
+                      <Button type="link" danger>
+                        Eliminar
+                      </Button>
+                    </Space>
+                  ),
+                },
+              ]}
+              dataSource={[
+                {
+                  key: "1",
+                  startDate: "10/09/2024",
+                  medicine: "Enalapril",
+                  dose: "5 mg",
+                  administration: "Oral",
+                  frequency: "Cada 12 horas",
+                  duration: "Indefinida",
+                  instructions:
+                    "Administrar con alimentos. Controlar presión arterial antes de cada dosis.",
+                },
+              ]}
+              pagination={false}
+            />
+          </div>
+
+          <Divider />
+
+          {/* Plan de Cuidados de Enfermería */}
+          <div>
+            <div className="table-header">
+              <Title level={5}>Plan de cuidados de enfermería</Title>
+              <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                className="add-button"
+              >
+                Agregar
+              </Button>
+            </div>
+            <Table
+              columns={[
+                { title: "Diagnóstico", dataIndex: "diagnosis", key: "diagnosis" },
+                { title: "Intervención", dataIndex: "intervention", key: "intervention" },
+                { title: "Frecuencia", dataIndex: "frequency", key: "frequency" },
+                {
+                  title: "Acciones",
+                  key: "actions",
+                  render: (_, record) => (
+                    <Space>
+                      <Button type="link" style={{ color: "#1890ff" }}>
+                        Finalizar
+                      </Button>
+                      <Button type="link" danger>
+                        Eliminar
+                      </Button>
+                    </Space>
+                  ),
+                },
+              ]}
+              dataSource={[
+                {
+                  key: "1",
+                  diagnosis: "Piel alterada relacionada con herida en la pierna.",
+                  intervention: "Limpiar herida, secar con gasas sin frotar.",
+                  frequency: "Diaria",
+                },
+              ]}
+              pagination={false}
+            />
+          </div>
+        </Card>
+{/* Tarjeta: Condiciones especiales permanentes preexistentes de cuidado */}
 <Card
-  className="tratamientos-card"
-  title="Tratamientos o medicamentos temporales o permanentes que requieren apoyo"
+  className="condiciones-card"
+  title={<Title level={4}>Condiciones especiales permanentes preexistentes de cuidado</Title>}
   bordered
 >
-  <div style={{ marginBottom: "16px" }}>
-    <Checkbox.Group style={{ display: "flex", gap: "16px" }}>
-      <Checkbox value="farmaco" defaultChecked>
-        Régimen farmacoterapéutico
+  {/* Head: Checkboxes */}
+  <div className="condiciones-head">
+    <Title level={5} className="checkbox-title">Condición especial</Title>
+    <Checkbox.Group style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
+      <Checkbox value="discapacidad" defaultChecked>
+        Persona con discapacidad
       </Checkbox>
-      <Checkbox value="enfermeria" defaultChecked>
-        Plan de cuidados de enfermería
+      <Checkbox value="apoyos" defaultChecked>
+        Limitaciones o apoyos
       </Checkbox>
-      <Checkbox value="fisioterapia">
-        Intervención fisioterapéutica
+      <Checkbox value="medicamentos" defaultChecked>
+        Alergias a medicamentos
+      </Checkbox>
+      <Checkbox value="cirugias" defaultChecked>
+        Cirugías
+      </Checkbox>
+      <Checkbox value="alergias">
+        Otras alergias
+      </Checkbox>
+      <Checkbox value="dieta">
+        Dieta especial
       </Checkbox>
     </Checkbox.Group>
   </div>
 
-  <div>
-    <Typography.Title level={5}>Régimen farmacoterapéutico</Typography.Title>
-    <Table
-      columns={[
-        { title: "Fecha de inicio", dataIndex: "startDate", key: "startDate" },
-        { title: "Medicamento", dataIndex: "medicine", key: "medicine" },
-        { title: "Dosis", dataIndex: "dose", key: "dose" },
-        {
-          title: "Vía de administración",
-          dataIndex: "administration",
-          key: "administration",
-        },
-        { title: "Frecuencia", dataIndex: "frequency", key: "frequency" },
-        { title: "Duración", dataIndex: "duration", key: "duration" },
-        { title: "Indicaciones", dataIndex: "instructions", key: "instructions" },
-        {
-          title: "Acciones",
-          key: "actions",
-          render: (_, record) => (
-            <Space>
-              <Button type="link">Desactivar</Button>
-              <Button type="link" danger>
-                Eliminar
-              </Button>
-            </Space>
-          ),
-        },
-      ]}
-      dataSource={[
-        {
-          key: "1",
-          startDate: "10/09/2024",
-          medicine: "Enalapril",
-          dose: "5 mg",
-          administration: "Oral",
-          frequency: "Cada 12 horas",
-          duration: "Indefinida",
-          instructions:
-            "Administrar con alimentos. Controlar presión arterial antes de cada dosis.",
-        },
-      ]}
-      pagination={false}
-    />
-    <Button
-      type="dashed"
-      icon={<PlusOutlined />}
-      style={{ marginTop: "16px" }}
-    >
-      Agregar Tratamiento
-    </Button>
-  </div>
-
   <Divider />
 
-  <div>
-    <Typography.Title level={5}>Plan de cuidados de enfermería</Typography.Title>
-    <Table
-      columns={[
-        { title: "Diagnóstico", dataIndex: "diagnosis", key: "diagnosis" },
-        { title: "Intervención", dataIndex: "intervention", key: "intervention" },
-        { title: "Frecuencia", dataIndex: "frequency", key: "frequency" },
-        {
-          title: "Acciones",
-          key: "actions",
-          render: (_, record) => (
-            <Space>
-              <Button type="link">Finalizar</Button>
-              <Button type="link" danger>
-                Eliminar
-              </Button>
-            </Space>
-          ),
-        },
-      ]}
-      dataSource={[
-        {
-          key: "1",
-          diagnosis: "Piel alterada relacionada con herida en la pierna.",
-          intervention: "Limpiar herida, secar con gasas sin frotar.",
-          frequency: "Diaria",
-        },
-      ]}
-      pagination={false}
-    />
-    <Button
-      type="dashed"
-      icon={<PlusOutlined />}
-      style={{ marginTop: "16px" }}
+  {/* Body */}
+  <div className="condiciones-body">
+    {/* Formulario 1: Tipos de discapacidad */}
+    <Card
+      title="Tipos de discapacidad del paciente"
+      className="terciaria-card"
+      bordered
     >
-      Agregar Cuidado de Enfermería
-    </Button>
+      <Row gutter={16}>
+        <Col span={12}>
+          <label>
+            Discapacidad
+            <Input placeholder="Ejemplo: Física" />
+          </label>
+        </Col>
+        <Col span={12}>
+          <label>
+            Observación
+            <Input.TextArea placeholder="Detalles adicionales" />
+          </label>
+        </Col>
+      </Row>
+      <Button type="primary" icon={<PlusOutlined />} className="add-button">
+        Agregar
+      </Button>
+    </Card>
+
+    <Divider />
+
+    {/* Formulario 2: Limitaciones permanentes */}
+    <Card
+      title="Limitaciones permanentes que requieren apoyos o cuidados"
+      className="terciaria-card"
+      bordered
+    >
+      <Row gutter={16}>
+        <Col span={12}>
+          <label>
+            Limitación
+            <Input placeholder="Ejemplo: Incontinencia urinaria" />
+          </label>
+        </Col>
+        <Col span={12}>
+          <label>
+            Observación
+            <Input.TextArea placeholder="Detalles adicionales" />
+          </label>
+        </Col>
+      </Row>
+      <Button type="primary" icon={<PlusOutlined />} className="add-button">
+        Agregar
+      </Button>
+    </Card>
+
+    <Divider />
+
+    {/* Formulario 3: Alergias a medicamentos */}
+    <Card
+      title="Alergias a medicamentos"
+      className="terciaria-card"
+      bordered
+    >
+      <Row gutter={16}>
+        <Col span={12}>
+          <label>
+            Medicamento
+            <Input placeholder="Ejemplo: Penicilina" />
+          </label>
+        </Col>
+        <Col span={12}>
+          <label>
+            Observación
+            <Input.TextArea placeholder="Ejemplo: Reemplazar con azitromicina" />
+          </label>
+        </Col>
+      </Row>
+      <Button type="primary" icon={<PlusOutlined />} className="add-button">
+        Agregar
+      </Button>
+    </Card>
   </div>
 </Card>
 
-        <Card title="Condiciones especiales permanentes preexistentes de cuidado" bordered>
-          <label>
-            Detalle de la condición:
-            <Input.TextArea placeholder="Escribe las condiciones especiales..." />
-          </label>
-        </Card>
 
         <Card title="Esquema de vacunación" bordered>
           <Button type="primary" icon={<PlusOutlined />}>
