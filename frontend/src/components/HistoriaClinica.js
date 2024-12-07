@@ -4,6 +4,8 @@ import "../styles/HistoriaClinica.css"; // Importa los estilos específicos para
 import { Card, Button, Avatar, Row, Col, Input, Select, Typography, Table, Checkbox, Space, Divider, Form } from "antd"; // Importa componentes de Ant Design.
 import { PlusOutlined } from "@ant-design/icons"; // Importa el ícono "PlusOutlined" de Ant Design.
 
+
+
 const { Title, Text } = Typography; // Desestructuración para usar componentes tipográficos de Ant Design.
 
 const HistoriaClinica = () => {
@@ -612,39 +614,306 @@ const HistoriaClinica = () => {
   </div>
 </Card>
 
-        <Card title="Esquema de vacunación" bordered>
-          <Button type="primary" icon={<PlusOutlined />}>
-            Agregar Vacuna
-          </Button>
-        </Card>
 
-        <Card title="Habilidades biofísicas" bordered>
-          <label>
-            Tipo de Movilidad:
+{/* Esquema de vacunación */}
+<Card className="vacunacion-card" bordered>
+  {/* Head: Título */}
+  <div className="table-header">
+    <Title level={5}>Esquema de vacunación</Title>
+    <Button type="primary" icon={<PlusOutlined />} className="add-button">
+      Agregar Vacuna
+    </Button>
+  </div>
+
+  {/* Body */}
+  <div className="vacunacion-body">
+    {/* Tabla dentro de la tarjeta */}
+    <Table
+      className="vacunacion-table"
+      columns={[
+        {
+          title: "Vacuna",
+          dataIndex: "vacuna",
+          key: "vacuna",
+          align: "center",
+        },
+        {
+          title: "Fecha administración",
+          dataIndex: "fechaAdministracion",
+          key: "fechaAdministracion",
+          align: "center",
+        },
+        {
+          title: "Próxima aplicación (Si aplica)",
+          dataIndex: "proximaAplicacion",
+          key: "proximaAplicacion",
+          align: "center",
+        },
+        {
+          title: "Efectos secundarios (Si reporta)",
+          dataIndex: "efectosSecundarios",
+          key: "efectosSecundarios",
+          align: "center",
+        },
+        {
+          title: "Acciones",
+          key: "acciones",
+          align: "center",
+          render: (_, record) => (
+            <Button type="link" danger>
+              Eliminar
+            </Button>
+          ),
+        },
+      ]}
+      dataSource={[
+        {
+          key: "1",
+          vacuna: "Influenza",
+          fechaAdministracion: "05/07/2024",
+          proximaAplicacion: "Anual",
+          efectosSecundarios: "Ninguno",
+        },
+        {
+          key: "2",
+          vacuna: "Hepatitis B",
+          fechaAdministracion: "NO REGISTRA",
+          proximaAplicacion: "No requiere",
+          efectosSecundarios: "Ninguno",
+        },
+      ]}
+      pagination={false}
+    />
+  </div>
+</Card>
+
+
+{/* Habilidades biofísicas */}
+<Card className="habilidades-biofisicas-card" bordered>
+  {/* Head: Título */}
+  <div className="table-header">
+    <Title level={5}>Habilidades biofísicas</Title>
+  </div>
+
+  {/* Body */}
+  <div className="habilidades-biofisicas-body">
+    <Form layout="vertical">
+      {/* Primer formulario */}
+      <Row gutter={16}>
+        <Col span={8}>
+          <Form.Item label="Tipo de alimentación" name="tipoAlimentacion" rules={[{ required: true }]}>
+            <Select placeholder="Seleccione" style={{ width: "100%" }}>
+              <Select.Option value="normal">Normal</Select.Option>
+              <Select.Option value="especial">Especial</Select.Option>
+            </Select>
+          </Form.Item>
+        </Col>
+        <Col span={8}>
+          <Form.Item label="Tipo de sueño" name="tipoSueno" rules={[{ required: true }]}>
+            <Select placeholder="Seleccione" style={{ width: "100%" }}>
+              <Select.Option value="regular">Regular</Select.Option>
+              <Select.Option value="interrumpido">Interrumpido</Select.Option>
+            </Select>
+          </Form.Item>
+        </Col>
+        <Col span={8}>
+          <Form.Item label="Continencia" name="continencia" rules={[{ required: true }]}>
+            <Select placeholder="Seleccione" style={{ width: "100%" }}>
+              <Select.Option value="si">Sí</Select.Option>
+              <Select.Option value="no">No</Select.Option>
+            </Select>
+          </Form.Item>
+        </Col>
+      </Row>
+
+      {/* Segundo formulario */}
+      <Row gutter={16}>
+        <Col span={8}>
+          <Form.Item label="Tipo de movilidad" name="tipoMovilidad" rules={[{ required: true }]}>
             <Select placeholder="Seleccione" style={{ width: "100%" }}>
               <Select.Option value="independiente">Independiente</Select.Option>
               <Select.Option value="con-ayuda">Con ayuda</Select.Option>
             </Select>
-          </label>
-        </Card>
+          </Form.Item>
+        </Col>
+        <Col span={8}>
+          <Form.Item label="Cuidado personal" name="cuidadoPersonal" rules={[{ required: true }]}>
+            <Select placeholder="Seleccione" style={{ width: "100%" }}>
+              <Select.Option value="independiente">Independiente</Select.Option>
+              <Select.Option value="con-ayuda-parcial">Con ayuda parcial</Select.Option>
+              <Select.Option value="con-ayuda-completa">Con ayuda completa</Select.Option>
+            </Select>
+          </Form.Item>
+        </Col>
+        <Col span={8}>
+          <Form.Item label="Apariencia personal" name="aparienciaPersonal" rules={[{ required: true }]}>
+            <Select placeholder="Seleccione" style={{ width: "100%" }}>
+              <Select.Option value="buena">Buena</Select.Option>
+              <Select.Option value="descuidada">Descuidada</Select.Option>
+            </Select>
+          </Form.Item>
+        </Col>
+      </Row>
+    </Form>
+  </div>
+</Card>
 
-        <Card title="Hábitos o antecedentes toxicológicos" bordered>
-          <label>
-            Detalle de los hábitos:
-            <Input.TextArea placeholder="Ejemplo: Consumo de alcohol o tabaco..." />
-          </label>
-        </Card>
 
-        <Card title="Habilidades de percepción social" bordered>
-          <label>
-            Estado de ánimo:
-            <Input placeholder="Alegre, Triste, etc." />
-          </label>
-        </Card>
 
-        <Card title="Diagnóstico inicial" bordered>
-          <Input.TextArea placeholder="Describa el diagnóstico inicial..." />
-        </Card>
+{/* Hábitos o antecedentes toxicológicos */}
+<Card className="habitos-toxicologicos-card" bordered>
+  {/* Head: Título */}
+  <div className="table-header">
+    <Title level={5}>Hábitos o antecedentes toxicológicos</Title>
+  </div>
+
+  {/* Body */}
+  <div className="habitos-toxicologicos-body">
+    <Form layout="vertical">
+      {/* Primer formulario */}
+      <Row gutter={16}>
+        <Col span={8}>
+          <Form.Item
+            label="Tabaquismo"
+            name="tabaquismo"
+            rules={[{ required: true, message: "Seleccione una opción" }]}
+          >
+            <Select placeholder="Seleccione" style={{ width: "100%" }}>
+              <Select.Option value="si">Sí</Select.Option>
+              <Select.Option value="no">No</Select.Option>
+            </Select>
+          </Form.Item>
+        </Col>
+        <Col span={8}>
+          <Form.Item
+            label="Sustancias Psicoactivas"
+            name="sustanciasPsicoactivas"
+            rules={[{ required: true, message: "Seleccione una opción" }]}
+          >
+            <Select placeholder="Seleccione" style={{ width: "100%" }}>
+              <Select.Option value="si">Sí</Select.Option>
+              <Select.Option value="no">No</Select.Option>
+            </Select>
+          </Form.Item>
+        </Col>
+      </Row>
+
+      {/* Segundo formulario */}
+      <Row gutter={16}>
+        <Col span={8}>
+          <Form.Item
+            label="Alcoholismo"
+            name="alcoholismo"
+            rules={[{ required: true, message: "Seleccione una opción" }]}
+          >
+            <Select placeholder="Seleccione" style={{ width: "100%" }}>
+              <Select.Option value="si">Sí</Select.Option>
+              <Select.Option value="no">No</Select.Option>
+            </Select>
+          </Form.Item>
+        </Col>
+        <Col span={8}>
+          <Form.Item
+            label="Cafeína"
+            name="cafeina"
+            rules={[{ required: true, message: "Seleccione una opción" }]}
+          >
+            <Select placeholder="Seleccione" style={{ width: "100%" }}>
+              <Select.Option value="si">Sí</Select.Option>
+              <Select.Option value="no">No</Select.Option>
+            </Select>
+          </Form.Item>
+        </Col>
+      </Row>
+    </Form>
+  </div>
+</Card>
+
+
+{/* Habilidades de percepción social */}
+<Card
+        className="habilidades-percepcion-social"
+        title="Habilidades de percepción social"
+        bordered
+      >
+        <Form layout="vertical">
+          <div className="form-row">
+            <Form.Item
+              label="Comunicación verbal"
+              name="comunicacionVerbal"
+              rules={[{ required: true, message: "Seleccione una opción" }]}
+            >
+              <Select placeholder="Seleccione una opción">
+              <Select.Option value="activa">Activa</Select.Option>
+              <Select.Option value="pasiva">Pasiva</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              label="Comunicación no verbal"
+              name="comunicacionNoVerbal"
+              rules={[{ required: true, message: "Seleccione una opción" }]}
+            >
+              <Select placeholder="Seleccione una opción">
+                <Select.Option value="activa">Activa</Select.Option>
+                <Select.Option value="pasiva">Pasiva</Select.Option>
+              </Select>
+            </Form.Item>
+          </div>
+          <Divider />
+          <div className="form-row">
+            <Form.Item
+              label="Estado de ánimo"
+              name="estadoAnimo"
+              rules={[{ required: true, message: "Seleccione una opción" }]}
+            >
+              <Select placeholder="Seleccione una opción">
+                <Select.Option value="alegre">Alegre</Select.Option>
+                <Select.Option value="triste">Triste</Select.Option>
+                <Select.Option value="ansioso">Ansioso</Select.Option>
+                <Select.Option value="calmado">Calmado</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              label="¿Ha sufrido maltrato?"
+              name="haSufridoMaltrato"
+              rules={[{ required: true, message: "Seleccione una opción" }]}
+            >
+              <Select placeholder="Seleccione una opción">
+                <Select.Option value="si">Sí</Select.Option>
+                <Select.Option value="no">No</Select.Option>
+              </Select>
+            </Form.Item>
+          </div>
+        </Form>
+</Card>
+
+{/* Diagnóstico inicial */}
+<Card
+  className="diagnostico-card"
+  title={<Title level={4}>Diagnóstico inicial</Title>}
+  bordered
+>
+  {/* Formulario para diagnóstico inicial */}
+  <Form layout="vertical" className="diagnostico-form">
+    <Form.Item
+      label="Observaciones"
+      name="diagnosticoObservaciones"
+      rules={[
+        {
+          required: true,
+          message: "Por favor, ingrese las observaciones del diagnóstico inicial",
+        },
+      ]}
+    >
+      <Input.TextArea
+        placeholder="Describa el diagnóstico inicial..."
+        rows={4}
+        className="diagnostico-textarea"
+      />
+    </Form.Item>
+  </Form>
+</Card>
+
 
         <Card title="Prueba y Test" bordered>
           <Button type="primary" icon={<PlusOutlined />}>
