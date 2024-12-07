@@ -20,7 +20,7 @@ const HistoriaClinica = () => {
     form.validateFields()
       .then((values) => {
         console.log("Datos guardados:", values);
-        // Aquí puedes agregar la lógica para enviar los datos al servidor
+        // Aquí se puede agregar la lógica para enviar los datos al servidor
       })
       .catch((errorInfo) => {
         console.error("Errores al guardar:", errorInfo);
