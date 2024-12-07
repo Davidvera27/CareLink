@@ -1,118 +1,122 @@
-/* Global Page Styles */
+/* 
+Global Styles 
+Estilos generales para la página de Historia Clínica
+*/
 .historia-clinica-page {
-  background-color: #f0f2f5; /* Matches Ant Design default background */
-  padding: 24px;
-  min-height: 100vh;
+  background-color: #f0f2f5; /* Fondo acorde al diseño predeterminado de Ant Design */
+  padding: 24px; /* Espaciado general */
+  min-height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif; /* Fuente utilizada en toda la página */
 }
 
-/* Container for Cards */
+/* 
+Container for Cards 
+Contenedor principal de todas las tarjetas
+*/
 .historia-clinica-container {
   display: flex;
-  flex-direction: column;
-  gap: 24px;
+  flex-direction: column; /* Las tarjetas se apilan verticalmente */
+  gap: 24px; /* Espaciado entre las tarjetas */
   width: 100%;
-  max-width: 1214px;
+  max-width: 1214px; /* Ancho máximo para un diseño responsivo */
 }
 
-/* Main Card (Patient Information) */
-.principal-card {
-  background: #ffffff;
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-}
-
-.principal-card .ant-row {
-  align-items: center;
-}
-
-.principal-card .avatar {
-  border: 1px solid #d9d9d9;
-}
-
-.principal-card .ant-typography-title {
-  font-size: 18px;
-  color: rgba(0, 0, 0, 0.85);
-}
-
-.principal-card .ant-typography {
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.75);
-}
-
-/* Emergency Services Card */
-.servicio-emergencias-card {
-  background: #ffffff;
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 24px;
-}
-
-.servicio-emergencias-card .ant-card-body {
-  padding-top: 16px;
-}
-
-.servicio-emergencias-card label {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.85);
-}
-
-.servicio-emergencias-card .ant-select,
-.servicio-emergencias-card .ant-input {
-  width: 100%;
-}
-
-/* General Card Styles */
+/* 
+General Card Styles 
+Estilos generales para todas las tarjetas
+*/
 .card {
-  background: #ffffff;
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 24px;
+  background: #ffffff; /* Fondo blanco */
+  border: 1px solid #d9d9d9; /* Bordes claros */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  padding: 24px; /* Espaciado interno */
 }
 
 .card .ant-card-body {
-  padding-top: 16px;
+  padding-top: 16px; /* Ajuste interno para contenido */
 }
 
 .card label {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-direction: column; /* Cada elemento dentro del label se apila */
+  gap: 8px; /* Espaciado entre elementos */
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.85);
+  color: rgba(0, 0, 0, 0.85); /* Color del texto */
 }
 
-.card .ant-input,
-.card .ant-select {
-  width: 100%;
+/* 
+Tratamientos Card 
+Estilos específicos para la tarjeta de tratamientos
+*/
+.tratamientos-card {
+  margin-bottom: 24px; /* Margen inferior para separar del siguiente bloque */
 }
 
-/* Inputs and Selects */
+/* 
+Title Styling 
+Estilos específicos para los títulos dentro de las tarjetas
+*/
+.checkbox-title {
+  margin-bottom: 8px;
+  color: #333333; /* Color gris oscuro para mayor contraste */
+  font-weight: bold;
+}
+
+/* 
+Add Button 
+Estilo del botón "Agregar" en la parte superior derecha de las tablas
+*/
+.add-button {
+  background-color: #7f34b4; /* Color principal del botón */
+  border-color: #7f34b4; /* Borde del mismo color */
+  color: white; /* Texto blanco para contraste */
+  font-weight: bold;
+}
+
+.add-button:hover {
+  background-color: #5d2393; /* Color más oscuro al pasar el mouse */
+  border-color: #5d2393;
+}
+
+/* 
+Table Header Styling 
+Estilo del encabezado de las tablas
+*/
+.table-header {
+  display: flex;
+  justify-content: space-between; /* Espacio entre título y botón */
+  align-items: center;
+  margin-bottom: 16px; /* Espaciado inferior */
+}
+
+/* Encabezados de las tablas */
+.ant-table-thead > tr > th {
+  background-color: #f5f5f5; /* Fondo gris claro */
+  font-weight: bold; /* Texto en negrita */
+  color: #333; /* Color oscuro para mejor legibilidad */
+}
+
+/* 
+Inputs and Selects 
+Estilos para entradas de texto y selectores
+*/
 .ant-input,
 .ant-select-selector {
   padding: 4px 12px;
   font-size: 14px;
   line-height: 22px;
   border-radius: 4px;
-  border: 1px solid #d9d9d9;
+  border: 1px solid #d9d9d9; /* Bordes claros */
 }
 
 .ant-input:focus,
 .ant-select-focused .ant-select-selector {
-  border-color: #7f34b4;
-  box-shadow: 0 0 0 2px rgba(127, 52, 180, 0.2);
+  border-color: #7f34b4; /* Color del borde al enfocar */
+  box-shadow: 0 0 0 2px rgba(127, 52, 180, 0.2); /* Sombra suave */
 }
 
 .ant-input-textarea {
@@ -127,34 +131,36 @@
   font-size: 14px;
 }
 
-/* Buttons */
+/* 
+Buttons 
+Estilo para los botones primarios (general)
+*/
 .ant-btn-primary {
-  background-color: #7f34b4;
+  background-color: #7f34b4; /* Color principal */
   border-color: #7f34b4;
 }
 
 .ant-btn-primary:hover {
-  background-color: #5d2393;
+  background-color: #5d2393; /* Color más oscuro al pasar el mouse */
   border-color: #5d2393;
 }
 
-/* Responsive Design */
+/* 
+Responsive Design 
+Diseño responsivo para pantallas más pequeñas
+*/
 @media (max-width: 768px) {
   .historia-clinica-container {
-    padding: 16px;
+    padding: 16px; /* Reduce el espaciado interno */
   }
 
-  .principal-card {
-    padding: 16px;
-  }
-
-  .servicio-emergencias-card,
   .card {
-    padding: 16px;
+    padding: 16px; /* Ajusta el espaciado para adaptarse a pantallas pequeñas */
   }
 
   .ant-row {
-    flex-direction: column;
-    gap: 16px;
+    flex-direction: column; /* Cambia las filas a columnas en pantallas pequeñas */
+    gap: 16px; /* Espaciado entre elementos */
   }
 }
+  
