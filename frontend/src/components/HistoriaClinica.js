@@ -381,13 +381,11 @@ const HistoriaClinica = () => {
 
       <Divider />
 
-      {/* Estructura del Formulario */}
       <Form layout="vertical">
         <Form.Item
           label={<span className="form-title">Seleccione los tipos de discapacidad</span>}
           className="vertical-form-item"
         >
-          {/* Checkboxes agrupados en frames */}
           <Checkbox.Group style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             <div className="frame">
               <Checkbox value="fisica">
@@ -414,7 +412,6 @@ const HistoriaClinica = () => {
           </Checkbox.Group>
         </Form.Item>
 
-        {/* Campos de entrada adicionales */}
         <Row gutter={16}>
           <Col span={12}>
             <Form.Item
@@ -453,20 +450,60 @@ const HistoriaClinica = () => {
         </div>
       }
     >
-      <Row gutter={16}>
-        <Col span={12}>
-          <label>
-            Limitación
-            <Input placeholder="Ejemplo: Incontinencia urinaria" />
-          </label>
-        </Col>
-        <Col span={12}>
-          <label>
-            Observación
-            <Input.TextArea placeholder="Detalles adicionales" />
-          </label>
-        </Col>
-      </Row>
+      {/* Tarjeta secundaria dentro del formulario */}
+      <Card
+        className="secondary-card"
+        bordered
+        title={
+          <div className="table-header">
+            <Title level={5}>Tipos de discapacidad del paciente</Title>
+            <Button type="primary" icon={<PlusOutlined />} className="add-button">
+              Agregar
+            </Button>
+          </div>
+        }
+      >
+        <Table
+          className="limitaciones-table"
+          columns={[
+            {
+              title: "Limitaciones",
+              dataIndex: "limitacion",
+              key: "limitacion",
+              align: "center",
+            },
+            {
+              title: "Observación",
+              dataIndex: "observacion",
+              key: "observacion",
+              align: "center",
+            },
+            {
+              title: "Acciones",
+              key: "acciones",
+              align: "center",
+              render: (_, record) => (
+                <Button type="link" danger>
+                  Eliminar
+                </Button>
+              ),
+            },
+          ]}
+          dataSource={[
+            {
+              key: "1",
+              limitacion: "Incontinencia urinaria",
+              observacion: "Requiere uso de pañal",
+            },
+            {
+              key: "2",
+              limitacion: "Debilidad muscular",
+              observacion: "Requiere ayuda para comer",
+            },
+          ]}
+          pagination={false}
+        />
+      </Card>
     </Card>
 
     <Divider />
@@ -484,23 +521,97 @@ const HistoriaClinica = () => {
         </div>
       }
     >
-      <Row gutter={16}>
-        <Col span={12}>
-          <label>
-            Medicamento
-            <Input placeholder="Ejemplo: Penicilina" />
-          </label>
-        </Col>
-        <Col span={12}>
-          <label>
-            Observación
-            <Input.TextArea placeholder="Ejemplo: Reemplazar con azitromicina" />
-          </label>
-        </Col>
-      </Row>
+      <Table
+        className="alergias-table"
+        columns={[
+          {
+            title: "Medicamentos a los que presenta alergia",
+            dataIndex: "medicamento",
+            key: "medicamento",
+            align: "center",
+          },
+          {
+            title: "Observación",
+            dataIndex: "observacion",
+            key: "observacion",
+            align: "center",
+          },
+          {
+            title: "Acciones",
+            key: "acciones",
+            align: "center",
+            render: (_, record) => (
+              <Button type="link" danger>
+                Eliminar
+              </Button>
+            ),
+          },
+        ]}
+        dataSource={[
+          {
+            key: "1",
+            medicamento: "Penicilina",
+            observacion: "Reemplazar con azitromicina",
+          },
+        ]}
+        pagination={false}
+      />
+    </Card>
+
+    <Divider />
+
+        {/* Formulario 4: Historial de cirugías, traumatismos o accidentes */}
+        <Card
+      className="terciaria-card"
+      bordered
+      title={
+        <div className="table-header">
+          <Title level={5}>Historial de cirugías, traumatismos o accidentes</Title>
+          <Button type="primary" icon={<PlusOutlined />} className="add-button">
+            Agregar
+          </Button>
+        </div>
+      }
+    >
+      <Table
+        className="historial-table"
+        columns={[
+          {
+            title: "Fecha de ocurrencia",
+            dataIndex: "fecha",
+            key: "fecha",
+            align: "center",
+          },
+          {
+            title: "Observación",
+            dataIndex: "observacion",
+            key: "observacion",
+            align: "center",
+          },
+          {
+            title: "Acciones",
+            key: "acciones",
+            align: "center",
+            render: (_, record) => (
+              <Button type="link" danger>
+                Eliminar
+              </Button>
+            ),
+          },
+        ]}
+        dataSource={[
+          {
+            key: "1",
+            fecha: "10/11/1998",
+            observacion: "Apendicectomía",
+          },
+        ]}
+        pagination={false}
+      />
     </Card>
   </div>
 </Card>
+
 
 
 
