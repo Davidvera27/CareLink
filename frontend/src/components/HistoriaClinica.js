@@ -1,7 +1,7 @@
 import React from "react";
 import GlobalHeader from "./GlobalHeader"; // Importa el componente de encabezado global.
 import "../styles/HistoriaClinica.css"; // Importa los estilos específicos para esta página.
-import { Card, Button, Avatar, Row, Col, Input, Select, Typography, Table, Checkbox, Space, Divider } from "antd"; // Importa componentes de Ant Design.
+import { Card, Button, Avatar, Row, Col, Input, Select, Typography, Table, Checkbox, Space, Divider, Form } from "antd"; // Importa componentes de Ant Design.
 import { PlusOutlined } from "@ant-design/icons"; // Importa el ícono "PlusOutlined" de Ant Design.
 
 const { Title, Text } = Typography; // Desestructuración para usar componentes tipográficos de Ant Design.
@@ -331,36 +331,127 @@ const HistoriaClinica = () => {
   <div className="condiciones-body">
     {/* Formulario 1: Tipos de discapacidad */}
     <Card
-      title="Tipos de discapacidad del paciente"
       className="terciaria-card"
       bordered
+      title={
+        <div className="table-header">
+          <Title level={5}>Tipos de discapacidad del paciente</Title>
+          <Button type="primary" icon={<PlusOutlined />} className="add-button">
+            Agregar
+          </Button>
+        </div>
+      }
     >
-      <Row gutter={16}>
-        <Col span={12}>
-          <label>
-            Discapacidad
-            <Input placeholder="Ejemplo: Física" />
-          </label>
-        </Col>
-        <Col span={12}>
-          <label>
-            Observación
-            <Input.TextArea placeholder="Detalles adicionales" />
-          </label>
-        </Col>
-      </Row>
-      <Button type="primary" icon={<PlusOutlined />} className="add-button">
-        Agregar
-      </Button>
+      {/* Tabla de datos */}
+      <Table
+        className="discapacidad-table"
+        columns={[
+          {
+            title: "Discapacidades",
+            dataIndex: "discapacidad",
+            key: "discapacidad",
+            align: "center",
+          },
+          {
+            title: "Observación",
+            dataIndex: "observacion",
+            key: "observacion",
+            align: "center",
+          },
+          {
+            title: "Acciones",
+            key: "acciones",
+            align: "center",
+            render: (_, record) => (
+              <Button type="link" danger>
+                Eliminar
+              </Button>
+            ),
+          },
+        ]}
+        dataSource={[
+          {
+            key: "1",
+            discapacidad: "Física",
+            observacion: "N/A",
+          },
+        ]}
+        pagination={false}
+      />
+
+      <Divider />
+
+      {/* Estructura del Formulario */}
+      <Form layout="vertical">
+        <Form.Item
+          label={<span className="form-title">Seleccione los tipos de discapacidad</span>}
+          className="vertical-form-item"
+        >
+          {/* Checkboxes agrupados en frames */}
+          <Checkbox.Group style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            <div className="frame">
+              <Checkbox value="fisica">
+                <span className="checkbox-label">Física</span>
+              </Checkbox>
+              <Checkbox value="sensorial">
+                <span className="checkbox-label">Sensorial</span>
+              </Checkbox>
+              <Checkbox value="intelectual">
+                <span className="checkbox-label">Intelectual</span>
+              </Checkbox>
+            </div>
+            <div className="frame">
+              <Checkbox value="psiquica">
+                <span className="checkbox-label">Psíquica</span>
+              </Checkbox>
+              <Checkbox value="multiple">
+                <span className="checkbox-label">Múltiple</span>
+              </Checkbox>
+              <Checkbox value="otra">
+                <span className="checkbox-label">Otra</span>
+              </Checkbox>
+            </div>
+          </Checkbox.Group>
+        </Form.Item>
+
+        {/* Campos de entrada adicionales */}
+        <Row gutter={16}>
+          <Col span={12}>
+            <Form.Item
+              label="Discapacidad específica"
+              name="discapacidadEspecifica"
+              rules={[{ required: true, message: "Ingrese la discapacidad específica" }]}
+            >
+              <Input placeholder="Ejemplo: Parálisis cerebral" />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label="Observación"
+              name="observacion"
+              rules={[{ required: false }]}
+            >
+              <Input.TextArea placeholder="Ejemplo: Requiere asistencia permanente" />
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
     </Card>
 
     <Divider />
 
     {/* Formulario 2: Limitaciones permanentes */}
     <Card
-      title="Limitaciones permanentes que requieren apoyos o cuidados"
       className="terciaria-card"
       bordered
+      title={
+        <div className="table-header">
+          <Title level={5}>Limitaciones permanentes que requieren apoyos o cuidados</Title>
+          <Button type="primary" icon={<PlusOutlined />} className="add-button">
+            Agregar
+          </Button>
+        </div>
+      }
     >
       <Row gutter={16}>
         <Col span={12}>
@@ -376,18 +467,22 @@ const HistoriaClinica = () => {
           </label>
         </Col>
       </Row>
-      <Button type="primary" icon={<PlusOutlined />} className="add-button">
-        Agregar
-      </Button>
     </Card>
 
     <Divider />
 
     {/* Formulario 3: Alergias a medicamentos */}
     <Card
-      title="Alergias a medicamentos"
       className="terciaria-card"
       bordered
+      title={
+        <div className="table-header">
+          <Title level={5}>Alergias a medicamentos</Title>
+          <Button type="primary" icon={<PlusOutlined />} className="add-button">
+            Agregar
+          </Button>
+        </div>
+      }
     >
       <Row gutter={16}>
         <Col span={12}>
@@ -403,12 +498,11 @@ const HistoriaClinica = () => {
           </label>
         </Col>
       </Row>
-      <Button type="primary" icon={<PlusOutlined />} className="add-button">
-        Agregar
-      </Button>
     </Card>
   </div>
 </Card>
+
+
 
 
         <Card title="Esquema de vacunación" bordered>
