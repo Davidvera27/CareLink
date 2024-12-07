@@ -1,7 +1,7 @@
 import React from "react";
 import GlobalHeader from "./GlobalHeader"; // Importa el componente de encabezado global.
 import "../styles/HistoriaClinica.css"; // Importa los estilos específicos para esta página.
-import { Card, Button, Avatar, Row, Col, Input, Select, Typography, Table, Checkbox, Space, Divider, Form } from "antd"; // Importa componentes de Ant Design.
+import { Card, Button, Avatar, Row, Col, Input, Select, Typography, Table, Checkbox, Space, Divider, Form, } from "antd"; // Importa componentes de Ant Design.
 import { PlusOutlined } from "@ant-design/icons"; // Importa el ícono "PlusOutlined" de Ant Design.
 
 
@@ -9,6 +9,24 @@ import { PlusOutlined } from "@ant-design/icons"; // Importa el ícono "PlusOutl
 const { Title, Text } = Typography; // Desestructuración para usar componentes tipográficos de Ant Design.
 
 const HistoriaClinica = () => {
+
+  const [form] = Form.useForm();
+
+  const handleReset = () => {
+    form.resetFields();
+  };
+
+  const handleSave = () => {
+    form.validateFields()
+      .then((values) => {
+        console.log("Datos guardados:", values);
+        // Aquí puedes agregar la lógica para enviar los datos al servidor
+      })
+      .catch((errorInfo) => {
+        console.error("Errores al guardar:", errorInfo);
+      });
+  };
+
   return (
     <div className="historia-clinica-page">
       {/* Encabezado global */}
@@ -915,15 +933,84 @@ const HistoriaClinica = () => {
 </Card>
 
 
-        <Card title="Prueba y Test" bordered>
-          <Button type="primary" icon={<PlusOutlined />}>
-            Agregar Prueba
-          </Button>
-        </Card>
+{/* Pruebas y Test */}
+<Card className="pruebas-test-card" bordered>
+  {/* Head: Título con botón para agregar */}
+  <div className="table-header">
+    <Title level={5}>Pruebas y Test</Title>
+    <Button type="primary" icon={<PlusOutlined />} className="add-button">
+      Nuevo
+    </Button>
+  </div>
 
-        <Card title="Adjuntar Documento" bordered>
-          <Input type="file" />
-        </Card>
+  {/* Body: Tabla para mostrar datos */}
+  <div className="pruebas-test-body">
+    <Table
+      className="pruebas-test-table"
+      columns={[
+        {
+          title: "Profesional",
+          dataIndex: "profesional",
+          key: "profesional",
+          align: "center",
+        },
+        {
+          title: "Tipo de prueba",
+          dataIndex: "tipoPrueba",
+          key: "tipoPrueba",
+          align: "center",
+        },
+        {
+          title: "Fecha",
+          dataIndex: "fecha",
+          key: "fecha",
+          align: "center",
+        },
+        {
+          title: "Acciones",
+          key: "acciones",
+          align: "center",
+          render: (_, record) => (
+            <Space>
+              <Button type="link" style={{ color: "#1890ff" }}>
+                Ver
+              </Button>
+              <Button type="link" danger>
+                Editar
+              </Button>
+            </Space>
+          ),
+        },
+      ]}
+      dataSource={[
+        {
+          key: "1",
+          profesional: "Sara Manuela Gomez",
+          tipoPrueba: "Escala de Yesavage",
+          fecha: "10/11/2024",
+        },
+      ]}
+      pagination={false}
+    />
+  </div>
+</Card>
+
+{/* Adjuntar Documento */}
+<Card title="Adjuntar Documento" bordered>
+  <Input type="file" />
+</Card>
+
+        {/* Botones de guardar y restablecer */}
+        <div className="action-buttons" style={{ marginTop: "16px", textAlign: "right" }}>
+          <Space>
+            <Button type="default" onClick={handleReset}>
+              Restablecer
+            </Button>
+            <Button type="primary" onClick={handleSave}>
+              Guardar y continuar
+            </Button>
+          </Space>
+        </div>
       </div>
     </div>
   );
