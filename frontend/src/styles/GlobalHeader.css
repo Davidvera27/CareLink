@@ -1,176 +1,168 @@
 .global-header-container {
-    display: flex;
-    flex-direction: row;
-    height: auto; /* Cambiar de 100vh a auto para no afectar el fondo completo */
-    background-color: transparent; /* Cambiar de morado a transparente */
-    position: sticky;
-    top: 0;
-    z-index: 10;
+  display: flex;
+  flex-direction: column;
+  height: auto; /* Ajusta el contenedor para que sea dinámico */
+  background-color: transparent;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
-
 
 /* Menú lateral */
 .menu-container {
-    margin-top: 64px; /* Igual a la altura de la cabecera global */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 240px;
-    height: calc(100vh - 64px); /* Resta la altura de la cabecera */
-    background-color: #ffffff;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    transition: width 0.3s;
+  margin-top: 64px; /* Ajusta según la altura del encabezado */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: calc(100vh - 64px);
+  background-color: #ffffff;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s;
 }
 
 .menu-container.collapsed {
-    width: 80px;
+  width: 80px;
 }
 
 .menu {
-    margin-top: 0; /* No necesita margen adicional ya que `menu-container` lo tiene */
-    height: 100%; /* Ocupa todo el espacio disponible del contenedor */
-    overflow-y: auto;
+  margin-top: 0;
+  height: 100%; /* Ocupa el espacio completo del contenedor */
+  overflow-y: auto;
 }
 
 .main-content {
-    margin-left: 240px; /* Ancho del menú lateral */
-    margin-top: 64px; /* Altura de la cabecera */
-    padding: 16px; /* Opcional, para añadir espacio */
-    transition: margin-left 0.3s;
+  margin-left: 240px;
+  margin-top: 64px;
+  padding: 16px;
+  transition: margin-left 0.3s;
 }
 
 .menu-container.collapsed ~ .main-content {
-    margin-left: 80px; /* Ajustar cuando el menú está colapsado */
+  margin-left: 80px;
 }
 
-
-
 .collapse-btn {
-    background-color: #7f34b4;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    margin: 16px;
-    padding: 8px;
-    transition: background-color 0.3s;
+  background-color: #7f34b4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin: 16px;
+  padding: 8px;
+  transition: background-color 0.3s;
 }
 
 .collapse-btn:hover {
-    background-color: #5d2393;
+  background-color: #5d2393;
 }
 
 /* Encabezado Global */
 .global-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 16px;
-    height: 48px;
-    background-color: #22075e; /* Fondo morado */
-    box-shadow: inset 0px -1px 0px #f0f0f0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-  }
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  height: 64px; /* Ajustado para un encabezado más consistente */
+  background-color: #22075e;
+  box-shadow: inset 0px -1px 0px #f0f0f0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
 
 .menu-container.collapsed ~ .global-header {
-    margin-left: 80px;
-    width: calc(100% - 80px);
+  margin-left: 80px;
+  width: calc(100% - 80px);
 }
 
 /* Logo */
 .logo h1 {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    color: #ffffff;
-    margin: 0;
-  }
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #ffffff;
+  margin: 0;
+}
 
 /* Barra de herramientas */
 .toolbar {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 /* Íconos en la barra de herramientas */
-  .icon-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px;
-    cursor: pointer;
-  }
-  .icon {
-    font-size: 16px;
-    color: #ffffff;
-  }
-  
-  .badge-icon {
-    position: relative;
-  }
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.badge-icon {
+  position: relative;
+}
 
 .badge-icon,
 .user-wrapper {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .badge {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    background: #ff4d4f;
-    color: #ffffff;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 12px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-/* Avatar y nombre del usuario */
-.user-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 2px solid #ffffff;
-  }
-  
-  .user-name {
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    color: #ffffff;
-  }
-
-  /* Logout */
-.icon-wrapper:last-child {
-    margin-left: 16px;
-  }
-
-  
-.user-wrapper img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ff4d4f;
+  color: #ffffff;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.user-wrapper .user-name {
-    font-family: "Roboto", sans-serif;
-    font-size: 14px;
-    color: #ffffff;
+/* Avatar y nombre del usuario */
+.user-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+}
+
+.user-name {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+/* Logout */
+.icon-wrapper:last-child {
+  margin-left: 16px;
+}
+
+.user-wrapper img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 }
