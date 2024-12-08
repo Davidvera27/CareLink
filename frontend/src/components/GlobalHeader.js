@@ -78,15 +78,13 @@ const GlobalHeader = () => {
         </div>
         <div className="toolbar">
           <div className="badge-icon">
-            <div className="badge-wrapper">
-              <span className="badge">11</span>
-            </div>
+            <span className="badge">11</span>
           </div>
           <div className="user-wrapper">
-            <img src={avatar} alt="User Avatar" />
+            <img className="avatar" src={avatar} alt="User Avatar" />
             <span className="user-name">{userName}</span>
-            <div className="logout-icon" onClick={handleLogout}>
-              <LogoutOutlined />
+            <div className="icon-wrapper" onClick={handleLogout}>
+              <LogoutOutlined className="icon" />
             </div>
           </div>
         </div>
