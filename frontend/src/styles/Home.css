@@ -1,41 +1,41 @@
-/* Página principal */
+/* General page styling */
 .home-page {
-    background-color: #f0f2f5; 
+    background-color: #f0f2f5;
     padding: 24px;
-    min-height: 100vh; 
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: "Roboto", sans-serif;
-}
-
-.home-container {
+  }
+  
+  .home-container {
     display: flex;
     flex-direction: column;
     gap: 24px;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-}
-
-/* Estilos generales para las tarjetas */
-.card-legacy {
+  }
+  
+  /* Styling for each card */
+  .card-legacy {
     background-color: #ffffff;
     border: 1px solid #d9d9d9;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 24px;
-}
-
-.head {
+  }
+  
+  .head {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 16px;
-}
-
-.add-button {
+  }
+  
+  .add-button {
     background-color: #7f34b4;
     color: white;
     font-weight: bold;
@@ -43,31 +43,40 @@
     border-radius: 4px;
     padding: 8px 16px;
     transition: background-color 0.3s ease;
-}
-
-.add-button:hover {
+  }
+  
+  .add-button:hover {
     background-color: #5d2393;
-}
-
-.body {
+  }
+  
+  .body {
     margin-top: 16px;
-}
-
-/* Ajustes para las tarjetas con imágenes */
-
-.card-legacy.user-flow {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra los elementos horizontalmente */
-}
-.card-legacy.user-flow .horizontal-stats-block {
+  }
+  
+  /* Card positioning for layout */
+  .cards-row {
     display: flex;
     justify-content: space-between;
-    width: 100%; /* Asegura que las gráficas ocupen el ancho completo */
-    margin-bottom: 24px; /* Espaciado entre gráficas y tabla */
-}
-
-.card-legacy.user-flow .stat-item {
+    gap: 16px;
+  }
+  
+  /* Specific styling for user-flow card */
+  .card-legacy.user-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48%; /* Adjusts to take half the row */
+  }
+  
+  .card-legacy.user-flow .horizontal-stats-block {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+    width: 100%;
+  }
+  
+  .card-legacy.user-flow .stat-item {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -76,114 +85,128 @@
     border-radius: 8px;
     padding: 16px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    width: 45%; /* Asegura que cada gráfica ocupe la mitad del contenedor */
-
-}
-
-.card-legacy.user-flow .stat-header {
+  }
+  
+  .card-legacy.user-flow .stat-header {
     font-weight: 600;
     font-size: 14px;
     text-align: center;
     margin-bottom: 8px;
-}
-
-.card-legacy.user-flow .stat-body {
+  }
+  
+  .card-legacy.user-flow .stat-body {
     font-size: 24px;
     font-weight: bold;
     color: #000;
     text-align: center;
-}
-
-.card-legacy.user-flow .stat-body .stat-trend-value {
+  }
+  
+  .card-legacy.user-flow .stat-body .stat-trend-value {
     font-size: 14px;
     font-weight: normal;
     color: #52c41a;
     margin-left: 4px;
-}
-
-.card-legacy.user-flow .stat-chart {
-    margin-top: 16px;
-    width: 100%;
-    height: auto;
-    text-align: center;
-}
-
-.card-legacy.user-flow .stat-chart img {
+  }
+  
+  .card-legacy.user-flow .stat-chart img {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Tabla */
-.card-legacy.user-flow .user-flow-table {
-    margin-top: 16px; /* Espaciado entre las gráficas y la tabla */
+  }
+  
+  .card-legacy.user-flow .user-flow-table {
     width: 100%;
-}
-
-.card-legacy.user-flow .user-flow-table .ant-table-thead > tr > th {
+    margin-top: 16px;
+  }
+  
+  .card-legacy.user-flow .user-flow-table .ant-table-thead > tr > th {
     text-align: center;
-    font-weight: 600;
-}
-
-.card-legacy.user-flow .user-flow-table .ant-table-tbody > tr > td {
+    font-weight: bold;
+  }
+  
+  .card-legacy.user-flow .user-flow-table .ant-table-tbody > tr > td {
     text-align: center;
-}
-
-/* Indicadores de estado */
-.status {
+  }
+  
+  /* Styling for scheduled activities card */
+  .card-legacy.scheduled-activities {
+    display: flex;
+    flex-direction: column;
+    width: 48%; /* Adjusts to take half the row */
+  }
+  
+  .card-legacy.scheduled-activities .activities-table {
+    width: 100%;
+    margin-top: 16px;
+  }
+  
+  .card-legacy.scheduled-activities .activities-table .ant-table-thead > tr > th {
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .card-legacy.scheduled-activities .activities-table .ant-table-tbody > tr > td {
+    text-align: center;
+  }
+  
+  /* Attendance control specific styles */
+  .card-legacy.attendance-control .attendance-table {
+    width: 100%;
+  }
+  
+  .card-legacy.attendance-control .attendance-table .ant-table-thead > tr > th {
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .card-legacy.attendance-control .attendance-table .ant-table-tbody > tr > td {
+    text-align: center;
+  }
+  
+  /* Status indicator styles */
+  .status {
     display: flex;
     align-items: center;
     gap: 8px;
-}
-
-.status-dot {
+  }
+  
+  .status-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-}
-
-.status-dot.green {
+  }
+  
+  .status-dot.green {
     background-color: #52c41a;
-}
-
-.status-dot.gray {
+  }
+  
+  .status-dot.gray {
     background-color: #d9d9d9;
-}
-
-/* Diseño responsivo */
-@media (max-width: 768px) {
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
     .home-container {
-        padding: 16px;
+      padding: 16px;
     }
-
-    .card-legacy {
-        padding: 16px;
+  
+    .cards-row {
+      flex-direction: column;
     }
-
-    .add-button {
-        width: 100%;
-        text-align: center;
+  
+    .card-legacy.user-flow,
+    .card-legacy.scheduled-activities {
+      width: 100%;
     }
-
+  
     .horizontal-stats-block {
-        flex-direction: column;
+      flex-direction: column;
+      gap: 16px;
     }
-
-    .stat-item {
-        width: 100%;
-    }
-
-    .user-flow-table {
-        margin-top: 16px;
-    }
-
+  
     .card-legacy.user-flow .stat-item {
-        width: 100%; /* Cada gráfica ocupa el ancho completo */
+      width: 100%;
     }
-    .card-legacy.user-flow .horizontal-stats-block {
-        flex-direction: column;
-        gap: 16px; /* Espaciado entre las gráficas en pantallas pequeñas */
-    }
-}
-
+  }
+  

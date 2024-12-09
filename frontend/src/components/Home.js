@@ -130,98 +130,98 @@ const Home = () => {
           </div>
         </Card>
 
-{/* Card 2: Flujo de usuarios */}
-<Card className="card-legacy user-flow" bordered>
-  {/* Head Section */}
-  <div className="head">
-    <div className="title-wrapper">
-      <Title level={5}>Flujo de usuarios</Title>
-      <div className="more">
-        <Button type="link" icon={<i className="icon-more" />} />
-      </div>
-    </div>
-  </div>
+        {/* Row for Card 2 and Card 3 */}
+        <div className="cards-row">
+          {/* Card 2: Flujo de usuarios */}
+          <Card className="card-legacy user-flow" bordered>
+            <div className="head">
+              <div className="title-wrapper">
+                <Title level={5}>Flujo de usuarios</Title>
+                <div className="more">
+                  <Button type="link" icon={<i className="icon-more" />} />
+                </div>
+              </div>
+            </div>
+            <div className="body">
+              <div className="horizontal-stats-block">
+                <div className="stat-item">
+                  <div className="stat-header">
+                    Usuarios del mes
+                    <span className="info-icon">
+                      <i className="icon-info-circle" />
+                    </span>
+                  </div>
+                  <div className="stat-body">
+                    <h3 className="stat-value">100</h3>
+                    <span className="stat-trend-value positive">17.1%</span>
+                  </div>
+                  <div className="stat-chart">
+                    <img
+                      src={Grafica1}
+                      alt="Gráfico Usuarios del Mes"
+                      className="stat-chart-image"
+                    />
+                  </div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-header">
+                    Tasa de asistencia
+                    <span className="info-icon">
+                      <i className="icon-info-circle" />
+                    </span>
+                  </div>
+                  <div className="stat-body">
+                    <h3 className="stat-value">90%</h3>
+                    <span className="stat-trend-value positive">26.2%</span>
+                  </div>
+                  <div className="stat-chart">
+                    <img
+                      src={Grafica2}
+                      alt="Gráfico Tasa de Asistencia"
+                      className="stat-chart-image"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="table-container">
+                <Table
+                  dataSource={userFlowData}
+                  columns={columnsUserFlow}
+                  pagination={{
+                    defaultPageSize: 5,
+                    showSizeChanger: false,
+                    showQuickJumper: true,
+                  }}
+                  className="user-flow-table"
+                />
+              </div>
+            </div>
+          </Card>
 
-  {/* Body Section */}
-  <div className="body">
-    {/* Horizontal Stats Block */}
-    <div className="horizontal-stats-block">
-      {/* Stat 1 */}
-      <div className="stat-item">
-        <div className="stat-header">
-          Usuarios del mes
-          <span className="info-icon">
-            <i className="icon-info-circle" />
-          </span>
+          {/* Card 3: Actividades programadas */}
+          <Card className="card-legacy scheduled-activities" bordered>
+            <div className="head">
+              <div className="title-wrapper">
+                <Title level={5}>Actividades programadas</Title>
+                <div className="more">
+                  <Button type="link" icon={<i className="icon-more" />} />
+                </div>
+              </div>
+            </div>
+            <div className="body">
+              <Table
+                dataSource={activitiesData}
+                columns={columnsActivities}
+                pagination={{
+                  defaultPageSize: 5,
+                  showSizeChanger: false,
+                  showQuickJumper: true,
+                }}
+                className="activities-table"
+              />
+            </div>
+          </Card>
         </div>
-        <div className="stat-body">
-          <h3 className="stat-value">100</h3>
-          <span className="stat-trend-value positive">17.1%</span>
-        </div>
-        <div className="stat-chart">
-          {/* Uso de Grafica1 */}
-          <img
-            src={Grafica1}
-            alt="Gráfico Usuarios del Mes"
-            className="stat-chart-image"
-          />
-        </div>
-      </div>
-
-      {/* Stat 2 */}
-      <div className="stat-item">
-        <div className="stat-header">
-          Tasa de asistencia
-          <span className="info-icon">
-            <i className="icon-info-circle" />
-          </span>
-        </div>
-        <div className="stat-body">
-          <h3 className="stat-value">90%</h3>
-          <span className="stat-trend-value positive">26.2%</span>
-        </div>
-        <div className="stat-chart">
-          {/* Uso de Grafica2 */}
-          <img
-            src={Grafica2}
-            alt="Gráfico Tasa de Asistencia"
-            className="stat-chart-image"
-          />
-        </div>
-      </div>
-    </div>
-
-    {/* Tabla */}
-    <div className="table-container">
-      <Table
-        dataSource={userFlowData}
-        columns={columnsUserFlow}
-        pagination={{
-          defaultPageSize: 5,
-          showSizeChanger: false,
-          showQuickJumper: true,
-        }}
-        className="user-flow-table"
-      />
-    </div>
-  </div>
-</Card>
-
-
-        {/* Card 3: Actividades programadas */}
-        <Card className="card-legacy scheduled-activities" bordered>
-          <div className="head">
-            <Title level={5}>Actividades programadas</Title>
-          </div>
-          <div className="body">
-            <Table
-              dataSource={activitiesData}
-              columns={columnsActivities}
-              pagination={false}
-              className="activities-table"
-            />
-          </div>
-        </Card>
       </div>
     </div>
   );
