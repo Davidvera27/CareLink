@@ -62,85 +62,83 @@ const Home = () => {
     <div className="home-page">
       <GlobalHeader />
       <div className="home-container">
-        <div className="content">
-          {/* Control de asistencia */}
-          <div className="card-legacy attendance-control">
+        {/* Control de asistencia del día */}
+        <div className="card-legacy attendance-control">
+          <div className="card-header">
+            <h5 className="card-title">Control de asistencia del día</h5>
+            <button className="add-button">Agregar</button>
+          </div>
+          <div className="card-body">
+            <div className="table">
+              <div className="table-row header">
+                <div className="table-cell checkbox-header"></div>
+                <div className="table-cell">Usuario</div>
+                <div className="table-cell">Tipo de servicio</div>
+                <div className="table-cell">Estado</div>
+                <div className="table-cell actions-header">Acciones</div>
+              </div>
+              <div className="table-row">
+                <div className="table-cell">
+                  <input type="checkbox" className="checkbox-input" />
+                </div>
+                <div className="table-cell">Sara Manuela Gómez</div>
+                <div className="table-cell">Centro día</div>
+                <div className="table-cell">
+                  <span className="badge green">Asistió</span>
+                </div>
+                <div className="table-cell actions">
+                  <span className="action-link">Ver</span>
+                  <span className="divider">|</span>
+                  <span className="action-link">Marcar asistencia</span>
+                </div>
+              </div>
+              <div className="table-row">
+                <div className="table-cell">
+                  <input type="checkbox" className="checkbox-input" />
+                </div>
+                <div className="table-cell">Juan Pablo Ruiz</div>
+                <div className="table-cell">Centro día</div>
+                <div className="table-cell">
+                  <span className="badge gray">Pendiente</span>
+                </div>
+                <div className="table-cell actions">
+                  <span className="action-link">Ver</span>
+                  <span className="divider">|</span>
+                  <span className="action-link">Marcar asistencia</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Segunda fila: Flujo de usuarios y Actividades programadas */}
+        <div className="card-row">
+          <div className="card-legacy flujo-usuarios">
             <div className="card-header">
-              <h5 className="card-title">Control de asistencia del día</h5>
-              <button className="add-button">Agregar</button>
+              <h5 className="card-title">Flujo de usuarios</h5>
             </div>
             <div className="card-body">
+              <HorizontalStatsBlock />
               <div className="table">
                 <div className="table-row header">
-                  <div className="table-cell checkbox-header"></div>
                   <div className="table-cell">Usuario</div>
-                  <div className="table-cell">Tipo de servicio</div>
-                  <div className="table-cell">Estado</div>
-                  <div className="table-cell actions-header">Acciones</div>
+                  <div className="table-cell">Contratos</div>
+                  <div className="table-cell">Visitas del mes</div>
                 </div>
                 <div className="table-row">
-                  <div className="table-cell">
-                    <input type="checkbox" className="checkbox-input" />
-                  </div>
-                  <div className="table-cell">Sara Manuela Gómez</div>
-                  <div className="table-cell">Centro día</div>
-                  <div className="table-cell">
-                    <span className="badge green">Asistió</span>
-                  </div>
-                  <div className="table-cell actions">
-                    <span className="action-link">Ver</span>
-                    <span className="divider">|</span>
-                    <span className="action-link">Marcar asistencia</span>
-                  </div>
+                  <div className="table-cell">Nombre usuario</div>
+                  <div className="table-cell">Ver</div>
+                  <div className="table-cell">5</div>
                 </div>
                 <div className="table-row">
-                  <div className="table-cell">
-                    <input type="checkbox" className="checkbox-input" />
-                  </div>
-                  <div className="table-cell">Juan Pablo Ruiz</div>
-                  <div className="table-cell">Centro día</div>
-                  <div className="table-cell">
-                    <span className="badge gray">Pendiente</span>
-                  </div>
-                  <div className="table-cell actions">
-                    <span className="action-link">Ver</span>
-                    <span className="divider">|</span>
-                    <span className="action-link">Marcar asistencia</span>
-                  </div>
+                  <div className="table-cell">Nombre usuario</div>
+                  <div className="table-cell">Ver</div>
+                  <div className="table-cell">10</div>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Card Row: Flujo de usuarios y Actividades programadas */}
-          <div className="card-row">
-            <div className="card-legacy flujo-usuarios">
-              <div className="card-header">
-                <h5 className="card-title">Flujo de usuarios</h5>
-              </div>
-              <div className="card-body">
-                <HorizontalStatsBlock />
-                <div className="table">
-                  <div className="table-row header">
-                    <div className="table-cell">Usuario</div>
-                    <div className="table-cell">Contratos</div>
-                    <div className="table-cell">Visitas del mes</div>
-                  </div>
-                  <div className="table-row">
-                    <div className="table-cell">Nombre usuario</div>
-                    <div className="table-cell">Ver</div>
-                    <div className="table-cell">5</div>
-                  </div>
-                  <div className="table-row">
-                    <div className="table-cell">Nombre usuario</div>
-                    <div className="table-cell">Ver</div>
-                    <div className="table-cell">10</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <ScheduledActivities />
-          </div>
+          <ScheduledActivities />
         </div>
       </div>
     </div>
