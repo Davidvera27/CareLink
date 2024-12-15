@@ -13,6 +13,7 @@ import {
   Row,
   Col,
   Menu,
+  Badge,
 } from "antd";
 import moment from "moment";
 import {
@@ -22,10 +23,15 @@ import {
   CheckCircleOutlined,
   CalendarOutlined,
   SettingOutlined,
+  SearchOutlined,
+  QuestionCircleOutlined,
+  BellOutlined,
+  LogoutOutlined,
+  SettingFilled,
 } from "@ant-design/icons"; // Importa íconos correctamente
 import axios from "axios";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 const { Option } = Select;
 
 // Configuración global de Axios
@@ -75,52 +81,80 @@ const NuevoUsuario = () => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider collapsible>
-        <div
-          className="logo"
-          style={{
-            color: "white",
-            textAlign: "center",
-            padding: "16px 0",
-          }}
-        >
+      {/* Cabecera Global */}
+      <Header
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          backgroundColor: "#22075E",
+          padding: "0 16px",
+          color: "#fff",
+        }}
+      >
+        <div style={{ fontWeight: "bold", fontSize: "16px" }}>
           Sistema de Gestión
         </div>
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-          <Menu.Item key="1" icon={<HomeOutlined />}>
-            Tablero de Inicio
-          </Menu.Item>
-
-          <Menu.SubMenu key="2" icon={<UserOutlined />} title="Usuarios">
-            <Menu.Item key="2.1">Nuevo Usuario</Menu.Item>
-            <Menu.Item key="2.2">Nuevo Reporte Clínico</Menu.Item>
-            <Menu.Item key="2.3">Lista de Usuarios</Menu.Item>
-          </Menu.SubMenu>
-
-          <Menu.Item key="3" icon={<CheckCircleOutlined />}>
-            Gestión de Actividades
-          </Menu.Item>
-
-          <Menu.SubMenu
-            key="4"
-            icon={<CalendarOutlined />}
-            title="Visitas Domiciliarias"
-          >
-            <Menu.Item key="4.1">Visitas Programadas</Menu.Item>
-            <Menu.Item key="4.2">Historial de Visitas</Menu.Item>
-          </Menu.SubMenu>
-
-          <Menu.SubMenu key="5" icon={<SettingOutlined />} title="Administración">
-            <Menu.Item key="5.1">Configuración General</Menu.Item>
-            <Menu.Item key="5.2">Auditoría</Menu.Item>
-          </Menu.SubMenu>
-        </Menu>
-      </Sider>
+        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          <SearchOutlined style={{ fontSize: "16px", color: "#fff" }} />
+          <QuestionCircleOutlined style={{ fontSize: "16px", color: "#fff" }} />
+          <Badge count={11} style={{ backgroundColor: "#FF4D4F" }}>
+            <BellOutlined style={{ fontSize: "16px", color: "#fff" }} />
+          </Badge>
+          <SettingFilled style={{ fontSize: "16px", color: "#fff" }} />
+          <LogoutOutlined style={{ fontSize: "16px", color: "#fff" }} />
+        </div>
+      </Header>
 
       <Layout>
-        <Header style={{ padding: 0, background: "#fff", textAlign: "center", fontWeight: "bold" }}>
-          Nuevo Usuario
-        </Header>
+        {/* Menú lateral */}
+        <Sider collapsible>
+          <div
+            className="logo"
+            style={{
+              color: "white",
+              textAlign: "center",
+              padding: "16px 0",
+            }}
+          >
+            Sistema de Gestión
+          </div>
+          <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+            <Menu.Item key="1" icon={<HomeOutlined />}>
+              Tablero de Inicio
+            </Menu.Item>
+
+            <Menu.SubMenu key="2" icon={<UserOutlined />} title="Usuarios">
+              <Menu.Item key="2.1">Nuevo Usuario</Menu.Item>
+              <Menu.Item key="2.2">Nuevo Reporte Clínico</Menu.Item>
+              <Menu.Item key="2.3">Lista de Usuarios</Menu.Item>
+            </Menu.SubMenu>
+
+            <Menu.Item key="3" icon={<CheckCircleOutlined />}>
+              Gestión de Actividades
+            </Menu.Item>
+
+            <Menu.SubMenu
+              key="4"
+              icon={<CalendarOutlined />}
+              title="Visitas Domiciliarias"
+            >
+              <Menu.Item key="4.1">Visitas Programadas</Menu.Item>
+              <Menu.Item key="4.2">Historial de Visitas</Menu.Item>
+            </Menu.SubMenu>
+
+            <Menu.SubMenu
+              key="5"
+              icon={<SettingOutlined />}
+              title="Administración"
+            >
+              <Menu.Item key="5.1">Configuración General</Menu.Item>
+              <Menu.Item key="5.2">Auditoría</Menu.Item>
+            </Menu.SubMenu>
+          </Menu>
+        </Sider>
+
+        {/* Contenido */}
         <Content style={{ margin: "16px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>Inicio</Breadcrumb.Item>
@@ -344,7 +378,6 @@ const NuevoUsuario = () => {
 
           </Row>
         </Content>
-        <Footer style={{ textAlign: "center" }}>Ant Design ©{new Date().getFullYear()} Created by Ant UED</Footer>
       </Layout>
     </Layout>
   );
