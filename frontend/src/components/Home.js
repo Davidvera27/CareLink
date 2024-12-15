@@ -1,28 +1,53 @@
-import React from "react";
-import GlobalHeader from "./GlobalHeader";
-import "../styles/Home.css";
+import React, { useState } from "react";
+import {
+  DesktopOutlined,
+  FileOutlined,
+  PieChartOutlined,
+  TeamOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { Breadcrumb, Layout, Menu, Table, Button, Typography, Checkbox, Card, Row, Col } from "antd";
 import Grafica1 from "../assets/Grafica1.jpg";
 import Grafica2 from "../assets/Grafica2.jpg";
-import { Card, Table, Button, Typography, Checkbox } from "antd";
 
+const { Header, Content, Footer, Sider } = Layout;
 const { Title } = Typography;
 
+function getItem(label, key, icon, children) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  };
+}
+
+const items = [
+  getItem("Tablero de Inicio", "1", <PieChartOutlined />),
+  getItem("Gestión de Usuarios", "sub1", <UserOutlined />, [
+    getItem("Nuevo Usuario", "2"),
+    getItem("Agregar Acudiente", "3"),
+    getItem("Detalles del Usuario", "4"),
+  ]),
+  getItem("Gestión de Actividades", "sub2", <DesktopOutlined />, [
+    getItem("Opción 1", "5"),
+    getItem("Opción 2", "6"),
+    getItem("Opción 3", "7"),
+  ]),
+  getItem("Visitas Domiciliarias", "sub3", <TeamOutlined />, [
+    getItem("Opción 1", "8"),
+    getItem("Opción 2", "9"),
+    getItem("Opción 3", "10"),
+  ]),
+  getItem("Administración", "11", <FileOutlined />),
+];
+
 const Home = () => {
+  const [collapsed, setCollapsed] = useState(false);
+
   const attendanceData = [
-    {
-      key: "1",
-      user: "Sara Manuela Gómez",
-      serviceType: "Centro día",
-      status: "Asistió",
-      statusColor: "green",
-    },
-    {
-      key: "2",
-      user: "Juan Pablo Ruiz",
-      serviceType: "Centro día",
-      status: "Pendiente",
-      statusColor: "gray",
-    },
+    { key: "1", user: "Sara Manuela Gómez", serviceType: "Centro día", status: "Asistió", statusColor: "green" },
+    { key: "2", user: "Juan Pablo Ruiz", serviceType: "Centro día", status: "Pendiente", statusColor: "gray" },
   ];
 
   const userFlowData = [
@@ -38,35 +63,16 @@ const Home = () => {
   ];
 
   const columnsAttendance = [
-    {
-      title: "",
-      dataIndex: "checkbox",
-      key: "checkbox",
-      render: () => <Checkbox />,
-    },
-    {
-      title: "Usuario",
-      dataIndex: "user",
-      key: "user",
-    },
-    {
-      title: "Tipo de servicio",
-      dataIndex: "serviceType",
-      key: "serviceType",
-    },
+    { title: "", dataIndex: "checkbox", key: "checkbox", render: () => <Checkbox /> },
+    { title: "Usuario", dataIndex: "user", key: "user" },
+    { title: "Tipo de servicio", dataIndex: "serviceType", key: "serviceType" },
     {
       title: "Estado",
       dataIndex: "status",
       key: "status",
       render: (text, record) => (
-        <div className="status">
-          <span
-            className={`status-dot ${record.statusColor}`}
-            style={{
-              backgroundColor:
-                record.statusColor === "green" ? "#52c41a" : "#d9d9d9",
-            }}
-          ></span>
+        <div>
+          <span style={{ backgroundColor: record.statusColor, borderRadius: "50%", display: "inline-block", width: 10, height: 10, marginRight: 8 }}></span>
           {text}
         </div>
       ),
@@ -76,9 +82,7 @@ const Home = () => {
       key: "actions",
       render: () => (
         <span>
-          <Button type="link">Ver</Button>
-          <span className="divider">|</span>
-          <Button type="link">Marcar asistencia</Button>
+          <Button type="link">Ver</Button> | <Button type="link">Marcar asistencia</Button>
         </span>
       ),
     },
@@ -98,132 +102,49 @@ const Home = () => {
       key: "actions",
       render: () => (
         <span>
-          <Button type="link">Editar</Button>
-          <span className="divider">|</span>
-          <Button type="link">Ver</Button>
+          <Button type="link">Editar</Button> | <Button type="link">Ver</Button>
         </span>
       ),
     },
   ];
 
   return (
-    <div className="home-page">
-      <GlobalHeader />
-      <div className="home-container">
-        {/* Card 1: Control de asistencia */}
-        <Card className="card-legacy attendance-control" bordered>
-          <div className="head">
-            <div className="title-wrapper">
-              <Title level={5}>Control de asistencia del día</Title>
+    <Layout style={{ minHeight: "100vh" }}>
+      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline" items={items} />
+      </Sider>
+      <Layout>
+        <Header style={{ padding: 0, background: "#fff" }} />
+        <Content style={{ margin: "16px" }}>
+          <Breadcrumb style={{ margin: "16px 0" }}>
+            <Breadcrumb.Item>Inicio</Breadcrumb.Item>
+            <Breadcrumb.Item>Tablero de Inicio</Breadcrumb.Item>
+          </Breadcrumb>
+          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+            <Card title={<Title level={5}>Control de asistencia del día</Title>} extra={<Button type="primary">Agregar</Button>}>
+              <Table dataSource={attendanceData} columns={columnsAttendance} pagination={false} />
+            </Card>
+            <div style={{ display: "flex", gap: 24 }}>
+              <Card title={<Title level={5}>Flujo de usuarios</Title>} style={{ flex: 1 }}>
+                <Row gutter={[16, 16]}>
+                  <Col span={12}>
+                    <img src={Grafica1} alt="Gráfico Usuarios del Mes" style={{ width: "100%", height: "auto" }} />
+                  </Col>
+                  <Col span={12}>
+                    <img src={Grafica2} alt="Gráfico Tasa de Asistencia" style={{ width: "100%", height: "auto" }} />
+                  </Col>
+                </Row>
+                <Table dataSource={userFlowData} columns={columnsUserFlow} pagination={{ pageSize: 5 }} />
+              </Card>
+              <Card title={<Title level={5}>Actividades programadas</Title>} style={{ flex: 1 }}>
+                <Table dataSource={activitiesData} columns={columnsActivities} pagination={{ pageSize: 5 }} />
+              </Card>
             </div>
-            <Button type="primary" className="add-button">
-              Agregar
-            </Button>
           </div>
-          <div className="body">
-            <Table
-              dataSource={attendanceData}
-              columns={columnsAttendance}
-              pagination={false}
-              className="attendance-table"
-            />
-          </div>
-        </Card>
-
-        {/* Row for Card 2 and Card 3 */}
-        <div className="cards-row">
-          {/* Card 2: Flujo de usuarios */}
-          <Card className="card-legacy user-flow" bordered>
-            <div className="head">
-              <div className="title-wrapper">
-                <Title level={5}>Flujo de usuarios</Title>
-                <div className="more">
-                  <Button type="link" icon={<i className="icon-more" />} />
-                </div>
-              </div>
-            </div>
-            <div className="body">
-              <div className="horizontal-stats-block">
-                <div className="stat-item">
-                  <div className="stat-header">
-                    Usuarios del mes
-                    <span className="info-icon">
-                      <i className="icon-info-circle" />
-                    </span>
-                  </div>
-                  <div className="stat-body">
-                    <h3 className="stat-value">100</h3>
-                    <span className="stat-trend-value positive">17.1%</span>
-                  </div>
-                  <div className="stat-chart">
-                    <img
-                      src={Grafica1}
-                      alt="Gráfico Usuarios del Mes"
-                      className="stat-chart-image"
-                    />
-                  </div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-header">
-                    Tasa de asistencia
-                    <span className="info-icon">
-                      <i className="icon-info-circle" />
-                    </span>
-                  </div>
-                  <div className="stat-body">
-                    <h3 className="stat-value">90%</h3>
-                    <span className="stat-trend-value positive">26.2%</span>
-                  </div>
-                  <div className="stat-chart">
-                    <img
-                      src={Grafica2}
-                      alt="Gráfico Tasa de Asistencia"
-                      className="stat-chart-image"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="table-container">
-                <Table
-                  dataSource={userFlowData}
-                  columns={columnsUserFlow}
-                  pagination={{
-                    defaultPageSize: 5,
-                    showSizeChanger: false,
-                    showQuickJumper: true,
-                  }}
-                  className="user-flow-table"
-                />
-              </div>
-            </div>
-          </Card>
-
-          {/* Card 3: Actividades programadas */}
-          <Card className="card-legacy scheduled-activities" bordered>
-            <div className="head">
-              <div className="title-wrapper">
-                <Title level={5}>Actividades programadas</Title>
-                <div className="more">
-                  <Button type="link" icon={<i className="icon-more" />} />
-                </div>
-              </div>
-            </div>
-            <div className="body">
-              <Table
-                dataSource={activitiesData}
-                columns={columnsActivities}
-                pagination={{
-                  defaultPageSize: 5,
-                  showSizeChanger: false,
-                  showQuickJumper: true,
-                }}
-                className="activities-table"
-              />
-            </div>
-          </Card>
-        </div>
-      </div>
-    </div>
+        </Content>
+        <Footer style={{ textAlign: "center" }}>Ant Design ©{new Date().getFullYear()} Created by Ant UED</Footer>
+      </Layout>
+    </Layout>
   );
 };
 
