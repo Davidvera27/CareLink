@@ -22,7 +22,7 @@ import "../styles/Home.css"
 
 
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 const { Title, Text } = Typography;
 
 const HistoriaClinica = () => {
@@ -851,7 +851,7 @@ const HistoriaClinica = () => {
             </div>
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>Ant Design Layout Adaptado</Footer>
+
       </Layout>
     </Layout>
   );
