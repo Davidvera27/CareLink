@@ -108,51 +108,95 @@ const NuevoUsuario = () => {
 
       <Layout>
         {/* Menú lateral */}
-        <Sider collapsible>
-          <div
-            className="logo"
-            style={{
-              color: "white",
-              textAlign: "center",
-              padding: "16px 0",
-            }}
-          >
-            Sistema de Gestión
-          </div>
-          <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-            <Menu.Item key="1" icon={<HomeOutlined />}>
-              Tablero de Inicio
-            </Menu.Item>
+        <Sider collapsible style={{ backgroundColor: "#F1E6F5" }}>
+  <div
+    className="logo"
+    style={{
+      color: "#7F34B4",
+      textAlign: "center",
+      padding: "16px 0",
+      fontWeight: "bold",
+      fontSize: "16px",
+    }}
+  >
 
-            <Menu.SubMenu key="2" icon={<UserOutlined />} title="Usuarios">
-              <Menu.Item key="2.1">Nuevo Usuario</Menu.Item>
-              <Menu.Item key="2.2">Nuevo Reporte Clínico</Menu.Item>
-              <Menu.Item key="2.3">Lista de Usuarios</Menu.Item>
-            </Menu.SubMenu>
+  </div>
+  <Menu
+    theme="light"
+    defaultSelectedKeys={["1"]}
+    mode="inline"
+    style={{
+      backgroundColor: "#FFFFFF",
+      color: "#000000",
+      fontWeight: "500",
+    }}
+  >
+    <Menu.Item
+      key="1"
+      icon={<HomeOutlined style={{ color: "#7F34B4" }} />}
+      style={{
+        color: "#7F34B4",
+        backgroundColor: "#EAD9F2",
+      }}
+    >
+      Tablero de Inicio
+    </Menu.Item>
 
-            <Menu.Item key="3" icon={<CheckCircleOutlined />}>
-              Gestión de Actividades
-            </Menu.Item>
+    <Menu.SubMenu
+      key="2"
+      icon={<UserOutlined style={{ color: "#7F34B4" }} />}
+      title={<span style={{ color: "#7F34B4" }}>Usuarios</span>}
+    >
+      <Menu.Item key="2.1" style={{ color: "#000000" }}>
+        Nuevo Usuario
+      </Menu.Item>
+      <Menu.Item key="2.2" style={{ color: "#000000" }}>
+        Nuevo Reporte Clínico
+      </Menu.Item>
+      <Menu.Item key="2.3" style={{ color: "#000000" }}>
+        Lista de Usuarios
+      </Menu.Item>
+    </Menu.SubMenu>
 
-            <Menu.SubMenu
-              key="4"
-              icon={<CalendarOutlined />}
-              title="Visitas Domiciliarias"
-            >
-              <Menu.Item key="4.1">Visitas Programadas</Menu.Item>
-              <Menu.Item key="4.2">Historial de Visitas</Menu.Item>
-            </Menu.SubMenu>
+    <Menu.Item
+      key="3"
+      icon={<CheckCircleOutlined style={{ color: "#7F34B4" }} />}
+      style={{
+        color: "#7F34B4",
+        backgroundColor: "#EAD9F2",
+      }}
+    >
+      Gestión de Actividades
+    </Menu.Item>
 
-            <Menu.SubMenu
-              key="5"
-              icon={<SettingOutlined />}
-              title="Administración"
-            >
-              <Menu.Item key="5.1">Configuración General</Menu.Item>
-              <Menu.Item key="5.2">Auditoría</Menu.Item>
-            </Menu.SubMenu>
-          </Menu>
-        </Sider>
+    <Menu.SubMenu
+      key="4"
+      icon={<CalendarOutlined style={{ color: "#7F34B4" }} />}
+      title={<span style={{ color: "#7F34B4" }}>Visitas Domiciliarias</span>}
+    >
+      <Menu.Item key="4.1" style={{ color: "#000000" }}>
+        Visitas Programadas
+      </Menu.Item>
+      <Menu.Item key="4.2" style={{ color: "#000000" }}>
+        Historial de Visitas
+      </Menu.Item>
+    </Menu.SubMenu>
+
+    <Menu.SubMenu
+      key="5"
+      icon={<SettingOutlined style={{ color: "#7F34B4" }} />}
+      title={<span style={{ color: "#7F34B4" }}>Administración</span>}
+    >
+      <Menu.Item key="5.1" style={{ color: "#000000" }}>
+        Configuración General
+      </Menu.Item>
+      <Menu.Item key="5.2" style={{ color: "#000000" }}>
+        Auditoría
+      </Menu.Item>
+    </Menu.SubMenu>
+  </Menu>
+</Sider>
+
 
         {/* Contenido */}
         <Content style={{ margin: "16px" }}>
