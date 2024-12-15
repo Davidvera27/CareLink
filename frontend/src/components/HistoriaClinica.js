@@ -1,323 +1,462 @@
 import React from "react";
-import GlobalHeader from "./GlobalHeader"; // Importa el componente de encabezado global.
-import "../styles/HistoriaClinica.css"; // Importa los estilos específicos para esta página.
-import { Card, Button, Avatar, Row, Col, Input, Select, Typography, Table, Checkbox, Space, Divider, Form, } from "antd"; // Importa componentes de Ant Design.
-import { PlusOutlined } from "@ant-design/icons"; // Importa el ícono "PlusOutlined" de Ant Design.
+import {
+  Layout,
+  Menu,
+  Breadcrumb,
+  Card,
+  Button,
+  Avatar,
+  Row,
+  Col,
+  Input,
+  Select,
+  Typography,
+  Table,
+  Checkbox,
+  Space,
+  Divider,
+  Form,
+} from "antd";
+import { PlusOutlined, UserOutlined, FileOutlined, TeamOutlined } from "@ant-design/icons";
+import "../styles/Home.css"
 
 
 
-const { Title, Text } = Typography; // Desestructuración para usar componentes tipográficos de Ant Design.
+const { Header, Content, Footer, Sider } = Layout;
+const { Title, Text } = Typography;
 
 const HistoriaClinica = () => {
-
   const [form] = Form.useForm();
+  const [collapsed, setCollapsed] = React.useState(false);
 
   const handleReset = () => {
     form.resetFields();
   };
 
   const handleSave = () => {
-    form.validateFields()
+    form
+      .validateFields()
       .then((values) => {
         console.log("Datos guardados:", values);
-        // Aquí se puede agregar la lógica para enviar los datos al servidor
       })
       .catch((errorInfo) => {
         console.error("Errores al guardar:", errorInfo);
       });
   };
 
+  const items = [
+    { key: "/home", icon: <UserOutlined />, label: "Tablero de Inicio" },
+    {
+      key: "sub1",
+      icon: <UserOutlined />,
+      label: "Usuarios",
+      children: [
+        { key: "/nuevo-usuario", label: "Nuevo usuario" },
+        { key: "/nuevo-reporte-clinico", label: "Nuevo reporte clínico" },
+        { key: "/lista-usuarios", label: "Lista de usuarios" },
+      ],
+    },
+    {
+      key: "sub2",
+      icon: <TeamOutlined />,
+      label: "Gestión Actividades",
+      children: [
+        { key: "/actividades-diarias", label: "Actividades Diarias" },
+        { key: "/visitas-domiciliarias", label: "Visitas Domiciliarias" },
+      ],
+    },
+    {
+      key: "sub3",
+      icon: <FileOutlined />,
+      label: "Administración",
+      children: [
+        { key: "/configuracion", label: "Configuración" },
+        { key: "/reportes", label: "Reportes" },
+      ],
+    },
+  ];
+
   return (
-    <div className="historia-clinica-page">
-      {/* Encabezado global */}
-      <GlobalHeader />
-      
-      {/* Contenedor principal de la página */}
-      <div className="historia-clinica-container">
+    <Layout style={{ minHeight: "100vh" }}>
+      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <div className="logo" />
+        <Menu
+          theme="dark"
+          defaultSelectedKeys={["/lista-usuarios"]}
+          mode="inline"
+          items={items}
+        />
+      </Sider>
+      <Layout>
+        <Header style={{ padding: 0, background: "#fff" }} />
+        <Content style={{ margin: "0 16px" }}>
+          <Breadcrumb style={{ margin: "16px 0" }}>
+            <Breadcrumb.Item>Inicio</Breadcrumb.Item>
+            <Breadcrumb.Item>Historia Clínica</Breadcrumb.Item>
+          </Breadcrumb>
+          <div style={{ padding: 24, background: "#fff" }}>
+            <div className="historia-clinica-page">
+              <div className="historia-clinica-container">
+<Card className="principal-card" bordered>
+  <Row align="middle" gutter={16}>
+    {/* Columna para el avatar del paciente */}
+    <Col span={4}>
+      <Avatar size={72} src="https://via.placeholder.com/72" alt="Avatar" />
+    </Col>
+    {/* Columna con la información personal del paciente */}
+    <Col span={10}>
+      <Title level={5}>JUAN ANTONIO LOPEZ ORREGO</Title>
+      <Text>44567890 - Masculino - 1956/11/08 - 68 años</Text>
+      <br />
+      <Text>Casado - Pensionado</Text>
+    </Col>
+    {/* Columna con la información de contacto del paciente */}
+    <Col span={10}>
+      <Text>CLL 45 - 60-20 INT 101</Text>
+      <br />
+      <Text>315 6789 6789 - juanantonio@gmail.com</Text>
+    </Col>
+  </Row>
+</Card>
 
-        {/* Tarjeta principal de información del paciente */}
-        <Card className="principal-card" bordered>
-          <Row align="middle" gutter={16}>
-            {/* Columna para el avatar del paciente */}
-            <Col span={4}>
-              <Avatar
-                className="avatar"
-                size={72}
-                src="https://via.placeholder.com/72" // URL de ejemplo para el avatar - puede cambiarse por una ruta del disco local.
-                alt="Avatar"
-              />
-            </Col>
+      <Divider />
 
-            {/* Columna con la información personal del paciente */}
-            <Col span={10}>
-              <Title level={5}>JUAN ANTONIO LOPEZ ORREGO</Title> {/* Nombre del paciente */}
-              <Text>44567890 - Masculino - 1956/11/08 - 68 años</Text> {/* Identificación y detalles */}
-              <br />
-              <Text>Casado - Pensionado</Text> {/* Estado civil */}
-            </Col>
+<Card
+  className="servicio-emergencias-card"
+  title={<Title level={4}>Servicio externo para emergencias médicas</Title>}
+  bordered
+>
+  <Row gutter={16}>
+    {/* Campo: ¿Cuenta con servicio externo? */}
+    <Col span={8}>
+      <Form.Item
+        label="¿Cuenta con servicio externo para emergencias?"
+        name="servicioExternoEmergencias"
+        rules={[{ required: true, message: 'Seleccione una opción' }]}
+      >
+        <Select placeholder="Seleccione" style={{ width: "100%" }}>
+          <Select.Option value="si">Sí</Select.Option>
+          <Select.Option value="no">No</Select.Option>
+        </Select>
+      </Form.Item>
+    </Col>
 
-            {/* Columna con la información de contacto del paciente */}
-            <Col span={10}>
-              <Text>CLL 45 - 60-20 INT 101</Text> {/* Dirección */}
-              <br />
-              <Text>315 6789 6789 - juanantonio@gmail.com</Text> {/* Teléfono y correo */}
-            </Col>
-          </Row>
-        </Card>
+    {/* Campo: ¿Cuál? */}
+    <Col span={8}>
+      <Form.Item
+        label="¿Cuál?"
+        name="cualServicio"
+        rules={[{ required: true, message: 'Seleccione un servicio' }]}
+      >
+        <Select placeholder="Seleccione un servicio" style={{ width: "100%" }}>
+          <Select.Option value="emi">EMI</Select.Option>
+          <Select.Option value="colsanitas">Colsanitas</Select.Option>
+          <Select.Option value="medilink">Medilink</Select.Option>
+          <Select.Option value="cruz-roja">Cruz Roja</Select.Option>
+          <Select.Option value="sura">SURA</Select.Option>
+          <Select.Option value="otra">Otro</Select.Option>
+        </Select>
+      </Form.Item>
+    </Col>
 
-        {/* Tarjeta para servicios de emergencias médicas */}
-        <Card
-          className="servicio-emergencias-card"
-          title="Servicio externo para emergencias médicas"
-          bordered
+    {/* Campo: Teléfono para emergencias */}
+    <Col span={8}>
+      <Form.Item
+        label="Teléfono para servicio emergencia médica"
+        name="telefonoEmergencias"
+        rules={[
+          { required: true, message: 'Ingrese un número de contacto' },
+          { pattern: /^[0-9]+$/, message: 'Solo se permiten números' },
+        ]}
+      >
+        <Input placeholder="Número de contacto" />
+      </Form.Item>
+    </Col>
+  </Row>
+</Card>
+
+      <Divider />
+      <Card
+  className="datos-basicos-ingreso-card"
+  title={<Title level={4}>Datos básicos de ingreso</Title>}
+  bordered
+>
+  <Form layout="vertical">
+    <Row gutter={16}>
+      {/* Campo: Fecha de registro */}
+      <Col span={12}>
+        <Form.Item
+          label="Fecha de registro"
+          name="fechaRegistro"
+          rules={[{ required: true, message: 'Por favor seleccione una fecha' }]}
         >
-          <Row gutter={16}>
-            {/* Campo: ¿Cuenta con servicio externo? */}
-            <Col span={8}>
-              <label>
-                ¿Cuenta con servicio externo para emergencias?
-                <Select placeholder="Seleccione" style={{ width: "100%" }}>
-                  <Select.Option value="si">Sí</Select.Option>
-                  <Select.Option value="no">No</Select.Option>
-                </Select>
-              </label>
-            </Col>
+          <Input type="date" />
+        </Form.Item>
+      </Col>
 
-            {/* Campo: ¿Cuál? */}
-            <Col span={8}>
-              <label>
-                ¿Cuál?
-                <Select placeholder="Seleccione un servicio" style={{ width: "100%" }}>
-                  <Select.Option value="emi">EMI</Select.Option>
-                  <Select.Option value="colsanitas">Colsanitas</Select.Option>
-                  <Select.Option value="medilink">Medilink</Select.Option>
-                  <Select.Option value="cruz-roja">Cruz Roja</Select.Option>
-                  <Select.Option value="sura">SURA</Select.Option>
-                  <Select.Option value="otra">Otro</Select.Option>
-                </Select>
-              </label>
-            </Col>
-
-            {/* Campo: Teléfono para emergencias */}
-            <Col span={8}>
-              <label>
-                Teléfono para servicio emergencia médica
-                <Input placeholder="Número de contacto" />
-              </label>
-            </Col>
-          </Row>
-        </Card>
-
-        {/* Tarjeta de datos básicos de ingreso */}
-        <Card title="Datos básicos de ingreso" bordered>
-          <Row gutter={16}>
-            <Col span={12}>
-              <label>
-                Fecha de registro
-                <Input type="date" />
-              </label>
-            </Col>
-            <Col span={12}>
-              <label>
-                Motivo de ingreso
-                <Input placeholder="Motivo" />
-              </label>
-            </Col>
-          </Row>
-        </Card>
-
-        {/* Tarjeta de datos básicos de salud */}
-        <Card title="Datos básicos de salud" bordered>
-          <Row gutter={16}>
-            <Col span={12}>
-              <label>
-                EPS
-                <Input placeholder="EPS" />
-              </label>
-            </Col>
-            <Col span={12}>
-              <label>
-                Tipo de Sangre
-                <Select placeholder="Seleccione" style={{ width: "100%" }}>
-                  <Select.Option value="O+">O+</Select.Option>
-                  <Select.Option value="O-">O-</Select.Option>
-                  <Select.Option value="A+">A+</Select.Option>
-                  <Select.Option value="A-">A-</Select.Option>
-                  <Select.Option value="B+">B+</Select.Option>
-                  <Select.Option value="B-">B-</Select.Option>
-                  <Select.Option value="AB+">AB+</Select.Option>
-                  <Select.Option value="AB-">AB-</Select.Option>
-                </Select>
-              </label>
-            </Col>
-          </Row>
-        </Card>
-
-        {/* Exploración física inicial */}
-        <Card title="Exploración física inicial" bordered>
-          <Row gutter={16}>
-            <Col span={8}>
-              <label>
-                Estatura
-                <Input placeholder="cm" />
-              </label>
-            </Col>
-            <Col span={8}>
-              <label>
-                Peso
-                <Input placeholder="kg" />
-              </label>
-            </Col>
-            <Col span={8}>
-              <label>
-                Presión Arterial
-                <Input placeholder="mmHg" />
-              </label>
-            </Col>
-            <Col span={8}>
-              <label>
-                Frecuencia Cardíaca
-                <Input placeholder="bpm" />
-              </label>
-            </Col>
-            <Col span={8}>
-              <label>
-                Temperatura Corporal
-                <Input placeholder="°C" />
-              </label>
-            </Col>
-          </Row>
-        </Card>
-
-        {/* Tratamientos o medicamentos temporales o permanentes */}
-        <Card
-          className="tratamientos-card"
-          title={<Title level={4}>Tratamientos o medicamentos temporales o permanentes que requieren apoyo</Title>}
-          bordered
+      {/* Campo: Motivo de ingreso */}
+      <Col span={12}>
+        <Form.Item
+          label="Motivo de ingreso"
+          name="motivoIngreso"
+          rules={[{ required: true, message: 'Por favor ingrese un motivo' }]}
         >
-          {/* Checkboxes */}
-          <div>
-            <Title level={5} className="checkbox-title">Tratamientos o medicamentos</Title>
-            <Checkbox.Group style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
-              <Checkbox value="farmaco" defaultChecked>
-                Régimen farmacoterapéutico
-              </Checkbox>
-              <Checkbox value="enfermeria" defaultChecked>
-                Plan de cuidados de enfermería
-              </Checkbox>
-              <Checkbox value="fisioterapia" defaultChecked>
-                Intervención fisioterapéutica
-              </Checkbox>
-            </Checkbox.Group>
-          </div>
+          <Input placeholder="Motivo" />
+        </Form.Item>
+      </Col>
+    </Row>
+  </Form>
+</Card>
 
-          {/* Régimen Farmacoterapéutico */}
-          <div>
-            <div className="table-header">
-              <Title level={5}>Régimen farmacoterapéutico</Title>
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                className="add-button"
-              >
-                Agregar
-              </Button>
-            </div>
-            <Table
-              columns={[
-                { title: "Fecha de inicio", dataIndex: "startDate", key: "startDate" },
-                { title: "Medicamento", dataIndex: "medicine", key: "medicine" },
-                { title: "Dosis", dataIndex: "dose", key: "dose" },
-                {
-                  title: "Vía de administración",
-                  dataIndex: "administration",
-                  key: "administration",
-                },
-                { title: "Frecuencia", dataIndex: "frequency", key: "frequency" },
-                { title: "Duración", dataIndex: "duration", key: "duration" },
-                { title: "Indicaciones", dataIndex: "instructions", key: "instructions" },
-                {
-                  title: "Acciones",
-                  key: "actions",
-                  render: (_, record) => (
-                    <Space>
-                      <Button type="link" style={{ color: "#1890ff" }}>
-                        Desactivar
-                      </Button>
-                      <Button type="link" danger>
-                        Eliminar
-                      </Button>
-                    </Space>
-                  ),
-                },
-              ]}
-              dataSource={[
-                {
-                  key: "1",
-                  startDate: "10/09/2024",
-                  medicine: "Enalapril",
-                  dose: "5 mg",
-                  administration: "Oral",
-                  frequency: "Cada 12 horas",
-                  duration: "Indefinida",
-                  instructions:
-                    "Administrar con alimentos. Controlar presión arterial antes de cada dosis.",
-                },
-              ]}
-              pagination={false}
-            />
-          </div>
+      <Divider />
+<Card
+  className="datos-basicos-salud-card"
+  title={<Title level={4}>Datos básicos de salud</Title>}
+  bordered
+>
+  <Form layout="vertical">
+    <Row gutter={16}>
+      {/* Campo: EPS */}
+      <Col span={12}>
+        <Form.Item
+          label="EPS"
+          name="eps"
+          rules={[{ required: true, message: 'Por favor ingrese la EPS' }]}
+        >
+          <Input placeholder="Ingrese la EPS" />
+        </Form.Item>
+      </Col>
 
-          <Divider />
+      {/* Campo: Tipo de Sangre */}
+      <Col span={12}>
+        <Form.Item
+          label="Tipo de Sangre"
+          name="tipoSangre"
+          rules={[{ required: true, message: 'Por favor seleccione el tipo de sangre' }]}
+        >
+          <Select placeholder="Seleccione" style={{ width: "100%" }}>
+            <Select.Option value="O+">O+</Select.Option>
+            <Select.Option value="O-">O-</Select.Option>
+            <Select.Option value="A+">A+</Select.Option>
+            <Select.Option value="A-">A-</Select.Option>
+            <Select.Option value="B+">B+</Select.Option>
+            <Select.Option value="B-">B-</Select.Option>
+            <Select.Option value="AB+">AB+</Select.Option>
+            <Select.Option value="AB-">AB-</Select.Option>
+          </Select>
+        </Form.Item>
+      </Col>
+    </Row>
+  </Form>
+</Card>
 
-          {/* Plan de Cuidados de Enfermería */}
-          <div>
-            <div className="table-header">
-              <Title level={5}>Plan de cuidados de enfermería</Title>
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                className="add-button"
-              >
-                Agregar
-              </Button>
-            </div>
-            <Table
-              columns={[
-                { title: "Diagnóstico", dataIndex: "diagnosis", key: "diagnosis" },
-                { title: "Intervención", dataIndex: "intervention", key: "intervention" },
-                { title: "Frecuencia", dataIndex: "frequency", key: "frequency" },
-                {
-                  title: "Acciones",
-                  key: "actions",
-                  render: (_, record) => (
-                    <Space>
-                      <Button type="link" style={{ color: "#1890ff" }}>
-                        Finalizar
-                      </Button>
-                      <Button type="link" danger>
-                        Eliminar
-                      </Button>
-                    </Space>
-                  ),
-                },
-              ]}
-              dataSource={[
-                {
-                  key: "1",
-                  diagnosis: "Piel alterada relacionada con herida en la pierna.",
-                  intervention: "Limpiar herida, secar con gasas sin frotar.",
-                  frequency: "Diaria",
-                },
-              ]}
-              pagination={false}
-            />
-          </div>
-        </Card>
+      <Divider />
+                
+<Card
+  className="exploracion-fisica-card"
+  title={<Title level={4}>Exploración física inicial</Title>}
+  bordered
+>
+  <Form layout="vertical">
+    <Row gutter={16}>
+      {/* Campo: Estatura */}
+      <Col span={8}>
+        <Form.Item
+          label="Estatura"
+          name="estatura"
+          rules={[
+            { required: true, message: "Por favor ingrese la estatura" },
+            { pattern: /^\d+$/, message: "Debe ser un número válido" },
+          ]}
+        >
+          <Input placeholder="Ingrese en cm" />
+        </Form.Item>
+      </Col>
+
+      {/* Campo: Peso */}
+      <Col span={8}>
+        <Form.Item
+          label="Peso"
+          name="peso"
+          rules={[
+            { required: true, message: "Por favor ingrese el peso" },
+            { pattern: /^\d+$/, message: "Debe ser un número válido" },
+          ]}
+        >
+          <Input placeholder="Ingrese en kg" />
+        </Form.Item>
+      </Col>
+
+      {/* Campo: Presión Arterial */}
+      <Col span={8}>
+        <Form.Item
+          label="Presión Arterial"
+          name="presionArterial"
+          rules={[
+            { required: true, message: "Por favor ingrese la presión arterial" },
+            { pattern: /^\d+\/\d+$/, message: "Debe seguir el formato mmHg (Ej: 120/80)" },
+          ]}
+        >
+          <Input placeholder="Ingrese en mmHg" />
+        </Form.Item>
+      </Col>
+
+      {/* Campo: Frecuencia Cardíaca */}
+      <Col span={8}>
+        <Form.Item
+          label="Frecuencia Cardíaca"
+          name="frecuenciaCardiaca"
+          rules={[
+            { required: true, message: "Por favor ingrese la frecuencia cardíaca" },
+            { pattern: /^\d+$/, message: "Debe ser un número válido en bpm" },
+          ]}
+        >
+          <Input placeholder="Ingrese en bpm" />
+        </Form.Item>
+      </Col>
+
+      {/* Campo: Temperatura Corporal */}
+      <Col span={8}>
+        <Form.Item
+          label="Temperatura Corporal"
+          name="temperaturaCorporal"
+          rules={[
+            { required: true, message: "Por favor ingrese la temperatura corporal" },
+            { pattern: /^\d+(\.\d+)?$/, message: "Debe ser un número válido en °C" },
+          ]}
+        >
+          <Input placeholder="Ingrese en °C" />
+        </Form.Item>
+      </Col>
+    </Row>
+  </Form>
+</Card>
+
+      <Divider />
+
+<Card
+  className="tratamientos-card"
+  title={<Title level={4}>Tratamientos o medicamentos temporales o permanentes que requieren apoyo</Title>}
+  bordered
+>
+  {/* Checkboxes para seleccionar tratamientos */}
+  <Form layout="vertical">
+    <Form.Item>
+      <Title level={5} className="checkbox-title">Tratamientos o medicamentos</Title>
+      <Checkbox.Group style={{ display: "flex", flexWrap: "wrap", gap: "16px", marginBottom: "16px" }}>
+        <Checkbox value="farmaco" defaultChecked>Régimen farmacoterapéutico</Checkbox>
+        <Checkbox value="enfermeria" defaultChecked>Plan de cuidados de enfermería</Checkbox>
+        <Checkbox value="fisioterapia" defaultChecked>Intervención fisioterapéutica</Checkbox>
+      </Checkbox.Group>
+    </Form.Item>
+  </Form>
+
+  <Divider />
+
+  {/* Régimen Farmacoterapéutico */}
+  <div>
+    <div className="table-header">
+      <Title level={5}>Régimen farmacoterapéutico</Title>
+      <Button
+        type="primary"
+        icon={<PlusOutlined />}
+        className="add-button"
+      >
+        Agregar
+      </Button>
+    </div>
+    <Table
+      columns={[
+        { title: "Fecha de inicio", dataIndex: "startDate", key: "startDate" },
+        { title: "Medicamento", dataIndex: "medicine", key: "medicine" },
+        { title: "Dosis", dataIndex: "dose", key: "dose" },
+        {
+          title: "Vía de administración",
+          dataIndex: "administration",
+          key: "administration",
+        },
+        { title: "Frecuencia", dataIndex: "frequency", key: "frequency" },
+        { title: "Duración", dataIndex: "duration", key: "duration" },
+        { title: "Indicaciones", dataIndex: "instructions", key: "instructions" },
+        {
+          title: "Acciones",
+          key: "actions",
+          render: (_, record) => (
+            <Space>
+              <Button type="link" style={{ color: "#1890ff" }}>Desactivar</Button>
+              <Button type="link" danger>Eliminar</Button>
+            </Space>
+          ),
+        },
+      ]}
+      dataSource={[
+        {
+          key: "1",
+          startDate: "10/09/2024",
+          medicine: "Enalapril",
+          dose: "5 mg",
+          administration: "Oral",
+          frequency: "Cada 12 horas",
+          duration: "Indefinida",
+          instructions: "Administrar con alimentos. Controlar presión arterial antes de cada dosis.",
+        },
+      ]}
+      pagination={false}
+    />
+  </div>
+
+  <Divider />
+
+  {/* Plan de Cuidados de Enfermería */}
+  <div>
+    <div className="table-header">
+      <Title level={5}>Plan de cuidados de enfermería</Title>
+      <Button
+        type="primary"
+        icon={<PlusOutlined />}
+        className="add-button"
+      >
+        Agregar
+      </Button>
+    </div>
+    <Table
+      columns={[
+        { title: "Diagnóstico", dataIndex: "diagnosis", key: "diagnosis" },
+        { title: "Intervención", dataIndex: "intervention", key: "intervention" },
+        { title: "Frecuencia", dataIndex: "frequency", key: "frequency" },
+        {
+          title: "Acciones",
+          key: "actions",
+          render: (_, record) => (
+            <Space>
+              <Button type="link" style={{ color: "#1890ff" }}>Finalizar</Button>
+              <Button type="link" danger>Eliminar</Button>
+            </Space>
+          ),
+        },
+      ]}
+      dataSource={[
+        {
+          key: "1",
+          diagnosis: "Piel alterada relacionada con herida en la pierna.",
+          intervention: "Limpiar herida, secar con gasas sin frotar.",
+          frequency: "Diaria",
+        },
+      ]}
+      pagination={false}
+    />
+  </div>
+</Card>
+
+      <Divider />
 {/* Tarjeta: Condiciones especiales permanentes preexistentes de cuidado */}
 <Card
   className="condiciones-card"
-  title={<Title level={4}>Condiciones especiales permanentes preexistentes de cuidado</Title>}
+  title={
+    <div className="title-wrapper">
+      <Title level={4}>Condiciones especiales permanentes preexistentes de cuidado</Title>
+    </div>
+  }
   bordered
 >
   {/* Head: Checkboxes */}
@@ -362,7 +501,6 @@ const HistoriaClinica = () => {
         </div>
       }
     >
-      {/* Tabla de datos */}
       <Table
         className="discapacidad-table"
         columns={[
@@ -470,60 +608,46 @@ const HistoriaClinica = () => {
         </div>
       }
     >
-      {/* Tarjeta secundaria dentro del formulario */}
-      <Card
-        className="secondary-card"
-        bordered
-        title={
-          <div className="table-header">
-            <Title level={5}>Tipos de discapacidad del paciente</Title>
-            <Button type="primary" icon={<PlusOutlined />} className="add-button">
-              Agregar
-            </Button>
-          </div>
-        }
-      >
-        <Table
-          className="limitaciones-table"
-          columns={[
-            {
-              title: "Limitaciones",
-              dataIndex: "limitacion",
-              key: "limitacion",
-              align: "center",
-            },
-            {
-              title: "Observación",
-              dataIndex: "observacion",
-              key: "observacion",
-              align: "center",
-            },
-            {
-              title: "Acciones",
-              key: "acciones",
-              align: "center",
-              render: (_, record) => (
-                <Button type="link" danger>
-                  Eliminar
-                </Button>
-              ),
-            },
-          ]}
-          dataSource={[
-            {
-              key: "1",
-              limitacion: "Incontinencia urinaria",
-              observacion: "Requiere uso de pañal",
-            },
-            {
-              key: "2",
-              limitacion: "Debilidad muscular",
-              observacion: "Requiere ayuda para comer",
-            },
-          ]}
-          pagination={false}
-        />
-      </Card>
+      <Table
+        className="limitaciones-table"
+        columns={[
+          {
+            title: "Limitaciones",
+            dataIndex: "limitacion",
+            key: "limitacion",
+            align: "center",
+          },
+          {
+            title: "Observación",
+            dataIndex: "observacion",
+            key: "observacion",
+            align: "center",
+          },
+          {
+            title: "Acciones",
+            key: "acciones",
+            align: "center",
+            render: (_, record) => (
+              <Button type="link" danger>
+                Eliminar
+              </Button>
+            ),
+          },
+        ]}
+        dataSource={[
+          {
+            key: "1",
+            limitacion: "Incontinencia urinaria",
+            observacion: "Requiere uso de pañal",
+          },
+          {
+            key: "2",
+            limitacion: "Debilidad muscular",
+            observacion: "Requiere ayuda para comer",
+          },
+        ]}
+        pagination={false}
+      />
     </Card>
 
     <Divider />
@@ -580,8 +704,8 @@ const HistoriaClinica = () => {
 
     <Divider />
 
-        {/* Formulario 4: Historial de cirugías, traumatismos o accidentes */}
-        <Card
+    {/* Formulario 4: Historial de cirugías */}
+    <Card
       className="terciaria-card"
       bordered
       title={
@@ -632,20 +756,23 @@ const HistoriaClinica = () => {
   </div>
 </Card>
 
-
+    <Divider />
 {/* Esquema de vacunación */}
-<Card className="vacunacion-card" bordered>
-  {/* Head: Título */}
-  <div className="table-header">
-    <Title level={5}>Esquema de vacunación</Title>
-    <Button type="primary" icon={<PlusOutlined />} className="add-button">
-      Agregar Vacuna
-    </Button>
-  </div>
-
+<Card
+  className="vacunacion-card"
+  bordered
+  title={
+    <div className="table-header">
+      <Title level={4}>Esquema de vacunación</Title>
+      <Button type="primary" icon={<PlusOutlined />} className="add-button">
+        Agregar Vacuna
+      </Button>
+    </div>
+  }
+>
   {/* Body */}
   <div className="vacunacion-body">
-    {/* Tabla dentro de la tarjeta */}
+    {/* Tabla de vacunas */}
     <Table
       className="vacunacion-table"
       columns={[
@@ -701,318 +828,32 @@ const HistoriaClinica = () => {
         },
       ]}
       pagination={false}
+      style={{
+        marginTop: 16, // Creates spacing between header and table
+      }}
     />
   </div>
 </Card>
 
-
-{/* Habilidades biofísicas */}
-<Card className="habilidades-biofisicas-card" bordered>
-  {/* Head: Título */}
-  <div className="table-header">
-    <Title level={5}>Habilidades biofísicas</Title>
-  </div>
-
-  {/* Body */}
-  <div className="habilidades-biofisicas-body">
-    <Form layout="vertical">
-      {/* Primer formulario */}
-      <Row gutter={16}>
-        <Col span={8}>
-          <Form.Item label="Tipo de alimentación" name="tipoAlimentacion" rules={[{ required: true }]}>
-            <Select placeholder="Seleccione" style={{ width: "100%" }}>
-              <Select.Option value="normal">Normal</Select.Option>
-              <Select.Option value="especial">Especial</Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-        <Col span={8}>
-          <Form.Item label="Tipo de sueño" name="tipoSueno" rules={[{ required: true }]}>
-            <Select placeholder="Seleccione" style={{ width: "100%" }}>
-              <Select.Option value="regular">Regular</Select.Option>
-              <Select.Option value="interrumpido">Interrumpido</Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-        <Col span={8}>
-          <Form.Item label="Continencia" name="continencia" rules={[{ required: true }]}>
-            <Select placeholder="Seleccione" style={{ width: "100%" }}>
-              <Select.Option value="si">Sí</Select.Option>
-              <Select.Option value="no">No</Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-      </Row>
-
-      {/* Segundo formulario */}
-      <Row gutter={16}>
-        <Col span={8}>
-          <Form.Item label="Tipo de movilidad" name="tipoMovilidad" rules={[{ required: true }]}>
-            <Select placeholder="Seleccione" style={{ width: "100%" }}>
-              <Select.Option value="independiente">Independiente</Select.Option>
-              <Select.Option value="con-ayuda">Con ayuda</Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-        <Col span={8}>
-          <Form.Item label="Cuidado personal" name="cuidadoPersonal" rules={[{ required: true }]}>
-            <Select placeholder="Seleccione" style={{ width: "100%" }}>
-              <Select.Option value="independiente">Independiente</Select.Option>
-              <Select.Option value="con-ayuda-parcial">Con ayuda parcial</Select.Option>
-              <Select.Option value="con-ayuda-completa">Con ayuda completa</Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-        <Col span={8}>
-          <Form.Item label="Apariencia personal" name="aparienciaPersonal" rules={[{ required: true }]}>
-            <Select placeholder="Seleccione" style={{ width: "100%" }}>
-              <Select.Option value="buena">Buena</Select.Option>
-              <Select.Option value="descuidada">Descuidada</Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-      </Row>
-    </Form>
-  </div>
-</Card>
-
-
-
-{/* Hábitos o antecedentes toxicológicos */}
-<Card className="habitos-toxicologicos-card" bordered>
-  {/* Head: Título */}
-  <div className="table-header">
-    <Title level={5}>Hábitos o antecedentes toxicológicos</Title>
-  </div>
-
-  {/* Body */}
-  <div className="habitos-toxicologicos-body">
-    <Form layout="vertical">
-      {/* Primer formulario */}
-      <Row gutter={16}>
-        <Col span={8}>
-          <Form.Item
-            label="Tabaquismo"
-            name="tabaquismo"
-            rules={[{ required: true, message: "Seleccione una opción" }]}
-          >
-            <Select placeholder="Seleccione" style={{ width: "100%" }}>
-              <Select.Option value="si">Sí</Select.Option>
-              <Select.Option value="no">No</Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-        <Col span={8}>
-          <Form.Item
-            label="Sustancias Psicoactivas"
-            name="sustanciasPsicoactivas"
-            rules={[{ required: true, message: "Seleccione una opción" }]}
-          >
-            <Select placeholder="Seleccione" style={{ width: "100%" }}>
-              <Select.Option value="si">Sí</Select.Option>
-              <Select.Option value="no">No</Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-      </Row>
-
-      {/* Segundo formulario */}
-      <Row gutter={16}>
-        <Col span={8}>
-          <Form.Item
-            label="Alcoholismo"
-            name="alcoholismo"
-            rules={[{ required: true, message: "Seleccione una opción" }]}
-          >
-            <Select placeholder="Seleccione" style={{ width: "100%" }}>
-              <Select.Option value="si">Sí</Select.Option>
-              <Select.Option value="no">No</Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-        <Col span={8}>
-          <Form.Item
-            label="Cafeína"
-            name="cafeina"
-            rules={[{ required: true, message: "Seleccione una opción" }]}
-          >
-            <Select placeholder="Seleccione" style={{ width: "100%" }}>
-              <Select.Option value="si">Sí</Select.Option>
-              <Select.Option value="no">No</Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-      </Row>
-    </Form>
-  </div>
-</Card>
-
-
-{/* Habilidades de percepción social */}
-<Card
-        className="habilidades-percepcion-social"
-        title="Habilidades de percepción social"
-        bordered
-      >
-        <Form layout="vertical">
-          <div className="form-row">
-            <Form.Item
-              label="Comunicación verbal"
-              name="comunicacionVerbal"
-              rules={[{ required: true, message: "Seleccione una opción" }]}
-            >
-              <Select placeholder="Seleccione una opción">
-              <Select.Option value="activa">Activa</Select.Option>
-              <Select.Option value="pasiva">Pasiva</Select.Option>
-              </Select>
-            </Form.Item>
-            <Form.Item
-              label="Comunicación no verbal"
-              name="comunicacionNoVerbal"
-              rules={[{ required: true, message: "Seleccione una opción" }]}
-            >
-              <Select placeholder="Seleccione una opción">
-                <Select.Option value="activa">Activa</Select.Option>
-                <Select.Option value="pasiva">Pasiva</Select.Option>
-              </Select>
-            </Form.Item>
+    <Divider />
+                {/* Incluye todas las demás tarjetas aquí */}
+              </div>
+              <div className="action-buttons" style={{ marginTop: "16px", textAlign: "right" }}>
+                <Space>
+                  <Button type="default" onClick={handleReset}>
+                    Restablecer
+                  </Button>
+                  <Button type="primary" onClick={handleSave}>
+                    Guardar y continuar
+                  </Button>
+                </Space>
+              </div>
+            </div>
           </div>
-          <Divider />
-          <div className="form-row">
-            <Form.Item
-              label="Estado de ánimo"
-              name="estadoAnimo"
-              rules={[{ required: true, message: "Seleccione una opción" }]}
-            >
-              <Select placeholder="Seleccione una opción">
-                <Select.Option value="alegre">Alegre</Select.Option>
-                <Select.Option value="triste">Triste</Select.Option>
-                <Select.Option value="ansioso">Ansioso</Select.Option>
-                <Select.Option value="calmado">Calmado</Select.Option>
-              </Select>
-            </Form.Item>
-            <Form.Item
-              label="¿Ha sufrido maltrato?"
-              name="haSufridoMaltrato"
-              rules={[{ required: true, message: "Seleccione una opción" }]}
-            >
-              <Select placeholder="Seleccione una opción">
-                <Select.Option value="si">Sí</Select.Option>
-                <Select.Option value="no">No</Select.Option>
-              </Select>
-            </Form.Item>
-          </div>
-        </Form>
-</Card>
-
-{/* Diagnóstico inicial */}
-<Card
-  className="diagnostico-card"
-  title={<Title level={4}>Diagnóstico inicial</Title>}
-  bordered
->
-  {/* Formulario para diagnóstico inicial */}
-  <Form layout="vertical" className="diagnostico-form">
-    <Form.Item
-      label="Observaciones"
-      name="diagnosticoObservaciones"
-      rules={[
-        {
-          required: true,
-          message: "Por favor, ingrese las observaciones del diagnóstico inicial",
-        },
-      ]}
-    >
-      <Input.TextArea
-        placeholder="Describa el diagnóstico inicial..."
-        rows={4}
-        className="diagnostico-textarea"
-      />
-    </Form.Item>
-  </Form>
-</Card>
-
-
-{/* Pruebas y Test */}
-<Card className="pruebas-test-card" bordered>
-  {/* Head: Título con botón para agregar */}
-  <div className="table-header">
-    <Title level={5}>Pruebas y Test</Title>
-    <Button type="primary" icon={<PlusOutlined />} className="add-button">
-      Nuevo
-    </Button>
-  </div>
-
-  {/* Body: Tabla para mostrar datos */}
-  <div className="pruebas-test-body">
-    <Table
-      className="pruebas-test-table"
-      columns={[
-        {
-          title: "Profesional",
-          dataIndex: "profesional",
-          key: "profesional",
-          align: "center",
-        },
-        {
-          title: "Tipo de prueba",
-          dataIndex: "tipoPrueba",
-          key: "tipoPrueba",
-          align: "center",
-        },
-        {
-          title: "Fecha",
-          dataIndex: "fecha",
-          key: "fecha",
-          align: "center",
-        },
-        {
-          title: "Acciones",
-          key: "acciones",
-          align: "center",
-          render: (_, record) => (
-            <Space>
-              <Button type="link" style={{ color: "#1890ff" }}>
-                Ver
-              </Button>
-              <Button type="link" danger>
-                Editar
-              </Button>
-            </Space>
-          ),
-        },
-      ]}
-      dataSource={[
-        {
-          key: "1",
-          profesional: "Sara Manuela Gomez",
-          tipoPrueba: "Escala de Yesavage",
-          fecha: "10/11/2024",
-        },
-      ]}
-      pagination={false}
-    />
-  </div>
-</Card>
-
-{/* Adjuntar Documento */}
-<Card title="Adjuntar Documento" bordered>
-  <Input type="file" />
-</Card>
-
-        {/* Botones de guardar y restablecer */}
-        <div className="action-buttons" style={{ marginTop: "16px", textAlign: "right" }}>
-          <Space>
-            <Button type="default" onClick={handleReset}>
-              Restablecer
-            </Button>
-            <Button type="primary" onClick={handleSave}>
-              Guardar y continuar
-            </Button>
-          </Space>
-        </div>
-      </div>
-    </div>
+        </Content>
+        <Footer style={{ textAlign: "center" }}>Ant Design Layout Adaptado</Footer>
+      </Layout>
+    </Layout>
   );
 };
 
