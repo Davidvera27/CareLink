@@ -10,7 +10,7 @@ import { Breadcrumb, Layout, Menu, Table, Button, Typography, Checkbox, Card, Ro
 import Grafica1 from "../assets/Grafica1.jpg";
 import Grafica2 from "../assets/Grafica2.jpg";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
 
 function getItem(label, key, icon, children) {
@@ -142,7 +142,6 @@ const Home = () => {
             </div>
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>Ant Design ©{new Date().getFullYear()} Created by Ant UED</Footer>
       </Layout>
     </Layout>
   );
