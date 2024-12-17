@@ -1,19 +1,31 @@
 const express = require("express");
+const router = express.Router();
+const multer = require("multer");
 const {
-  createPatient,
   getAllPatients,
+  createPatient,
   getPatientById,
-  updatePatient,
-  deletePatient,
 } = require("../controllers/patientController");
 
-const router = express.Router();
+const { getNextPatientId } = require("../controllers/patientController");
 
-router.post("/", createPatient); // Crear nuevo paciente
-router.get("/", getAllPatients); // Obtener todos los pacientes
-router.get("/:id", getPatientById); // Obtener paciente por ID
-router.put("/:id", updatePatient); // Actualizar paciente
-router.delete("/:id", deletePatient); // Eliminar paciente
+// Configurar almacenamiento de Multer
+const storage = multer.memoryStorage(); // Opcionalmente puedes usar diskStorage
+const upload = multer({ storage: storage });
 
+// Ruta GET: Obtener el próximo ID
+router.get("/next-id", getNextPatientId);
+
+// Ruta POST: Crear un nuevo paciente
+router.post("/", upload.single("fotografia"), createPatient);
+
+// Ruta para obtener todos los pacientes
+router.get("/", getAllPatients);
+
+// Ruta para crear un nuevo paciente
+router.post("/", createPatient);
+
+// Ruta para obtener un paciente por ID
+router.get("/:id", getPatientById);
 
 module.exports = router;
