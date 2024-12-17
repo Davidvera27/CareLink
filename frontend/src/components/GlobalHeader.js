@@ -15,7 +15,7 @@ import {
 } from "@ant-design/icons";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/GlobalHeader.css";
-import avatar from "../assets/avatar.jpg";
+import avatar from "../assets/Profesional/avatar.jpg";
 
 const { SubMenu } = Menu;
 
