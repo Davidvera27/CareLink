@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Layout,
   Breadcrumb,
@@ -55,29 +55,57 @@ const validateDate = (_, value) => {
 };
 
 const NuevoUsuario = () => {
-  const onFinish = async (values) => {
-    try {
-      const response = await axios.post("http://localhost:5000/api/patients", {
-        tipo_usuario: values.tipoUsuario,
-        n_documento: values.nDocumento,
-        apellidos: values.apellidos,
-        nombres: values.nombres,
-        genero: values.genero,
-        fecha_nacimiento: values.fechaNacimiento.format("YYYY-MM-DD"),
-        estado_civil: values.estadoCivil,
-        ocupacion: values.ocupacion,
-        direccion: values.direccion,
-        telefono: values.telefono,
-        correo_electronico: values.correoElectronico,
-      });
+  const [form] = Form.useForm();
+  const [idUsuario, setIdUsuario] = useState(""); // ID del nuevo paciente
 
-      if (response.status === 201) {
-        message.success("Usuario registrado exitosamente.");
-      }
+  useEffect(() => {
+    fetchNextId();
+  }, []);
+
+  // Función GET: Obtener el próximo ID de paciente
+  const fetchNextId = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/patients/next-id");
+      setIdUsuario(response.data.nextId); // Actualizar ID de usuario
     } catch (error) {
-      console.error("Error al registrar el usuario:", error);
+      console.error("Error al obtener el siguiente ID:", error);
+      message.error("Error al obtener el siguiente ID.");
     }
   };
+
+  // Función POST: Enviar los datos del formulario
+  const onFinish = async (values) => {
+    try {
+      const formData = new FormData();
+      formData.append("tipo_usuario", values.tipoUsuario);
+      formData.append("n_documento", values.nDocumento);
+      formData.append("apellidos", values.apellidos);
+      formData.append("nombres", values.nombres);
+      formData.append("genero", values.genero);
+      formData.append("fecha_nacimiento", values.fechaNacimiento.format("YYYY-MM-DD"));
+      formData.append("estado_civil", values.estadoCivil);
+      formData.append("ocupacion", values.ocupacion);
+      formData.append("direccion", values.direccion);
+      formData.append("telefono", values.telefono);
+      formData.append("correo_electronico", values.correoElectronico);
+      if (values.fotografia) {
+        formData.append("fotografia", values.fotografia.file.originFileObj);
+      }
+
+      // Enviar solicitud POST
+      await axios.post("http://localhost:5000/api/patients", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      message.success("Paciente creado exitosamente.");
+      form.resetFields();
+      fetchNextId(); // Actualizar el siguiente ID
+    } catch (error) {
+      console.error("Error al registrar el usuario:", error);
+      message.error("Error al registrar el usuario. Intente nuevamente.");
+    }
+  };
+  
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -205,222 +233,161 @@ const NuevoUsuario = () => {
             <Breadcrumb.Item>Nuevo Usuario</Breadcrumb.Item>
           </Breadcrumb>
 
-          {/* Tarjetas con estructura basada en Figma */}
-          <Row gutter={[16, 16]}>
-            {/* Tarjeta 1: Datos Básicos */}
+{/* Tarjetas con estructura basada en Figma */}
+<Row gutter={[16, 16]}>
+  {/* Tarjeta 1: Datos Básicos */}
+  <Col span={24}>
+    <Card title="Datos Básicos" bordered={false}>
+      <Form
+        id="nuevoUsuarioForm"
+        layout="vertical"
+        onFinish={onFinish}
+        form={form}
+        initialValues={{ genero: "Masculino" }}
+      >
+        <Row gutter={16}>
+          {/* Id. Usuario */}
+          <Col span={8}>
+            <Form.Item name="idUsuario" label="Id. Usuario">
+              <Input value={idUsuario} placeholder={idUsuario} disabled />
+            </Form.Item>
+          </Col>
+
+          {/* Tipo de usuario */}
+          <Col span={8}>
+            <Form.Item name="tipoUsuario" label="Tipo de usuario" rules={[{ required: true }]}>
+              <Select placeholder="Selecciona el tipo de usuario">
+                <Option value="Recurrente">Recurrente</Option>
+                <Option value="Nuevo">Nuevo</Option>
+              </Select>
+            </Form.Item>
+          </Col>
+
+          {/* N° Documento */}
+          <Col span={8}>
+            <Form.Item name="nDocumento" label="N° Documento" rules={[{ required: true }]}>
+              <Input placeholder="Número de documento" />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row gutter={16}>
+          {/* Apellidos */}
+          <Col span={8}>
+            <Form.Item name="apellidos" label="Apellidos" rules={[{ required: true }]}>
+              <Input placeholder="Apellidos" />
+            </Form.Item>
+          </Col>
+
+          {/* Nombres */}
+          <Col span={8}>
+            <Form.Item name="nombres" label="Nombres" rules={[{ required: true }]}>
+              <Input placeholder="Nombres" />
+            </Form.Item>
+          </Col>
+
+          {/* Género */}
+          <Col span={8}>
+            <Form.Item name="genero" label="Género" rules={[{ required: true }]}>
+              <Select>
+                <Option value="Masculino">Masculino</Option>
+                <Option value="Femenino">Femenino</Option>
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row gutter={16}>
+          {/* Fecha de nacimiento */}
+          <Col span={8}>
+            <Form.Item
+              name="fechaNacimiento"
+              label="Fecha de nacimiento"
+              rules={[{ required: true, message: "Este campo es obligatorio" }, { validator: validateDate }]}
+            >
+              <DatePicker style={{ width: "100%" }} format="DD-MM-YYYY" />
+            </Form.Item>
+          </Col>
+
+          {/* Estado civil */}
+          <Col span={8}>
+            <Form.Item name="estadoCivil" label="Estado civil" rules={[{ required: true }]}>
+              <Select>
+                <Option value="Casado">Casado</Option>
+                <Option value="Soltero">Soltero</Option>
+                <Option value="Divorciado">Divorciado</Option>
+              </Select>
+            </Form.Item>
+          </Col>
+
+          {/* Ocupación */}
+          <Col span={8}>
+            <Form.Item name="ocupacion" label="Ocupación" rules={[{ required: true }]}>
+              <Select>
+                <Option value="Pensionado">Pensionado</Option>
+                <Option value="Empleado">Empleado</Option>
+                <Option value="Independiente">Independiente</Option>
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row>
+          {/* Fotografía */}
+          <Col span={24}>
+            <Form.Item name="fotografia" label="Fotografía" valuePropName="fileList" getValueFromEvent={(e) => e.fileList}>
+              <Upload beforeUpload={() => false} listType="picture">
+                <Button icon={<UploadOutlined />}>Click to Upload</Button>
+              </Upload>
+            </Form.Item>
+          </Col>
+        </Row>
+
+        {/* Tarjeta 2: Datos de Localización */}
+        <Card title="Datos de Localización" bordered={false}>
+          <Row gutter={16}>
             <Col span={24}>
-<Card title="Datos Básicos" bordered={false}>
-  <Form layout="vertical" onFinish={onFinish} initialValues={{ genero: "Masculino" }}>
-    <Row gutter={16}>
-      {/* Campo: Id. Usuario */}
-      <Col span={8}>
-        <Form.Item name="idUsuario" label="Id. Usuario">
-          <Input placeholder="0001" disabled />
-        </Form.Item>
-      </Col>
-
-      {/* Campo: Tipo de usuario */}
-      <Col span={8}>
-        <Form.Item name="tipoUsuario" label="Tipo de usuario" rules={[{ required: true }]}>
-          <Select>
-            <Option value="Recurrente">Recurrente</Option>
-            <Option value="Nuevo">Nuevo</Option>
-          </Select>
-        </Form.Item>
-      </Col>
-
-      {/* Campo: N° Documento */}
-      <Col span={8}>
-        <Form.Item name="nDocumento" label="N° Documento" rules={[{ required: true }]}>
-          <Input placeholder="Número de documento" />
-        </Form.Item>
-      </Col>
-    </Row>
-
-    <Row gutter={16}>
-      {/* Campo: Apellidos */}
-      <Col span={8}>
-        <Form.Item name="apellidos" label="Apellidos" rules={[{ required: true }]}>
-          <Input placeholder="Apellidos" />
-        </Form.Item>
-      </Col>
-
-      {/* Campo: Nombres */}
-      <Col span={8}>
-        <Form.Item name="nombres" label="Nombres" rules={[{ required: true }]}>
-          <Input placeholder="Nombres" />
-        </Form.Item>
-      </Col>
-
-      {/* Campo: Género */}
-      <Col span={8}>
-        <Form.Item name="genero" label="Género" rules={[{ required: true }]}>
-          <Select>
-            <Option value="Masculino">Masculino</Option>
-            <Option value="Femenino">Femenino</Option>
-          </Select>
-        </Form.Item>
-      </Col>
-    </Row>
-
-    <Row gutter={16}>
-      {/* Campo: Fecha de nacimiento */}
-      <Col span={8}>
-        <Form.Item
-          name="fechaNacimiento"
-          label="Fecha de nacimiento"
-          rules={[
-            { required: true, message: "Este campo es obligatorio" },
-            { validator: validateDate },
-          ]}
-        >
-          <DatePicker style={{ width: "100%" }} format="YYYY-MM-DD" />
-        </Form.Item>
-      </Col>
-
-      {/* Campo: Estado civil */}
-      <Col span={8}>
-        <Form.Item name="estadoCivil" label="Estado civil" rules={[{ required: true }]}>
-          <Select>
-            <Option value="Casado">Casado</Option>
-            <Option value="Soltero">Soltero</Option>
-            <Option value="Divorciado">Divorciado</Option>
-          </Select>
-        </Form.Item>
-      </Col>
-
-      {/* Campo: Ocupación */}
-      <Col span={8}>
-        <Form.Item name="ocupacion" label="Ocupación" rules={[{ required: true }]}>
-          <Select>
-            <Option value="Pensionado">Pensionado</Option>
-            <Option value="Empleado">Empleado</Option>
-            <Option value="Independiente">Independiente</Option>
-          </Select>
-        </Form.Item>
-      </Col>
-    </Row>
-
-    <Row>
-      {/* Campo: Fotografía */}
-      <Col span={24}>
-        <Form.Item name="fotografia" label="Fotografía" valuePropName="fileList">
-          <Upload name="fotografia" listType="picture" beforeUpload={() => false}>
-            <Button icon={<UploadOutlined />}>Click to Upload</Button>
-          </Upload>
-        </Form.Item>
-      </Col>
-    </Row>
-  </Form>
-</Card>
-
+              <Form.Item name="direccion" label="Dirección" rules={[{ required: true }]}>
+                <Input placeholder="CLL 45 - 60-20 INT 101" />
+              </Form.Item>
             </Col>
-
-{/* Tarjeta 2: Datos de Localización */}
-<Col span={24}>
-<Card title="Datos de Localización" bordered={false}>
-    <Form layout="vertical">
-      <Row gutter={16}>
-        {/* Campo: Dirección */}
-        <Col span={24}>
-          <Form.Item
-            name="direccion"
-            label="Dirección"
-            rules={[{ required: true, message: "La dirección es obligatoria" }]}
-          >
-            <Input placeholder="CLL 45 - 60-20 INT 101" />
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row gutter={16}>
-        {/* Campo: Teléfono */}
-        <Col span={12}>
-          <Form.Item
-            name="telefono"
-            label="Teléfono"
-            rules={[{ required: true, message: "El teléfono es obligatorio" }]}
-          >
-            <Input placeholder="315 6789 6789" />
-          </Form.Item>
-        </Col>
-
-        {/* Campo: Correo Electrónico */}
-        <Col span={12}>
-          <Form.Item
-            name="correoElectronico"
-            label="Correo Electrónico"
-            rules={[
-              { required: true, message: "El correo electrónico es obligatorio" },
-              { type: "email", message: "Ingresa un correo válido" },
-            ]}
-          >
-            <Input placeholder="juanantonio@gmail.com" />
-          </Form.Item>
-        </Col>
-      </Row>
-    </Form>
-</Card>
-</Col>
-
-{/* Tarjeta 3: Botones */}
-<Col span={24}>
-  <Card
-    bordered={false}
-    style={{
-      background: "#FFFFFF",
-      border: "1px solid rgba(0, 0, 0, 0.06)",
-      borderRadius: "2px",
-      padding: "24px",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-    }}
-  >
-    <Row justify="end" gutter={16}>
-      <Col>
-        <Button
-          type="default"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "4px 15px",
-            width: "106px",
-            height: "32px",
-            border: "1px solid #D9D9D9",
-            boxShadow: "0px 2px 0px rgba(0, 0, 0, 0.016)",
-            borderRadius: "2px",
-          }}
-        >
-          Restablecer
-        </Button>
-      </Col>
-      <Col>
-        <Button
-          type="primary"
-          htmlType="submit"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "4px 15px",
-            width: "155px",
-            height: "32px",
-            background: "#7F34B4",
-            border: "1px solid #7F34B4",
-            boxShadow: "0px 2px 0px rgba(0, 0, 0, 0.043)",
-            borderRadius: "2px",
-            color: "#FFFFFF",
-          }}
-        >
-          Guardar y continuar
-        </Button>
-      </Col>
-    </Row>
-  </Card>
-</Col>
-
           </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="telefono" label="Teléfono" rules={[{ required: true }]}>
+                <Input placeholder="315 6789 6789" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="correoElectronico" label="Correo Electrónico" rules={[{ required: true, type: "email" }]}>
+                <Input placeholder="juanantonio@gmail.com" />
+              </Form.Item>
+            </Col>
+          </Row>
+        </Card>
+
+        {/* Botones */}
+        <Row justify="end">
+          <Button
+            type="default"
+            onClick={() => form.resetFields()}
+            style={{ marginRight: "8px", backgroundColor: "#fff", borderColor: "#7F34B4", color: "#7F34B4" }}
+          >
+            Restablecer
+          </Button>
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{ backgroundColor: "#7F34B4", borderColor: "#7F34B4", color: "#fff" }}
+          >
+            Guardar y continuar
+          </Button>
+        </Row>
+      </Form>
+    </Card>
+  </Col>
+</Row>
+
         </Content>
       </Layout>
     </Layout>
