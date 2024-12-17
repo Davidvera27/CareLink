@@ -8,14 +8,15 @@ const PatientGuardian = sequelize.define("PatientsGuardian", {
     autoIncrement: true,
   },
   id_usuario: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: DataTypes.INTEGER,
     references: {
       model: "Patients",
-      key: "id_usuario",
+      key: "id", // <- Clave primaria correcta en la tabla Patients
     },
-    onDelete: "CASCADE",
+    allowNull: false,
+    onDelete: "CASCADE", // Elimina los registros relacionados si se borra el paciente
   },
+  
   parentesco: {
     type: DataTypes.STRING,
     allowNull: false,
