@@ -1,7 +1,36 @@
 const Patient = require("../models/patientModel");
+const path = require("path");
+const fs = require("fs");
+const multer = require("multer");
+
+// Configura Multer para almacenar archivos en "frontend/src/assets/Pacientes"
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const dir = path.join(__dirname, "../../frontend/src/assets/Pacientes");
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    cb(null, dir);
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage });
+
+// Obtener todos los pacientes
+const getAllPatients = async (req, res) => {
+  try {
+    const patients = await Patient.findAll();
+    res.status(200).json(patients);
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener pacientes.", error });
+  }
+};
 
 // Crear un nuevo paciente
-exports.createPatient = async (req, res) => {
+const createPatient = async (req, res) => {
   try {
     const {
       tipo_usuario,
@@ -12,23 +41,14 @@ exports.createPatient = async (req, res) => {
       fecha_nacimiento,
       estado_civil,
       ocupacion,
-      fotografia,
       direccion,
       telefono,
       correo_electronico,
     } = req.body;
 
-    // Validar campos obligatorios
-    if (!tipo_usuario || !n_documento || !apellidos || !nombres || !genero || !fecha_nacimiento) {
-      return res.status(400).json({ message: "Faltan campos obligatorios." });
-    }
+    const fotografia = req.file ? req.file.filename : null;
 
-    // Generar un id_usuario único
-    const id_usuario = `USR-${Date.now()}`;
-
-    // Crear el paciente en la base de datos
-    const patient = await Patient.create({
-      id_usuario,
+    const newPatient = await Patient.create({
       tipo_usuario,
       n_documento,
       apellidos,
@@ -43,67 +63,43 @@ exports.createPatient = async (req, res) => {
       correo_electronico,
     });
 
-    res.status(201).json({ message: "Paciente registrado exitosamente.", patient });
+    return res.status(201).json({ message: "Paciente creado exitosamente", data: newPatient });
   } catch (error) {
-    console.error("Error al registrar el paciente:", error);
-    res.status(500).json({ message: "Error interno del servidor.", error: error.message });
+    console.error("Error al crear paciente:", error);
+    return res.status(500).json({ message: "Error al crear el paciente", error: error.message });
   }
 };
 
-// Obtener todos los pacientes
-exports.getAllPatients = async (req, res) => {
-  try {
-    const patients = await Patient.findAll();
-    res.status(200).json(patients);
-  } catch (error) {
-    console.error("Error al obtener pacientes:", error);
-    res.status(500).json({ message: "Error al obtener pacientes.", error: error.message });
-  }
-};
-
-// Obtener un paciente por ID
-exports.getPatientById = async (req, res) => {
+// Obtener paciente por ID
+const getPatientById = async (req, res) => {
   try {
     const patient = await Patient.findByPk(req.params.id);
-    if (!patient) {
-      return res.status(404).json({ message: "Paciente no encontrado." });
-    }
+    if (!patient) return res.status(404).json({ message: "Paciente no encontrado." });
     res.status(200).json(patient);
   } catch (error) {
-    console.error("Error al obtener paciente:", error);
-    res.status(500).json({ message: "Error al obtener paciente.", error: error.message });
+    res.status(500).json({ message: "Error al obtener paciente.", error });
   }
 };
 
-// Actualizar un paciente existente
-exports.updatePatient = async (req, res) => {
+// Obtener el próximo ID de usuario
+const getNextPatientId = async (req, res) => {
   try {
-    const patient = await Patient.findByPk(req.params.id);
-    if (!patient) {
-      return res.status(404).json({ message: "Paciente no encontrado." });
+    const lastPatient = await Patient.findOne({ order: [["id", "DESC"]] });
+    let nextId = "PCT-01";
+    if (lastPatient) {
+      const lastIdNumber = parseInt(lastPatient.id, 10);
+      nextId = `PCT-${(lastIdNumber + 1).toString().padStart(2, "0")}`;
     }
-
-    // Actualizar los datos del paciente
-    await patient.update(req.body);
-    res.status(200).json({ message: "Paciente actualizado correctamente.", patient });
+    res.status(200).json({ nextId });
   } catch (error) {
-    console.error("Error al actualizar paciente:", error);
-    res.status(500).json({ message: "Error al actualizar paciente.", error: error.message });
+    res.status(500).json({ message: "Error al obtener el próximo ID.", error });
   }
 };
 
-// Eliminar un paciente
-exports.deletePatient = async (req, res) => {
-  try {
-    const patient = await Patient.findByPk(req.params.id);
-    if (!patient) {
-      return res.status(404).json({ message: "Paciente no encontrado." });
-    }
-
-    await patient.destroy();
-    res.status(200).json({ message: "Paciente eliminado correctamente." });
-  } catch (error) {
-    console.error("Error al eliminar paciente:", error);
-    res.status(500).json({ message: "Error al eliminar paciente.", error: error.message });
-  }
+module.exports = {
+  upload,
+  getAllPatients,
+  createPatient,
+  getPatientById,
+  getNextPatientId,
 };
