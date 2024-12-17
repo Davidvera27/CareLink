@@ -7,8 +7,8 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Table, Button, Typography, Checkbox, Card, Row, Col } from "antd";
-import Grafica1 from "../assets/Grafica1.jpg";
-import Grafica2 from "../assets/Grafica2.jpg";
+import Grafica1 from "../assets/Otros/Grafica1.jpg";
+import Grafica2 from "../assets/Otros/Grafica2.jpg";
 
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
