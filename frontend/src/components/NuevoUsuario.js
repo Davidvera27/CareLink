@@ -76,27 +76,37 @@ const NuevoUsuario = () => {
   // Función POST: Enviar los datos del formulario
   const onFinish = async (values) => {
     try {
-      const formData = new FormData();
-      formData.append("tipo_usuario", values.tipoUsuario);
-      formData.append("n_documento", values.nDocumento);
-      formData.append("apellidos", values.apellidos);
-      formData.append("nombres", values.nombres);
-      formData.append("genero", values.genero);
-      formData.append("fecha_nacimiento", values.fechaNacimiento.format("YYYY-MM-DD"));
-      formData.append("estado_civil", values.estadoCivil);
-      formData.append("ocupacion", values.ocupacion);
-      formData.append("direccion", values.direccion);
-      formData.append("telefono", values.telefono);
-      formData.append("correo_electronico", values.correoElectronico);
+      // Crear FormData para enviar solo la imagen
+      const fotoData = new FormData();
       if (values.fotografia) {
-        formData.append("fotografia", values.fotografia.file.originFileObj);
+        fotoData.append("fotografia", values.fotografia.file.originFileObj);
       }
-
-      // Enviar solicitud POST
-      await axios.post("http://localhost:5000/api/patients", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
+  
+      // Enviar los demás datos
+      const usuarioData = {
+        tipo_usuario: values.tipoUsuario,
+        n_documento: values.nDocumento,
+        apellidos: values.apellidos,
+        nombres: values.nombres,
+        genero: values.genero,
+        fecha_nacimiento: values.fechaNacimiento.format("YYYY-MM-DD"),
+        estado_civil: values.estadoCivil,
+        ocupacion: values.ocupacion,
+        direccion: values.direccion,
+        telefono: values.telefono,
+        correo_electronico: values.correoElectronico,
+      };
+  
+      // 1. Guardar los datos del paciente sin la foto
+      await axios.post("http://localhost:5000/api/patients", usuarioData);
+  
+      // 2. Subir la imagen de manera independiente (si existe)
+      if (values.fotografia) {
+        await axios.post("http://localhost:5000/api/upload-foto", fotoData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      }
+  
       message.success("Paciente creado exitosamente.");
       form.resetFields();
       fetchNextId(); // Actualizar el siguiente ID
@@ -105,6 +115,7 @@ const NuevoUsuario = () => {
       message.error("Error al registrar el usuario. Intente nuevamente.");
     }
   };
+  
   
 
   return (
@@ -336,9 +347,10 @@ const NuevoUsuario = () => {
           {/* Fotografía */}
           <Col span={24}>
             <Form.Item name="fotografia" label="Fotografía" valuePropName="fileList" getValueFromEvent={(e) => e.fileList}>
-              <Upload beforeUpload={() => false} listType="picture">
-                <Button icon={<UploadOutlined />}>Click to Upload</Button>
-              </Upload>
+            <Upload beforeUpload={() => false} listType="picture">
+              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            </Upload>
+
             </Form.Item>
           </Col>
         </Row>
