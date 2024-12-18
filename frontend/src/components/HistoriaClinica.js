@@ -7,6 +7,7 @@ import {
   Button,
   Avatar,
   Row,
+  Badge,
   Col,
   Input,
   Select,
@@ -17,7 +18,7 @@ import {
   Divider,
   Form,
 } from "antd";
-import { PlusOutlined, UserOutlined, FileOutlined, TeamOutlined } from "@ant-design/icons";
+import { PlusOutlined, HomeOutlined, CalendarOutlined, CheckCircleOutlined, UserOutlined, SearchOutlined, QuestionCircleOutlined, BellOutlined, LogoutOutlined, SettingFilled, SettingOutlined, } from "@ant-design/icons";
 import "../styles/Home.css"
 
 
@@ -27,7 +28,7 @@ const { Title, Text } = Typography;
 
 const HistoriaClinica = () => {
   const [form] = Form.useForm();
-  const [collapsed, setCollapsed] = React.useState(false);
+
 
   const handleReset = () => {
     form.resetFields();
@@ -44,51 +45,122 @@ const HistoriaClinica = () => {
       });
   };
 
-  const items = [
-    { key: "/home", icon: <UserOutlined />, label: "Tablero de Inicio" },
-    {
-      key: "sub1",
-      icon: <UserOutlined />,
-      label: "Usuarios",
-      children: [
-        { key: "/nuevo-usuario", label: "Nuevo usuario" },
-        { key: "/nuevo-reporte-clinico", label: "Nuevo reporte clínico" },
-        { key: "/lista-usuarios", label: "Lista de usuarios" },
-      ],
-    },
-    {
-      key: "sub2",
-      icon: <TeamOutlined />,
-      label: "Gestión Actividades",
-      children: [
-        { key: "/actividades-diarias", label: "Actividades Diarias" },
-        { key: "/visitas-domiciliarias", label: "Visitas Domiciliarias" },
-      ],
-    },
-    {
-      key: "sub3",
-      icon: <FileOutlined />,
-      label: "Administración",
-      children: [
-        { key: "/configuracion", label: "Configuración" },
-        { key: "/reportes", label: "Reportes" },
-      ],
-    },
-  ];
+
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div className="logo" />
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={["/lista-usuarios"]}
-          mode="inline"
-          items={items}
-        />
-      </Sider>
+        <Sider collapsible style={{ backgroundColor: "#F1E6F5" }}>
+  <div
+    className="logo"
+    style={{
+      color: "#7F34B4",
+      textAlign: "center",
+      padding: "16px 0",
+      fontWeight: "bold",
+      fontSize: "16px",
+    }}
+  >
+
+  </div>
+  <Menu
+    theme="light"
+    defaultSelectedKeys={["1"]}
+    mode="inline"
+    style={{
+      backgroundColor: "#FFFFFF",
+      color: "#000000",
+      fontWeight: "500",
+    }}
+  >
+    <Menu.Item
+      key="1"
+      icon={<HomeOutlined style={{ color: "#7F34B4" }} />}
+      style={{
+        color: "#7F34B4",
+        backgroundColor: "#EAD9F2",
+      }}
+    >
+      Tablero de Inicio
+    </Menu.Item>
+
+    <Menu.SubMenu
+      key="2"
+      icon={<UserOutlined style={{ color: "#7F34B4" }} />}
+      title={<span style={{ color: "#7F34B4" }}>Usuarios</span>}
+    >
+      <Menu.Item key="2.1" style={{ color: "#000000" }}>
+        Nuevo Usuario
+      </Menu.Item>
+      <Menu.Item key="2.2" style={{ color: "#000000" }}>
+        Nuevo Reporte Clínico
+      </Menu.Item>
+      <Menu.Item key="2.3" style={{ color: "#000000" }}>
+        Lista de Usuarios
+      </Menu.Item>
+    </Menu.SubMenu>
+
+    <Menu.Item
+      key="3"
+      icon={<CheckCircleOutlined style={{ color: "#7F34B4" }} />}
+      style={{
+        color: "#7F34B4",
+        backgroundColor: "#EAD9F2",
+      }}
+    >
+      Gestión de Actividades
+    </Menu.Item>
+
+    <Menu.SubMenu
+      key="4"
+      icon={<CalendarOutlined style={{ color: "#7F34B4" }} />}
+      title={<span style={{ color: "#7F34B4" }}>Visitas Domiciliarias</span>}
+    >
+      <Menu.Item key="4.1" style={{ color: "#000000" }}>
+        Visitas Programadas
+      </Menu.Item>
+      <Menu.Item key="4.2" style={{ color: "#000000" }}>
+        Historial de Visitas
+      </Menu.Item>
+    </Menu.SubMenu>
+
+    <Menu.SubMenu
+      key="5"
+      icon={<SettingOutlined style={{ color: "#7F34B4" }} />}
+      title={<span style={{ color: "#7F34B4" }}>Administración</span>}
+    >
+      <Menu.Item key="5.1" style={{ color: "#000000" }}>
+        Configuración General
+      </Menu.Item>
+      <Menu.Item key="5.2" style={{ color: "#000000" }}>
+        Auditoría
+      </Menu.Item>
+    </Menu.SubMenu>
+  </Menu>
+</Sider>
       <Layout>
-        <Header style={{ padding: 0, background: "#fff" }} />
+      <Header
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          backgroundColor: "#22075E",
+          padding: "0 16px",
+          color: "#fff",
+        }}
+      >
+        <div style={{ fontWeight: "bold", fontSize: "16px" }}>
+          Sistema de Gestión
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          <SearchOutlined style={{ fontSize: "16px", color: "#fff" }} />
+          <QuestionCircleOutlined style={{ fontSize: "16px", color: "#fff" }} />
+          <Badge count={11} style={{ backgroundColor: "#FF4D4F" }}>
+            <BellOutlined style={{ fontSize: "16px", color: "#fff" }} />
+          </Badge>
+          <SettingFilled style={{ fontSize: "16px", color: "#fff" }} />
+          <LogoutOutlined style={{ fontSize: "16px", color: "#fff" }} />
+        </div>
+      </Header>
         <Content style={{ margin: "0 16px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>Inicio</Breadcrumb.Item>
